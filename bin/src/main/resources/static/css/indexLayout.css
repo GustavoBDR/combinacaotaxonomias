@@ -1,0 +1,28 @@
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
+}
+
+.tela-inicial {
+  min-height: 100vh;
+}
+
+.tela-direita {
+  background-color: #EDF1FE;
+}
+
+.tela-heading {
+  font-weight: 450;
+}
+
+.texto {
+  color: #808080;
+}
+
+.botao {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  text-align: center;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<!-- Meta tags Obrigatórias -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin="anonymous">
+<link href="../static/css/indexLayout.css" th:href="@{/css/cadastroVendedorLayout.css}" rel="stylesheet" />
+
+<title>Combinação de Taxonomias</title>
+</head>
+<body>
+  <section class="order-form my-4 mx-4">
+    <div class="container pt-4">
+      
+      <div class="row">
+        <div class="col-12">
+            <h1>Vendedor</h1>
+            <span>Buscar vendedor cadastrado</span>
+            <hr class="mt-1">
+        </div>
+        <div class="col-12">
+          <form action="#" th:action="@{/vendedor}" th:object="${vendedor}" method="get" id="formPesquisa">
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Nome do Vendedor</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{nome}" maxlength="150" placeholder="Informe o nome do vendedor"/>
+              </div>
+            </div>
+
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Url da API para get das categorias</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{urlAPIGetCategorias}" maxlength="150" placeholder="api.marketplace.com.br/category"/>
+              </div>
+            </div>
+
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Url da API para get dos atributos</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{urlAPIGetAtributos}" maxlength="150" placeholder="api.marketplace.com.br/category/{categoryId}/attribute"/>
+              </div>
+            </div>
+            <div class="row mt-3 mx-4 float-right">
+              <div class="col-12" th:if="${erroBusca != null or resultadoBuscaVendedores != null}">
+                <button type="submit" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Pesquisar</button>
+              </div>  
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 " th:if="${resultadoBuscaVendedores != null}">
+          <table class="table">
+            <div class="row mt-3 mx-4">
+              <thead>
+                <tr>
+                  <th scope="col">ID VENDEDOR</th>
+                  <th scope="col">NOME</th>
+                  <th scope="col">API GET CATEGORIAS</th>
+                  <th scope="col">API GET ATRIBUTOS</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+            </div>
+            <div class="row mt-3 mx-4">
+              <tbody>
+              	<th:block th:each="vendedor : ${resultadoBuscaVendedores}">
+                  <tr>
+                    <th scope="row" th:text="${vendedor.id}"></th>
+                    <td th:text="${vendedor.nome}"></td>
+                    <td th:text="${vendedor.urlAPIGetCategorias}"></td>
+                    <td th:text="${vendedor.urlAPIGetAtributos}"></td> 
+                    <td>
+                    	<a th:href="@{'/editarVendedor/' + ${vendedor.id}}">Editar</a>
+                    </td>                                 
+                  </tr>                
+                </th:block>
+              </tbody>
+            </div>
+          </table>
+        </div>
+        <div class="col-12 " th:if="${erroBusca != null}">
+	        <div class="alert alert-warning" role="alert">
+			  	<span th:text="${erroBusca}"></span>
+			</div>
+        </div>
+        <div class="col-12">
+          <div div class="row mt-3 float-right"  th:if="${erroBusca == null && resultadoBuscaVendedores == null}">
+            <div div class="col-3">
+              	<button type="button" id="bntCancelarBusca" class="btn btn-dark d-block mx-auto btn-submit">Cancelar</button>
+            </div>
+            <div div class="col-3">
+            	<button type="submit" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Pesquisar</button>
+            </div>
+            <div div class="col-3">
+             	<button type="button" id="btnCadastrar" class="btn btn-success d-block mx-auto btn-submit">Adicionar Vendedor</button>
+            </div>
+          </div>
+          <div div class="row mt-3 mx-4 float-right"  th:if="${erroBusca != null or resultadoBuscaVendedores != null}">
+            <div div class="col-6">
+              	<button type="button" id="bntCancelarBusca" class="btn btn-dark d-block mx-auto btn-submit">Cancelar</button>
+            </div>
+            <div div class="col-6">
+             	<button type="button" id="btnCadastrar" class="btn btn-success d-block mx-auto btn-submit">Adicionar Vendedor</button>
+            </div>
+          </div>          
+        </div>        
+      </div>
+    </div>
+  </section>
+  <!-- JavaScript -->
+  <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" th:src="@{/scripts/pesquisaVendedor.js}" ></script> 
+</body>
+</html>

@@ -91,11 +91,11 @@ alter table categoria_marketplace
 add id_categoria_pai integer;
 
 ALTER TABLE categoria_marketplace
-ADD CONSTRAINT marketplace_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_marketplace (id_categoria_marketplace) MATCH FULL;
+ADD CONSTRAINT marketplace_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_marketplace (codigo_categoria) MATCH FULL;
 
 alter table categoria_vendedor
 add id_categoria_pai integer;	
 
 ALTER TABLE categoria_vendedor
-ADD CONSTRAINT vendedor_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_vendedor (id_categoria_vendedor) MATCH FULL;
+ADD CONSTRAINT vendedor_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_vendedor (codigo_categoria) MATCH FULL;
 */

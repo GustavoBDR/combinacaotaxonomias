@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import br.com.combinacaotaxonomias.model.Base;
+import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
@@ -121,17 +121,28 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public void inserirCategoria(Base categoria) {
-		/*String sql = "INSERT INTO marketplace(nome, api_get_categoria, api_get_atributo, api_post_autenticacao, api_token_id, api_token_key) values (:nome,:urlAPIGetCategorias,:urlAPIGetAtributos,:urlApiPostAutenticacao,:apiTokenId,:apiTokenKey)";
+	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Integer idMarketplace) {
+		String sql = "INSERT INTO categoria_marketplace(codigo_categoria, nome, id_marketplace, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idMarketplace, :idCategoriaPai)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
-	    									.addValue("nome", marketplace.getNome())
-	    									.addValue("urlAPIGetCategorias", marketplace.getUrlAPIGetCategorias())
-	    									.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos())
-	    									.addValue("urlApiPostAutenticacao", marketplace.getUrlApiPostAutenticacao())
-	    									.addValue("apiTokenId", marketplace.getApiTokenId())
-	    									.addValue("apiTokenKey", marketplace.getApiTokenKey());
+	    									.addValue("idCategoria", categoria.getId())
+	    									.addValue("nomeCategoria", categoria.getNome())
+	    									.addValue("idMarketplace", idMarketplace)
+	    									.addValue("idCategoriaPai", idCategoriaPai);
 
-	    template.update(sql,param);*/
-	}	
+	    template.update(sql,param);
+	}
+
+	@Override
+	public Integer getUltimoIdMarketplace() {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT max(id_marketplace) as id");
+		sql.append(" FROM marketplace");
+	
+	    SqlParameterSource param = new MapSqlParameterSource();	
+
+	    List<Integer> id = template.queryForList(sql.toString(), param, Integer.class);
+	    return id.get(0);
+	}
 }

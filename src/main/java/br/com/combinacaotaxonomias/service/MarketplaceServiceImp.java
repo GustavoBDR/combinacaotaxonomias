@@ -7,9 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import br.com.combinacaotaxonomias.common.NivelHierarquia;
 import br.com.combinacaotaxonomias.dao.MarketplaceDao;
-import br.com.combinacaotaxonomias.model.Base;
+import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
@@ -30,7 +29,9 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		List<CategoriaResponse> categoriasResponse = consumoApiService.getCategorias(marketplace);
 		List<Categoria> categorias = extrairCategorias(categoriasResponse);
 		
-		inserirCategorias(categorias);
+		Integer idMarketplace = marketplaceDao.getUltimoIdMarketplace();
+		
+		inserirCategorias(categorias, idMarketplace);
 	}
 
 	@Override
@@ -63,14 +64,14 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	}
 	
 	
-	public void inserirCategorias(List<Categoria> categorias) {
+	public void inserirCategorias(List<Categoria> categorias, Integer idMarketplace) {
 		for (Categoria categoria : categorias) {
-			for (int i = 0; i < NivelHierarquia.NIVEL_MAXIMO; i++) {
-				Base linha = categoria;
-				Base familia = categoria.getFilho(0);
-				
-				//Base grupo = familia.getFilho(0);
-			}
+			Taxonomia linha = categoria;
+			Taxonomia familia = categoria.getFilhoTaxonomia(0);
+			Taxonomia grupo = familia.getFilhoTaxonomia(0);
+			marketplaceDao.inserirCategoria(linha, null, idMarketplace);
+			marketplaceDao.inserirCategoria(familia, linha.getId(), idMarketplace);
+			marketplaceDao.inserirCategoria(grupo, familia.getId(), idMarketplace);
 		}
 	}
 	
@@ -81,12 +82,12 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		
 		for (CategoriaResponse categoriaResponse : categoriasResponse) {
 			
-			Categoria categoriaLinha = new Categoria(new Long(categoriaResponse.getLineId()),categoriaResponse.getLineName());
-			Categoria categoriaFamilia = new Categoria(new Long(categoriaResponse.getFamilyId()),categoriaResponse.getFamilyName());
-			Categoria categoriaGrupo = new Categoria(new Long(categoriaResponse.getGroupId()),categoriaResponse.getGroupName());
+			Categoria categoriaLinha = new Categoria(categoriaResponse.getLineId(),categoriaResponse.getLineName());
+			Categoria categoriaFamilia = new Categoria(categoriaResponse.getFamilyId(),categoriaResponse.getFamilyName());
+			Categoria categoriaGrupo = new Categoria(categoriaResponse.getGroupId(),categoriaResponse.getGroupName());
 			
-			categoriaFamilia.add(categoriaGrupo);
-			categoriaLinha.add(categoriaFamilia);
+			categoriaFamilia.addTaxonomia(categoriaGrupo);
+			categoriaLinha.addTaxonomia(categoriaFamilia);
 			
 			categoriasExtraidas.add(categoriaLinha);
 		}

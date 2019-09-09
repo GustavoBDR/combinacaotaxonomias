@@ -86,9 +86,11 @@ public class CadastroMarketplaceController {
     
     @RequestMapping(value = "/testeapi", method = RequestMethod.GET)
 	public String salvaCategoriasMarketplace(Plataforma marketplace) {
-    	TokenApiResponse response = consumoApiService.getAutenticacao(marketplace.getUrlAPIGetCategorias(), "xxx", "yyyy");
+    	Plataforma marketplace2 = marketplaceService.buscaMarketplacePorId(new Long(4));
+
+    	List<Categoria> resultado = consumoApiService.getCategorias(marketplace2);
     	
-    	List<Categoria> resultado = consumoApiService.getCategorias(marketplace.getUrlAPIGetCategorias());
+    	
     	
 		return "index";
 	}	    

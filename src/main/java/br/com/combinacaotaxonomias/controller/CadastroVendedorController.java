@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.TokenApiRequest;
 import br.com.combinacaotaxonomias.model.TokenApiResponse;
 import br.com.combinacaotaxonomias.service.ConsumoApiService;
 import br.com.combinacaotaxonomias.service.VendedorService;
 
-//https://mdbootstrap.com/snippets/jquery/pjoter-2-0/747937
 @Controller
 public class CadastroVendedorController {
 
@@ -86,10 +86,10 @@ public class CadastroVendedorController {
     }
     
 
-	public String salvaCategoriasVendedor() {
-    	TokenApiResponse response = consumoApiService.getAutenticacao("https://api.marketplace.colombo.com.br/v1/authentication", "KPEMTHNFEVVAFIUKAQRC", "KveplnQA9srpvevqcGGXroJjQm3Z24JFdsD4ZIQ9");
-    	
-    	
+	public String salvaCategoriasVendedor(Plataforma vendedor) {
+    	Plataforma vendedor2 = vendedorService.buscaVendedorPorId(new Long(4));
+
+    	List<Categoria> resultado = consumoApiService.getCategorias(vendedor2);
     	
 		return "index";
 	}	

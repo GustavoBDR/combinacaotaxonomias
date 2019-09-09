@@ -8,6 +8,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import br.com.combinacaotaxonomias.model.Base;
+import br.com.combinacaotaxonomias.model.Categoria;
+import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
 
 @Repository("marketplaceDao")
@@ -115,5 +118,20 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	    									.addValue("apiTokenKey", marketplace.getApiTokenKey());	    								
 
 	    template.update(sql,param);
+	}
+
+	@Override
+	public void inserirCategoria(Base categoria) {
+		/*String sql = "INSERT INTO marketplace(nome, api_get_categoria, api_get_atributo, api_post_autenticacao, api_token_id, api_token_key) values (:nome,:urlAPIGetCategorias,:urlAPIGetAtributos,:urlApiPostAutenticacao,:apiTokenId,:apiTokenKey)";
+		 
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("nome", marketplace.getNome())
+	    									.addValue("urlAPIGetCategorias", marketplace.getUrlAPIGetCategorias())
+	    									.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos())
+	    									.addValue("urlApiPostAutenticacao", marketplace.getUrlApiPostAutenticacao())
+	    									.addValue("apiTokenId", marketplace.getApiTokenId())
+	    									.addValue("apiTokenKey", marketplace.getApiTokenKey());
+
+	    template.update(sql,param);*/
 	}	
 }

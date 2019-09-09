@@ -85,5 +85,17 @@ alter table marketplace
 add api_post_autenticacao   varchar(500);
 
 alter table vendedor
-add api_post_autenticacao   varchar(500);	
+add api_post_autenticacao   varchar(500);
+
+alter table categoria_marketplace
+add id_categoria_pai integer;
+
+ALTER TABLE categoria_marketplace
+ADD CONSTRAINT marketplace_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_marketplace (id_categoria_marketplace) MATCH FULL;
+
+alter table categoria_vendedor
+add id_categoria_pai integer;	
+
+ALTER TABLE categoria_vendedor
+ADD CONSTRAINT vendedor_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_vendedor (id_categoria_vendedor) MATCH FULL;
 */

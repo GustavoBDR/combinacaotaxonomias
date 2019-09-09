@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.combinacaotaxonomias.model.Categoria;
+import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.TokenApiResponse;
 import br.com.combinacaotaxonomias.service.ConsumoApiService;
@@ -86,11 +86,9 @@ public class CadastroMarketplaceController {
     
     @RequestMapping(value = "/testeapi", method = RequestMethod.GET)
 	public String salvaCategoriasMarketplace(Plataforma marketplace) {
-    	Plataforma marketplace2 = marketplaceService.buscaMarketplacePorId(new Long(4));
+    	Plataforma marketplace2 = marketplaceService.buscaMarketplacePorId(new Long(3));
 
-    	List<Categoria> resultado = consumoApiService.getCategorias(marketplace2);
-    	
-    	
+    	List<CategoriaResponse> resultado = consumoApiService.getCategorias(marketplace2);
     	
 		return "index";
 	}	    

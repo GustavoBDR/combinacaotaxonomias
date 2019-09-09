@@ -21,12 +21,15 @@ public class MarketplaceDaoImp implements MarketplaceDao{
  
 	@Override
 	public void inserirMarketplace(Plataforma marketplace) {
-		String sql = "INSERT INTO marketplace(nome, api_get_categoria, api_get_atributo) values (:nome,:urlAPIGetCategorias,:urlAPIGetAtributos)";
+		String sql = "INSERT INTO marketplace(nome, api_get_categoria, api_get_atributo, api_post_autenticacao, api_token_id, api_token_key) values (:nome,:urlAPIGetCategorias,:urlAPIGetAtributos,:urlApiPostAutenticacao,:apiTokenId,:apiTokenKey)";
 	 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    									.addValue("nome", marketplace.getNome())
 	    									.addValue("urlAPIGetCategorias", marketplace.getUrlAPIGetCategorias())
-	    									.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos());
+	    									.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos())
+	    									.addValue("urlApiPostAutenticacao", marketplace.getUrlApiPostAutenticacao())
+	    									.addValue("apiTokenId", marketplace.getApiTokenId())
+	    									.addValue("apiTokenKey", marketplace.getApiTokenKey());
 
 	    template.update(sql,param);
 	}
@@ -55,7 +58,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 			sql.append(" and id_marketplace = :id ");
 		}
 		if (!marketplace.getNome().isEmpty()) {
-			sql.append(" and nome = :nome ");
+			sql.append(" and nome LIKE :nome ");
 		}
 		if (!marketplace.getUrlAPIGetCategorias().isEmpty()) {
 			sql.append(" and api_get_categoria = :urlAPIGetCategorias ");
@@ -67,7 +70,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("id", marketplace.getId())
-	    		.addValue("nome", marketplace.getNome())
+	    		.addValue("nome", "%" + marketplace.getNome() + "%")
 				.addValue("urlAPIGetCategorias", marketplace.getUrlAPIGetCategorias())
 				.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos());	
 
@@ -82,6 +85,9 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 		sql.append(",	   nome as nome");
 		sql.append(",	   api_get_categoria as urlAPIGetCategorias");
 		sql.append(",	   api_get_atributo as urlAPIGetAtributos");
+		sql.append(",	   api_post_autenticacao as urlApiPostAutenticacao");
+		sql.append(",      api_token_id as apiTokenId");
+		sql.append(",      api_token_key as apiTokenKey");		
 		sql.append(" FROM marketplace");
 		sql.append(" WHERE 1=1");
      	sql.append(" and id_marketplace = :id");
@@ -97,13 +103,16 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 
 	@Override
 	public void alterarMarketplace(Plataforma marketplace) {
-		String sql = "UPDATE marketplace SET nome = :nome, api_get_categoria = :urlAPIGetCategorias, api_get_atributo = :urlAPIGetAtributos WHERE id_marketplace = :id_marketplace";
+		String sql = "UPDATE marketplace SET nome = :nome, api_get_categoria = :urlAPIGetCategorias, api_get_atributo = :urlAPIGetAtributos, api_post_autenticacao = :urlApiPostAutenticacao, api_token_id = :apiTokenId, api_token_key = :apiTokenKey WHERE id_marketplace = :id_marketplace";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    									.addValue("id_marketplace", marketplace.getId())
 	    									.addValue("nome", marketplace.getNome())
 	    									.addValue("urlAPIGetCategorias", marketplace.getUrlAPIGetCategorias())
-	    									.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos());
+	    									.addValue("urlAPIGetAtributos", marketplace.getUrlAPIGetAtributos())
+	    									.addValue("urlApiPostAutenticacao", marketplace.getUrlApiPostAutenticacao())
+	    									.addValue("apiTokenId", marketplace.getApiTokenId())
+	    									.addValue("apiTokenKey", marketplace.getApiTokenKey());	    								
 
 	    template.update(sql,param);
 	}	

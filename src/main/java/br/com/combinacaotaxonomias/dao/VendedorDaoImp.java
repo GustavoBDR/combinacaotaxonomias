@@ -23,12 +23,15 @@ public class VendedorDaoImp implements VendedorDao{
  
 	@Override
 	public void inserirVendedor(Plataforma vendedor) {
-		String sql = "INSERT INTO vendedor(nome, api_get_categoria, api_get_atributo) values (:nome,:urlAPIGetCategorias,:urlAPIGetAtributos)";
+		String sql = "INSERT INTO vendedor(nome, api_get_categoria, api_get_atributo, api_post_autenticacao, api_token_id, api_token_key) values (:nome,:urlAPIGetCategorias,:urlAPIGetAtributos,:urlApiPostAutenticacao,:apiTokenId,:apiTokenKey)";
 	 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    									.addValue("nome", vendedor.getNome())
 	    									.addValue("urlAPIGetCategorias", vendedor.getUrlAPIGetCategorias())
-	    									.addValue("urlAPIGetAtributos", vendedor.getUrlAPIGetAtributos());
+	    									.addValue("urlAPIGetAtributos", vendedor.getUrlAPIGetAtributos())
+	    									.addValue("urlApiPostAutenticacao", vendedor.getUrlApiPostAutenticacao())
+	    									.addValue("apiTokenId", vendedor.getApiTokenId())
+	    									.addValue("apiTokenKey", vendedor.getApiTokenKey());
 
 	    template.update(sql,param);
 	}
@@ -57,7 +60,7 @@ public class VendedorDaoImp implements VendedorDao{
 			sql.append(" and id_vendedor = :id ");
 		}
 		if (!vendedor.getNome().isEmpty()) {
-			sql.append(" and nome = :nome ");
+			sql.append(" and nome LIKE :nome ");
 		}
 		if (!vendedor.getUrlAPIGetCategorias().isEmpty()) {
 			sql.append(" and api_get_categoria = :urlAPIGetCategorias ");
@@ -69,7 +72,7 @@ public class VendedorDaoImp implements VendedorDao{
 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("id", vendedor.getId())
-	    		.addValue("nome", vendedor.getNome())
+	    		.addValue("nome", "%" + vendedor.getNome() + "%")
 				.addValue("urlAPIGetCategorias", vendedor.getUrlAPIGetCategorias())
 				.addValue("urlAPIGetAtributos", vendedor.getUrlAPIGetAtributos());	
 
@@ -84,6 +87,9 @@ public class VendedorDaoImp implements VendedorDao{
 		sql.append(",	   nome as nome");
 		sql.append(",	   api_get_categoria as urlAPIGetCategorias");
 		sql.append(",	   api_get_atributo as urlAPIGetAtributos");
+		sql.append(",	   api_post_autenticacao as urlApiPostAutenticacao");
+		sql.append(",      api_token_id as apiTokenId");
+		sql.append(",      api_token_key as apiTokenKey");
 		sql.append(" FROM vendedor");
 		sql.append(" WHERE 1=1");
      	sql.append(" and id_vendedor = :id");
@@ -99,13 +105,16 @@ public class VendedorDaoImp implements VendedorDao{
 
 	@Override
 	public void alterarVendedor(Plataforma vendedor) {
-		String sql = "UPDATE vendedor SET nome = :nome, api_get_categoria = :urlAPIGetCategorias, api_get_atributo = :urlAPIGetAtributos WHERE id_vendedor = :id_vendedor";
+		String sql = "UPDATE vendedor SET nome = :nome, api_get_categoria = :urlAPIGetCategorias, api_get_atributo = :urlAPIGetAtributos, api_post_autenticacao = :urlApiPostAutenticacao, api_token_id = :apiTokenId, api_token_key = :apiTokenKey WHERE id_vendedor = :id_vendedor";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    									.addValue("id_vendedor", vendedor.getId())
 	    									.addValue("nome", vendedor.getNome())
 	    									.addValue("urlAPIGetCategorias", vendedor.getUrlAPIGetCategorias())
-	    									.addValue("urlAPIGetAtributos", vendedor.getUrlAPIGetAtributos());
+	    									.addValue("urlAPIGetAtributos", vendedor.getUrlAPIGetAtributos())
+	    									.addValue("urlApiPostAutenticacao", vendedor.getUrlApiPostAutenticacao())
+	    									.addValue("apiTokenId", vendedor.getApiTokenId())
+	    									.addValue("apiTokenKey", vendedor.getApiTokenKey());
 
 	    template.update(sql,param);
 	}	

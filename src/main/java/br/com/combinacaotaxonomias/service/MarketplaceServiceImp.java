@@ -23,7 +23,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	public void inserirMarketplace(Plataforma marketplace) {
 		marketplaceDao.inserirMarketplace(marketplace);
 		
-		List<Categoria> categorias = consumoApiService.getCategorias(marketplace.getUrlAPIGetCategorias());
+		//List<Categoria> categorias = consumoApiService.getCategorias(marketplace.getUrlAPIGetCategorias());
 	}
 
 	@Override

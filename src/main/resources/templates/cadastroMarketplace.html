@@ -51,6 +51,30 @@
 						</div>
 					</div>
 
+					<div class="row mt-3 mx-4">
+						<div class="col-12">
+						  <label class="order-form-label">Url da API para autenticação</label>
+						</div>
+						<div class="col-12">
+						  <input type="text" class="order-form-input" th:field="*{urlApiPostAutenticacao}" maxlength="150" placeholder="api.marketplace.com.br/auth"/>
+						</div>
+					</div>
+
+					<div class="row mt-3 mx-4">
+						<div class="col-1">
+						  <label class="order-form-label">API Id:</label>
+						</div>
+						<div class="col-5">
+						  <input type="text" class="order-form-input" th:field="*{apiTokenId}" maxlength="50" placeholder="Id autenticação API"/>
+						</div>
+						<div class="col-1">
+						  <label class="order-form-label">API Key:</label>
+						</div>
+						<div class="col-5">
+						  <input type="text" class="order-form-input" th:field="*{apiTokenKey}" maxlength="50" placeholder="Key autenticação API"/>
+						</div>
+					</div>
+
 					<div class="row mt-4 float-right">
 						<div class="col-6">
 						  <button type="button" id="bntCancelarCadastro" class="btn btn-dark d-block mx-auto btn-submit">Cancelar</button>

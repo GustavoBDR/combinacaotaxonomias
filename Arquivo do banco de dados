@@ -79,5 +79,11 @@ alter table marketplace
 add api_token_id   varchar(500);
 
 alter table marketplace
-add api_token_key      varchar(500);	
+add api_token_key      varchar(500);
+
+alter table marketplace
+add api_post_autenticacao   varchar(500);
+
+alter table vendedor
+add api_post_autenticacao   varchar(500);	
 */

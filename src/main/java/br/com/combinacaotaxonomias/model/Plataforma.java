@@ -5,6 +5,9 @@ public class Plataforma {
 	private String nome;
 	private String urlAPIGetCategorias;
 	private String urlAPIGetAtributos;
+	private String apiTokenId;
+	private String apiTokenKey;
+	private String urlApiPostAutenticacao;
 	
 	public Plataforma() {
 		
@@ -47,7 +50,30 @@ public class Plataforma {
 	public void setUrlAPIGetAtributos(String urlAPIGetAtributos) {
 		this.urlAPIGetAtributos = urlAPIGetAtributos;
 	}
-	
+	public String getApiTokenId() {
+		return apiTokenId;
+	}
+
+	public void setApiTokenId(String apiTokenId) {
+		this.apiTokenId = apiTokenId;
+	}
+
+	public String getApiTokenKey() {
+		return apiTokenKey;
+	}
+
+	public void setApiTokenKey(String apiTokenKey) {
+		this.apiTokenKey = apiTokenKey;
+	}
+
+	public String getUrlApiPostAutenticacao() {
+		return urlApiPostAutenticacao;
+	}
+
+	public void setUrlApiPostAutenticacao(String urlApiPostAutenticacao) {
+		this.urlApiPostAutenticacao = urlApiPostAutenticacao;
+	}
+
 	public boolean isEmpty() {
 		if (this.id == null && this.nome == null && this.urlAPIGetCategorias == null && this.urlAPIGetAtributos == null ) {
 			return true;

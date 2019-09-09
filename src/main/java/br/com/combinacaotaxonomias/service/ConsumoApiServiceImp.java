@@ -12,7 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.combinacaotaxonomias.model.Categoria;
+import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.TokenApiRequest;
 import br.com.combinacaotaxonomias.model.TokenApiResponse;
@@ -35,7 +35,7 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
 
 
 	@Override
-	public List<Categoria> getCategorias(Plataforma marketplace){
+	public List<CategoriaResponse> getCategorias(Plataforma marketplace){
 				
 	    String accessToken = getAutenticacao(marketplace);
 
@@ -46,7 +46,7 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
                 headers, HttpMethod.GET, URI.create(marketplace.getUrlAPIGetCategorias()));
         
         
-        ResponseEntity<Categoria[]> response = restTemplate.exchange(request, Categoria[].class);
+        ResponseEntity<CategoriaResponse[]> response = restTemplate.exchange(request, CategoriaResponse[].class);
 
 
         return Arrays.asList(response.getBody());

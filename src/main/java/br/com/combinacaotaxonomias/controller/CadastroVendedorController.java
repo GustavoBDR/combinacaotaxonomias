@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.combinacaotaxonomias.model.Categoria;
+import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.TokenApiRequest;
 import br.com.combinacaotaxonomias.model.TokenApiResponse;
@@ -89,7 +89,7 @@ public class CadastroVendedorController {
 	public String salvaCategoriasVendedor(Plataforma vendedor) {
     	Plataforma vendedor2 = vendedorService.buscaVendedorPorId(new Long(4));
 
-    	List<Categoria> resultado = consumoApiService.getCategorias(vendedor2);
+    	List<CategoriaResponse> resultado = consumoApiService.getCategorias(vendedor2);
     	
 		return "index";
 	}	

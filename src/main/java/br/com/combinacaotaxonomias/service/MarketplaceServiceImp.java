@@ -68,6 +68,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 			for (int i = 0; i < NivelHierarquia.NIVEL_MAXIMO; i++) {
 				Base linha = categoria;
 				Base familia = categoria.getFilho(0);
+				
 				//Base grupo = familia.getFilho(0);
 			}
 		}

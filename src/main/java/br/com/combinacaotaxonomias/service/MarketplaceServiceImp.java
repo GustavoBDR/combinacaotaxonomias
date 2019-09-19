@@ -7,8 +7,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.dao.MarketplaceDao;
 import br.com.combinacaotaxonomias.model.Taxonomia;
+import br.com.combinacaotaxonomias.model.Atributo;
+import br.com.combinacaotaxonomias.model.AtributoResponse;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
@@ -32,6 +35,12 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		Integer idMarketplace = marketplaceDao.getUltimoIdMarketplace();
 		
 		inserirCategorias(categorias, idMarketplace);
+		
+		for (Categoria categoria : categorias) {
+			List<AtributoResponse> atributosResponse = consumoApiService.getAtributos(marketplace, categoria);
+			List<Atributo> atributos = extrairAtributos(atributosResponse, categoria);
+			inserirAtributos(atributos, idMarketplace);
+		}
 	}
 
 	@Override
@@ -75,6 +84,12 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		}
 	}
 	
+	public void inserirAtributos(List<Atributo> atributos, Integer idMarketplace) {
+		for (Atributo atributo : atributos) {
+			marketplaceDao.inserirAtributo(atributo, idMarketplace);
+		}
+	}
+	
 	public List<Categoria> extrairCategorias(List<CategoriaResponse> categoriasResponse) {
 		
 		List<Categoria> categoriasExtraidas = new ArrayList<Categoria>();
@@ -94,6 +109,24 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		
 		return categoriasExtraidas;
 	}
+	
+	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Categoria categoria) {
+		
+		List<Atributo> atributosExtraidos = new ArrayList<Atributo>();
+		
+		
+		for (AtributoResponse atributoResponse : atributosResponse) {
+			
+			TipoAtributo tipoAtributo = TipoAtributo.getTipo(atributoResponse.getAttributeType());
+			
+			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), categoria.getId(), tipoAtributo); 
+
+			
+			atributosExtraidos.add(atributo);
+		}
+		
+		return atributosExtraidos;
+	}	
 }
 
 

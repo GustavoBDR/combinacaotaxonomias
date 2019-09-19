@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Plataforma;
+import br.com.combinacaotaxonomias.model.Taxonomia;
 
 @Repository("vendedorDao")
 public class VendedorDaoImp implements VendedorDao{
@@ -117,7 +118,33 @@ public class VendedorDaoImp implements VendedorDao{
 	    									.addValue("apiTokenKey", vendedor.getApiTokenKey());
 
 	    template.update(sql,param);
-	}	
+	}
+
+	@Override
+	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Integer idVendedor) {
+		String sql = "INSERT INTO categoria_vendedor(codigo_categoria, nome, id_vendedor, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idVendedor, :idCategoriaPai)";
+		 
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("idCategoria", categoria.getId())
+	    									.addValue("nomeCategoria", categoria.getNome())
+	    									.addValue("idVendedor", idVendedor)
+	    									.addValue("idCategoriaPai", idCategoriaPai);
+
+	    template.update(sql,param);
+	}
+
+	@Override
+	public Integer getUltimoIdVendedor() {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT max(id_vendedor) as id");
+		sql.append(" FROM vendedor");
 	
-	
+	    SqlParameterSource param = new MapSqlParameterSource();	
+
+	    List<Integer> id = template.queryForList(sql.toString(), param, Integer.class);
+	    return id.get(0);
+	}
+
+
 }

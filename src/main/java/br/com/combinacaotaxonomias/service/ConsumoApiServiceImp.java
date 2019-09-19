@@ -12,6 +12,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.combinacaotaxonomias.common.UrlApi;
+import br.com.combinacaotaxonomias.model.AtributoResponse;
+import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.TokenApiRequest;
@@ -35,15 +38,15 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
 
 
 	@Override
-	public List<CategoriaResponse> getCategorias(Plataforma marketplace){
+	public List<CategoriaResponse> getCategorias(Plataforma plataforma){
 				
-	    String accessToken = getAutenticacao(marketplace);
+	    String accessToken = getAutenticacao(plataforma);
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Authorization", accessToken);
         
         RequestEntity<Object> request = new RequestEntity<>(
-                headers, HttpMethod.GET, URI.create(marketplace.getUrlAPIGetCategorias()));
+                headers, HttpMethod.GET, URI.create(plataforma.getUrlAPIGetCategorias()));
         
         
         ResponseEntity<CategoriaResponse[]> response = restTemplate.exchange(request, CategoriaResponse[].class);
@@ -51,6 +54,25 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
 
         return Arrays.asList(response.getBody());
 
-	} 
+	}
+	
+	@Override
+	public List<AtributoResponse> getAtributos(Plataforma plataforma, Categoria categoria){
+				
+	    String accessToken = getAutenticacao(plataforma);
+
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
+        headers.add("Authorization", accessToken);
+        
+        String url = UrlApi.peparaUrlGetAtributos(plataforma.getUrlAPIGetAtributos(), categoria.getId().toString());
+        RequestEntity<Object> request = new RequestEntity<>(
+        									headers, HttpMethod.GET, URI.create(url));
+        
+        ResponseEntity<AtributoResponse[]> response = restTemplate.exchange(request, AtributoResponse[].class);
+        
+
+        return Arrays.asList(response.getBody());
+
+	} 	
 
 }

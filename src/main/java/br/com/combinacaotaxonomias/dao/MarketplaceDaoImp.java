@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Taxonomia;
+import br.com.combinacaotaxonomias.common.TipoAtributo;
+import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
@@ -145,4 +147,18 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	    List<Integer> id = template.queryForList(sql.toString(), param, Integer.class);
 	    return id.get(0);
 	}
+
+	@Override
+	public void inserirAtributo(Atributo atributo, Integer idMarketplace) {
+		String sql = "INSERT INTO atributo_marketplace(codigo_atributo, nome, id_categoria_marketplace, id_marketplace) values (:codigoAtributo, :nomeCategoria, :idCategoriaPai, :idMarketplace)";
+		 
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("codigoAtributo", atributo.getId())
+	    									.addValue("nomeCategoria", atributo.getNome())
+	    									.addValue("idCategoriaPai", atributo.getCategoriaId())	    									
+	    									.addValue("idMarketplace", idMarketplace);
+
+
+	    template.update(sql,param);	
+	}	
 }

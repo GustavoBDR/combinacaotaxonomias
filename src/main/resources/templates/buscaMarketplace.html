@@ -77,8 +77,8 @@
                   <tr>
                     <th scope="row" th:text="${marketplace.id}"></th>
                     <td th:text="${marketplace.nome}"></td>
-                    <td th:text="${marketplace.urlAPIGetCategorias}"></td>
-                    <td th:text="${marketplace.urlAPIGetAtributos}"></td> 
+                    <td th:text="${#strings.substring(marketplace.urlAPIGetCategorias,0,30)}+' ...'"></td>
+                    <td th:text="${#strings.substring(marketplace.urlAPIGetAtributos,0,40)}+' ...'"></td> 
                     <td>
                     	<a th:href="@{'/editarMarketplace/' + ${marketplace.id}}">Editar</a>
                     </td>                                 

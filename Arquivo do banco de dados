@@ -31,7 +31,7 @@ CREATE TABLE atributo_vendedor (
     id_atributo_vendedor  INTEGER DEFAULT NEXTVAL('atributo_vendedor_id_seq'),
     codigo_atributo       varchar(100),
 	nome                  varchar(500),
-	id_categoria_vendedor integer REFERENCES categoria_vendedor (id_categoria_vendedor),
+	id_categoria_vendedor integer, --REFERENCES categoria_vendedor (codigo_categoria),
 	id_vendedor           integer REFERENCES vendedor (id_vendedor),
     CONSTRAINT id_atributo_vendedor PRIMARY KEY(id_atributo_vendedor)
 );
@@ -62,7 +62,7 @@ CREATE TABLE atributo_marketplace (
     id_atributo_marketplace  INTEGER DEFAULT NEXTVAL('atributo_marketplace_id_seq'),
     codigo_atributo          varchar(100),
 	nome                     varchar(500),
-	id_categoria_marketplace    integer REFERENCES categoria_marketplace (id_categoria_marketplace),
+	id_categoria_marketplace    integer, -- REFERENCES categoria_marketplace (codigo_categoria),
 	id_marketplace              integer REFERENCES marketplace (id_marketplace),
     CONSTRAINT id_atributo_marketplace PRIMARY KEY(id_atributo_marketplace)
 );
@@ -98,4 +98,11 @@ add id_categoria_pai integer;
 
 ALTER TABLE categoria_vendedor
 ADD CONSTRAINT vendedor_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_vendedor (codigo_categoria) MATCH FULL;
+
+
+ALTER TABLE atributo_marketplace
+DROP CONSTRAINT atributo_marketplace_id_categoria_marketplace_fkey;
+
+ALTER TABLE atributo_vendedor
+DROP CONSTRAINT atributo_vendedor_id_categoria_vendedor_fkey;
 */

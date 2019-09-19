@@ -77,8 +77,8 @@
                   <tr>
                     <th scope="row" th:text="${vendedor.id}"></th>
                     <td th:text="${vendedor.nome}"></td>
-                    <td th:text="${vendedor.urlAPIGetCategorias}"></td>
-                    <td th:text="${vendedor.urlAPIGetAtributos}"></td> 
+                    <td th:text="${#strings.substring(vendedor.urlAPIGetCategorias,0,30)}+' ...'"></td>
+                    <td th:text="${#strings.substring(vendedor.urlAPIGetAtributos,0,30)}+' ...'"></td> 
                     <td>
                     	<a th:href="@{'/editarVendedor/' + ${vendedor.id}}">Editar</a>
                     </td>                                 

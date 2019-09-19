@@ -1,8 +1,5 @@
 package br.com.combinacaotaxonomias.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CategoriaResponse {
 	
 	private boolean eanRequired;

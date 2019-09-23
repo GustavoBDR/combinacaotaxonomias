@@ -7,7 +7,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.dao.VendedorDao;
+import br.com.combinacaotaxonomias.model.Atributo;
+import br.com.combinacaotaxonomias.model.AtributoResponse;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
@@ -31,7 +34,13 @@ public class VendedorServiceImp implements VendedorService{
 		
 		Integer idMarketplace = vendedorDao.getUltimoIdVendedor();
 		
-		inserirCategorias(categorias, idMarketplace);		
+		inserirCategorias(categorias, idMarketplace);
+		
+		for (Categoria categoria : categorias) {
+			List<AtributoResponse> atributosResponse = consumoApiService.getAtributos(vendedor, categoria);
+			List<Atributo> atributos = extrairAtributos(atributosResponse, categoria);
+			inserirAtributos(atributos, idMarketplace);
+		}
 	}
 
 	@Override
@@ -92,5 +101,29 @@ public class VendedorServiceImp implements VendedorService{
 			vendedorDao.inserirCategoria(familia, linha.getId(), idVendedor);
 			vendedorDao.inserirCategoria(grupo, familia.getId(), idVendedor);
 		}
-	}	
+	}
+	
+	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Categoria categoria) {
+		
+		List<Atributo> atributosExtraidos = new ArrayList<Atributo>();
+		
+		
+		for (AtributoResponse atributoResponse : atributosResponse) {
+			
+			TipoAtributo tipoAtributo = TipoAtributo.getTipo(atributoResponse.getAttributeType());
+			
+			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), categoria.getId(), tipoAtributo); 
+
+			
+			atributosExtraidos.add(atributo);
+		}
+		
+		return atributosExtraidos;
+	}
+	
+	public void inserirAtributos(List<Atributo> atributos, Integer idMarketplace) {
+		for (Atributo atributo : atributos) {
+			vendedorDao.inserirAtributo(atributo, idMarketplace);
+		}
+	}
 }

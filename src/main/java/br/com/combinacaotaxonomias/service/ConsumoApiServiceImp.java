@@ -12,6 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.combinacaotaxonomias.common.TokenApi;
 import br.com.combinacaotaxonomias.common.UrlApi;
 import br.com.combinacaotaxonomias.model.AtributoResponse;
 import br.com.combinacaotaxonomias.model.Categoria;
@@ -26,24 +27,24 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	@Override
-	public String getAutenticacao(Plataforma marketplace) {
+	public void getAutenticacao(Plataforma marketplace) {
 		TokenApiRequest tokenApiRequest = new TokenApiRequest(marketplace.getApiTokenId(),marketplace.getApiTokenKey());
 
 		ResponseEntity<TokenApiResponse> response = restTemplate.postForEntity(marketplace.getUrlApiPostAutenticacao(), tokenApiRequest, TokenApiResponse.class);
 		
 		TokenApiResponse token = response.getBody();
 		
-		return "Bearer "+ token.getAccess_token();
-	}
+		TokenApi.TOKEN = "Bearer "+ token.getAccess_token();
 
+	}
 
 	@Override
 	public List<CategoriaResponse> getCategorias(Plataforma plataforma){
 				
-	    String accessToken = getAutenticacao(plataforma);
+	    getAutenticacao(plataforma);
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add("Authorization", accessToken);
+        headers.add("Authorization", TokenApi.TOKEN);
         
         RequestEntity<Object> request = new RequestEntity<>(
                 headers, HttpMethod.GET, URI.create(plataforma.getUrlAPIGetCategorias()));
@@ -58,11 +59,9 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
 	
 	@Override
 	public List<AtributoResponse> getAtributos(Plataforma plataforma, Categoria categoria){
-				
-	    String accessToken = getAutenticacao(plataforma);
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add("Authorization", accessToken);
+        headers.add("Authorization", TokenApi.TOKEN);
         
         String url = UrlApi.peparaUrlGetAtributos(plataforma.getUrlAPIGetAtributos(), categoria.getId().toString());
         RequestEntity<Object> request = new RequestEntity<>(

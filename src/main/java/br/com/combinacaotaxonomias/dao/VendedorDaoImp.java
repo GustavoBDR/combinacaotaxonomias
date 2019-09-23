@@ -10,6 +10,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 
@@ -146,5 +147,17 @@ public class VendedorDaoImp implements VendedorDao{
 	    return id.get(0);
 	}
 
+	@Override
+	public void inserirAtributo(Atributo atributo, Integer idVendedor) {
+		String sql = "INSERT INTO atributo_vendedor(codigo_atributo, nome, id_categoria_vendedor, id_vendedor) values (:codigoAtributo, :nomeCategoria, :idCategoriaPai, :idVendedor)";
+		 
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("codigoAtributo", atributo.getId())
+	    									.addValue("nomeCategoria", atributo.getNome())
+	    									.addValue("idCategoriaPai", atributo.getCategoriaId())	    									
+	    									.addValue("idVendedor", idVendedor);
 
+
+	    template.update(sql,param);	
+	}	
 }

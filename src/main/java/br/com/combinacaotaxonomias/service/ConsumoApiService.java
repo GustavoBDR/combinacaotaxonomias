@@ -10,5 +10,5 @@ import br.com.combinacaotaxonomias.model.Plataforma;
 public interface ConsumoApiService {
 	public void getAutenticacao(Plataforma marketplace);
 	public List<CategoriaResponse> getCategorias(Plataforma marketplace);
-	public List<AtributoResponse> getAtributos(Plataforma plataforma, Categoria categoria);
+	public List<AtributoResponse> getAtributos(Plataforma plataforma, Integer idCategoria);
 }

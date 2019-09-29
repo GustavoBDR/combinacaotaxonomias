@@ -1,42 +1,35 @@
-CREATE SEQUENCE vendedor_id_seq START 1;
-CREATE SEQUENCE categoria_vendedor_id_seq START 1;
-CREATE SEQUENCE atributo_vendedor_id_seq START 1;
-
-CREATE SEQUENCE marketplace_id_seq START 1;
-CREATE SEQUENCE categoria_marketplace_id_seq START 1;
-CREATE SEQUENCE atributo_marketplace_id_seq START 1;
-
-
 CREATE TABLE vendedor (
 	id_vendedor INTEGER DEFAULT NEXTVAL('vendedor_id_seq'),
     nome               varchar(100),
 	api_get_categoria  varchar(500),
 	api_get_atributo   varchar(500),
+	api_post_autenticacao   varchar(500),
 	api_token_id       varchar(500),
 	api_token_key      varchar(500),
-	api_get_atributo   varchar(500),
 	data_cadastro      timestamp DEFAULT current_timestamp,
     CONSTRAINT id_vendedor PRIMARY KEY(id_vendedor)
 );
 
 CREATE TABLE categoria_vendedor (
     id_categoria_vendedor INTEGER DEFAULT NEXTVAL('categoria_vendedor_id_seq'),
-    codigo_categoria      varchar(100),
+    codigo_categoria      integer,
 	nome                  varchar(500),
 	id_vendedor           integer REFERENCES vendedor (id_vendedor),
-    CONSTRAINT id_categoria_vendedor PRIMARY KEY(id_categoria_vendedor)
+	id_categoria_pai 	  integer,
+    CONSTRAINT id_categoria_vendedor PRIMARY KEY(id_categoria_vendedor),
+	UNIQUE(id_vendedor,codigo_categoria)
 );
 
 CREATE TABLE atributo_vendedor (
     id_atributo_vendedor  INTEGER DEFAULT NEXTVAL('atributo_vendedor_id_seq'),
-    codigo_atributo       varchar(100),
+    codigo_atributo       integer,
 	nome                  varchar(500),
-	id_categoria_vendedor integer, --REFERENCES categoria_vendedor (codigo_categoria),
+	tipo                  varchar(500),
+	id_categoria_vendedor integer,
 	id_vendedor           integer REFERENCES vendedor (id_vendedor),
-    CONSTRAINT id_atributo_vendedor PRIMARY KEY(id_atributo_vendedor)
+    CONSTRAINT id_atributo_vendedor PRIMARY KEY(id_atributo_vendedor),
+    CONSTRAINT fk_codigo_categoria_vendedor FOREIGN KEY (id_categoria_vendedor, id_vendedor) REFERENCES categoria_vendedor (codigo_categoria, id_vendedor)
 );
-
-
 
 
 CREATE TABLE marketplace (
@@ -44,6 +37,7 @@ CREATE TABLE marketplace (
     nome               varchar(100),
 	api_get_categoria  varchar(500),
 	api_get_atributo   varchar(500),
+	api_post_autenticacao   varchar(500),
 	api_token_id       varchar(500),
 	api_token_key      varchar(500),	
 	data_cadastro      timestamp DEFAULT current_timestamp,
@@ -52,57 +46,29 @@ CREATE TABLE marketplace (
 
 CREATE TABLE categoria_marketplace (
     id_categoria_marketplace INTEGER DEFAULT NEXTVAL('categoria_marketplace_id_seq'),
-    codigo_categoria         varchar(100),
+    codigo_categoria         integer,
 	nome                     varchar(500),
 	id_marketplace           integer REFERENCES marketplace (id_marketplace),
-    CONSTRAINT id_categoria_marketplace PRIMARY KEY(id_categoria_marketplace)
+	id_categoria_pai 	  	 integer,
+    CONSTRAINT id_categoria_marketplace PRIMARY KEY(id_categoria_marketplace),
+	UNIQUE(id_marketplace,codigo_categoria)
 );
 
 CREATE TABLE atributo_marketplace (
     id_atributo_marketplace  INTEGER DEFAULT NEXTVAL('atributo_marketplace_id_seq'),
-    codigo_atributo          varchar(100),
+    codigo_atributo          integer,
 	nome                     varchar(500),
-	id_categoria_marketplace    integer, -- REFERENCES categoria_marketplace (codigo_categoria),
+	tipo                     varchar(500),
+	id_categoria_marketplace    integer,
 	id_marketplace              integer REFERENCES marketplace (id_marketplace),
-    CONSTRAINT id_atributo_marketplace PRIMARY KEY(id_atributo_marketplace)
+    CONSTRAINT id_atributo_marketplace PRIMARY KEY(id_atributo_marketplace),
+    CONSTRAINT fk_codigo_categoria_marketplace FOREIGN KEY (id_categoria_marketplace, id_marketplace) REFERENCES categoria_marketplace (codigo_categoria, id_marketplace)
 );
 
+drop table atributo_vendedor;
+drop table categoria_vendedor;
+drop table vendedor;
 
-/*
-alter table vendedor
-add api_token_id   varchar(500);
-
-alter table vendedor
-add api_token_key      varchar(500);
-
-alter table marketplace
-add api_token_id   varchar(500);
-
-alter table marketplace
-add api_token_key      varchar(500);
-
-alter table marketplace
-add api_post_autenticacao   varchar(500);
-
-alter table vendedor
-add api_post_autenticacao   varchar(500);
-
-alter table categoria_marketplace
-add id_categoria_pai integer;
-
-ALTER TABLE categoria_marketplace
-ADD CONSTRAINT marketplace_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_marketplace (codigo_categoria) MATCH FULL;
-
-alter table categoria_vendedor
-add id_categoria_pai integer;	
-
-ALTER TABLE categoria_vendedor
-ADD CONSTRAINT vendedor_categoria_pai_fk FOREIGN KEY (id_categoria_pai) REFERENCES categoria_vendedor (codigo_categoria) MATCH FULL;
-
-
-ALTER TABLE atributo_marketplace
-DROP CONSTRAINT atributo_marketplace_id_categoria_marketplace_fkey;
-
-ALTER TABLE atributo_vendedor
-DROP CONSTRAINT atributo_vendedor_id_categoria_vendedor_fkey;
-*/
+drop table atributo_marketplace;
+drop table categoria_marketplace;
+drop table marketplace;

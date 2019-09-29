@@ -25,6 +25,8 @@ public class VendedorServiceImp implements VendedorService{
 	@Resource 
 	private ConsumoApiService consumoApiService;	
 	
+	private List<Integer> idCategorias = new ArrayList<Integer>();
+	
 	@Override
 	public void inserirVendedor(Plataforma vendedor) {
 		vendedorDao.inserirVendedor(vendedor);
@@ -36,9 +38,10 @@ public class VendedorServiceImp implements VendedorService{
 		
 		inserirCategorias(categorias, idMarketplace);
 		
-		for (Categoria categoria : categorias) {
-			List<AtributoResponse> atributosResponse = consumoApiService.getAtributos(vendedor, categoria);
-			List<Atributo> atributos = extrairAtributos(atributosResponse, categoria);
+
+		for (Integer idCategoria : idCategorias) {	
+			List<AtributoResponse> atributosResponse = consumoApiService.getAtributos(vendedor, idCategoria);
+			List<Atributo> atributos = extrairAtributos(atributosResponse, idCategoria);
 			inserirAtributos(atributos, idMarketplace);
 		}
 	}
@@ -80,8 +83,17 @@ public class VendedorServiceImp implements VendedorService{
 		for (CategoriaResponse categoriaResponse : categoriasResponse) {
 			
 			Categoria categoriaLinha = new Categoria(categoriaResponse.getLineId(),categoriaResponse.getLineName());
+			if (!idCategorias.contains(categoriaLinha.getId())) {
+				idCategorias.add(categoriaLinha.getId());	
+			}
 			Categoria categoriaFamilia = new Categoria(categoriaResponse.getFamilyId(),categoriaResponse.getFamilyName());
+			if (!idCategorias.contains(categoriaFamilia.getId())) {
+				idCategorias.add(categoriaFamilia.getId());	
+			}
 			Categoria categoriaGrupo = new Categoria(categoriaResponse.getGroupId(),categoriaResponse.getGroupName());
+			if (!idCategorias.contains(categoriaGrupo.getId())) {
+				idCategorias.add(categoriaGrupo.getId());	
+			}
 			
 			categoriaFamilia.addTaxonomia(categoriaGrupo);
 			categoriaLinha.addTaxonomia(categoriaFamilia);
@@ -103,7 +115,7 @@ public class VendedorServiceImp implements VendedorService{
 		}
 	}
 	
-	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Categoria categoria) {
+	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Integer idCategoria) {
 		
 		List<Atributo> atributosExtraidos = new ArrayList<Atributo>();
 		
@@ -112,7 +124,7 @@ public class VendedorServiceImp implements VendedorService{
 			
 			TipoAtributo tipoAtributo = TipoAtributo.getTipo(atributoResponse.getAttributeType());
 			
-			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), categoria.getId(), tipoAtributo); 
+			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), idCategoria, tipoAtributo); 
 
 			
 			atributosExtraidos.add(atributo);

@@ -14,5 +14,5 @@ public interface MarketplaceService {
 	public Plataforma buscaMarketplacePorId(Long id);
 	public boolean isMarketplace(Plataforma marketplace);
 	public void alterarMarketplace(Plataforma marketplace);
-	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Categoria categoria);
+	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Integer idCategoria);
 }

@@ -25,6 +25,8 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	@Resource 
 	private ConsumoApiService consumoApiService;	
 	
+	private List<Integer> idCategorias = new ArrayList<Integer>();
+	
 	@Override
 	public void inserirMarketplace(Plataforma marketplace) {
 		marketplaceDao.inserirMarketplace(marketplace);
@@ -36,9 +38,9 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		
 		inserirCategorias(categorias, idMarketplace);
 		
-		for (Categoria categoria : categorias) {
-			List<AtributoResponse> atributosResponse = consumoApiService.getAtributos(marketplace, categoria);
-			List<Atributo> atributos = extrairAtributos(atributosResponse, categoria);
+		for (Integer idCategoria : idCategorias) {	
+			List<AtributoResponse> atributosResponse = consumoApiService.getAtributos(marketplace, idCategoria);
+			List<Atributo> atributos = extrairAtributos(atributosResponse, idCategoria);
 			inserirAtributos(atributos, idMarketplace);
 		}
 	}
@@ -98,8 +100,11 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		for (CategoriaResponse categoriaResponse : categoriasResponse) {
 			
 			Categoria categoriaLinha = new Categoria(categoriaResponse.getLineId(),categoriaResponse.getLineName());
+			idCategorias.add(categoriaLinha.getId());
 			Categoria categoriaFamilia = new Categoria(categoriaResponse.getFamilyId(),categoriaResponse.getFamilyName());
+			idCategorias.add(categoriaFamilia.getId());
 			Categoria categoriaGrupo = new Categoria(categoriaResponse.getGroupId(),categoriaResponse.getGroupName());
+			idCategorias.add(categoriaGrupo.getId());
 			
 			categoriaFamilia.addTaxonomia(categoriaGrupo);
 			categoriaLinha.addTaxonomia(categoriaFamilia);
@@ -110,7 +115,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		return categoriasExtraidas;
 	}
 	
-	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Categoria categoria) {
+	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Integer idCategoria) {
 		
 		List<Atributo> atributosExtraidos = new ArrayList<Atributo>();
 		
@@ -119,7 +124,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 			
 			TipoAtributo tipoAtributo = TipoAtributo.getTipo(atributoResponse.getAttributeType());
 			
-			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), categoria.getId(), tipoAtributo); 
+			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), idCategoria, tipoAtributo); 
 
 			
 			atributosExtraidos.add(atributo);

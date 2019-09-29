@@ -58,12 +58,12 @@ public class ConsumoApiServiceImp implements ConsumoApiService{
 	}
 	
 	@Override
-	public List<AtributoResponse> getAtributos(Plataforma plataforma, Categoria categoria){
+	public List<AtributoResponse> getAtributos(Plataforma plataforma, Integer idCategoria){
 
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         headers.add("Authorization", TokenApi.TOKEN);
         
-        String url = UrlApi.peparaUrlGetAtributos(plataforma.getUrlAPIGetAtributos(), categoria.getId().toString());
+        String url = UrlApi.peparaUrlGetAtributos(plataforma.getUrlAPIGetAtributos(), idCategoria.toString());
         RequestEntity<Object> request = new RequestEntity<>(
         									headers, HttpMethod.GET, URI.create(url));
         

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<!-- Meta tags Obrigatórias -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.min.css">
+<link href="../static/css/indexLayout.css" th:href="@{/css/cadastroCombinacaoLayout.css}" rel="stylesheet" />
+
+<title>Combinação de Taxonomias</title>
+</head>
+<body>
+  <section class="order-form my-4 mx-4">
+    <div class="container pt-4">
+      
+      <div class="row">
+        <div class="col-12">
+            <h1>Combinação de Taxonomias</h1>
+            <span>Cadastro de combinações de taxonomias.</span>
+            <hr class="mt-1">
+        </div>
+        <div class="col-12">
+          <form action="#" th:action="@{/vendedor}" th:object="${vendedor}" method="get" id="formPesquisa">
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Nome da combinação</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{nome}" maxlength="150" placeholder="Informe o nome do vendedor"/>
+              </div>
+            </div>
+
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Descrição da combinação</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{urlAPIGetCategorias}" maxlength="150" placeholder="api.marketplace.com.br/category"/>
+              </div>
+            </div>
+            
+			<div class="row mt-3 mx-4" id="selectinicial">
+				<div class="col-sm-2">
+				  <label class="order-form-label">Marketplace:</label>
+				</div>
+				<div class="col-sm-4">				  
+					<select class="selectpicker" data-live-search="true">
+					        <option value="4444">4444</option>
+					        <option value="Fedex">Fedex</option>
+					        <option value="Elite">Elite</option>
+					        <option value="Interp">Interp</option>
+					        <option value="Test">Test</option>
+					</select>			  
+				</div>
+								
+				<div class="col-sm-2">
+				  <label class="order-form-label">Vendedor:</label>
+				</div>
+				<div class="col-sm-4">				  
+					<select class="selectpicker" data-live-search="true">
+					        <option value="4444">4444</option>
+					        <option value="Fedex">Fedex</option>
+					        <option value="Elite">Elite</option>
+					        <option value="Interp">Interp</option>
+					        <option value="Test">Test</option>
+					</select>			  
+				</div>
+			</div>
+		
+		
+			
+		    <div class="row mt-3 mx-4">
+		    	<div class="col-12">
+		     		<hr class="mt-1">
+		        </div>
+		    </div>
+      
+      
+      
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Categoria Marketplace</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{urlAPIGetCategorias}" maxlength="150" placeholder="api.marketplace.com.br/category"/>
+              </div>
+            </div>
+            <div class="row mt-3 mx-4">
+              <div class="col-12">
+                <label class="order-form-label">Categoria Vendedor</label>
+              </div>
+              <div class="col-12">
+                <input type="text" class="order-form-input" th:field="*{urlAPIGetCategorias}" maxlength="150" placeholder="api.marketplace.com.br/category"/>
+              </div>
+            </div>
+            
+	        <div class="row">
+	          <div class="col-12">
+	            <div div class="row mt-3 mx-4 float-right">
+	              <div div class="col-6">
+	              	<button type="button" id="bntCancelarBusca" class="btn btn-dark d-block mx-auto btn-submit">Cancelar</button>
+	              </div>
+	              <div div class="col-6">
+	                <button type="submit" id="btnSubmit" class="btn btn-success d-block mx-auto btn-submit">Salvar</button>
+	              </div>
+	            </div>          
+	          </div>        
+	      	</div>
+
+          </form>
+        </div>        
+    </div>
+  </section>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+</body>
+</html>

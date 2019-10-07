@@ -13,6 +13,7 @@ import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
+import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 
 @Repository("marketplaceDao")
@@ -160,5 +161,19 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 
 
 	    template.update(sql,param);	
-	}	
+	}
+
+	@Override
+	public void inserirCategoriaTO(CategoriaTO categoria) {
+		String sql = "INSERT INTO categoria_marketplace(codigo_categoria, nome, id_marketplace, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idMarketplace, :idCategoriaPai)";
+		 
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("idCategoria", categoria.getId())
+	    									.addValue("nomeCategoria", categoria.getNome())
+	    									.addValue("idMarketplace", categoria.getIdMarketplace())
+	    									.addValue("idCategoriaPai", categoria.getIdPai());
+
+	    template.update(sql,param);
+	}
+	
 }

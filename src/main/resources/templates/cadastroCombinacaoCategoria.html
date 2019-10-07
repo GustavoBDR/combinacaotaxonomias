@@ -49,8 +49,8 @@
 				  <label class="order-form-label">Marketplace:</label>
 				</div>
 				<div class="col-sm-3">				  
-					<select class="selectpicker" data-live-search="true">
-					    <option th:each="marketplace : ${marketplaces}" th:value="${marketplace}" th:text="${marketplace.nome}" selected="selected"></option>
+					<select class="selectpicker" data-live-search="true" id="selectmarketplace">
+					    <option th:each="marketplace : ${marketplaces}" th:value="${marketplace}" th:text="${marketplace.nome}"></option>
 					</select>			  
 				</div>
 								
@@ -58,8 +58,8 @@
 				  <label class="order-form-label">Vendedor:</label>
 				</div>
 				<div class="col-sm-3">				  
-					<select class="selectpicker" data-live-search="true">
-					    <option th:each="vendedor : ${vendedores}" th:value="${vendedor}" th:text="${vendedor.nome}" selected="selected"></option>
+					<select class="selectpicker" data-live-search="true" id="selectvendedor">
+					    <option th:each="vendedor : ${vendedores}" th:value="${vendedor}" th:text="${vendedor.nome}"></option>
 					</select>			  
 				</div>
 	            <div class="col-sm-1 float-right">

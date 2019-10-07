@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $("#btnCadastrar").click(function(){
         location.href="/cadastromarketplace";
     });
@@ -7,6 +8,11 @@ $(document).ready(function () {
     });    
     $( "#btnSubmit" ).click(function() {
   	  $( "#formPesquisa" ).submit();
-  	});    
+  	});
+    
+    $('#selectmarketplace').change(function(){
+    	let valor = $(this).val();
+    	alert("O valor é: "+valor);
+    })
 });
 

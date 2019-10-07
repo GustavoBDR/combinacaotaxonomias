@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.Combinacao;
@@ -43,4 +44,12 @@ public class CadastroCombinacaoController {
 	public String salvaCadastroCombinacao(@RequestParam("novaCombinacao") Combinacao novaCombinacao, List<Plataforma> marketplaces){
 		return "cadastroCombinacaoCategoria";
 	}
+	
+	
+    @ResponseBody
+    @RequestMapping(path = {"/marketplacelinha"}, method = RequestMethod.GET)
+    public List<Categoria> getMarketplaceLinha(@RequestParam(required = true, name = "idMarketplace") Integer idMarketplace) {
+        return marketplaceService.getCategoriasPorMarketplace(marketplaceService);
+    }
+
 }

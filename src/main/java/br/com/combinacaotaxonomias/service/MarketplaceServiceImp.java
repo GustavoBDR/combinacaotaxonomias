@@ -152,5 +152,10 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		}
 		
 		return atributosExtraidos;
-	}	
+	}
+
+	@Override
+	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace) {
+		return marketplaceDao.buscaCategoriasPorMarketplace(idMarketplace);
+	}
 }

@@ -2,23 +2,27 @@ package br.com.combinacaotaxonomias.model;
 
 public class CategoriaTO {
 
-    private Integer id;
+    private Integer idCategoria;
     private String nome;
 	private Integer idPai;
 	private Integer idMarketplace;
 
-	public CategoriaTO(Integer id, String nome, Integer idPai, Integer idMarketplace) {
-		this.id = id;
+	public CategoriaTO() {
+
+	}	
+	
+	public CategoriaTO(Integer idCategoria, String nome, Integer idPai, Integer idMarketplace) {
+		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.idPai = idPai;
 		this.idMarketplace = idMarketplace;
 	}
 	
-	public Integer getId() {
-		return id;
+	public Integer getIdCategoria() {
+		return idCategoria;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
 	}
 	public String getNome() {
 		return nome;

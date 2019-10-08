@@ -42,11 +42,17 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 
 	@Override
 	public List<Plataforma> buscaTodosMarketplaces() {
-        String sql = "SELECT * FROM marketplace";
+        StringBuilder sql = new StringBuilder();
+        
+		sql.append("SELECT id_marketplace as id");
+		sql.append(",	   nome as nome");
+		sql.append(",	   api_get_categoria as urlAPIGetCategorias");
+		sql.append(",	   api_get_atributo as urlAPIGetAtributos");
+		sql.append(" FROM marketplace");
         
         SqlParameterSource param = new MapSqlParameterSource();
         
-        return template.query(sql, param, new BeanPropertyRowMapper(Plataforma.class));
+        return template.query(sql.toString(), param, new BeanPropertyRowMapper(Plataforma.class));
 	}
 
 	@Override
@@ -168,12 +174,30 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 		String sql = "INSERT INTO categoria_marketplace(codigo_categoria, nome, id_marketplace, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idMarketplace, :idCategoriaPai)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
-	    									.addValue("idCategoria", categoria.getId())
+	    									.addValue("idCategoria", categoria.getIdCategoria())
 	    									.addValue("nomeCategoria", categoria.getNome())
 	    									.addValue("idMarketplace", categoria.getIdMarketplace())
 	    									.addValue("idCategoriaPai", categoria.getIdPai());
 
 	    template.update(sql,param);
 	}
-	
+
+	@Override
+	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT codigo_categoria as idCategoria");
+		sql.append(",	   nome as nome");
+		sql.append(",	   id_marketplace as idMarketplace");
+		sql.append(",	   id_categoria_pai as idPai");	
+		sql.append(" FROM categoria_marketplace");
+		sql.append(" WHERE 1=1");
+     	sql.append(" and id_marketplace = :id");
+		
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("id", idMarketplace);
+	    
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	}
 }

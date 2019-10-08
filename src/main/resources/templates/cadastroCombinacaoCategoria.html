@@ -45,15 +45,16 @@
             </div>
             
 			<div class="row mt-3 mx-4" id="selectinicial">
-				<div class="col-sm-2">
-				  <label class="order-form-label">Marketplace:</label>
-				</div>
-				<div class="col-sm-3">				  
-					<select class="selectpicker" data-live-search="true" id="selectmarketplace">
-					    <option th:each="marketplace : ${marketplaces}" th:value="${marketplace}" th:text="${marketplace.nome}"></option>
-					</select>			  
-				</div>
-								
+				<div id="selectcategoriamkp">
+					<div class="col-sm-2">
+					  <label class="order-form-label">Marketplace:</label>
+					</div>
+					<div class="col-sm-3">				  
+						<select class="selectmarketplace selectpicker" data-live-search="true" onchange="populaFamilia(this)">
+						    <option th:each="marketplace : ${marketplaces}" th:value="${marketplace.id}" th:text="${marketplace.nome}"></option>
+						</select>			  
+					</div>
+				</div>		
 				<div class="col-sm-2">
 				  <label class="order-form-label">Vendedor:</label>
 				</div>
@@ -164,6 +165,7 @@
   
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-  <script type="text/javascript" th:src="@{/scripts/pesquisaCombinacao.js}" ></script> 
+  <script type="text/javascript" th:src="@{/scripts/pesquisaCombinacao.js}" ></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
 </body>
 </html>

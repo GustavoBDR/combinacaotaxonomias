@@ -20,36 +20,24 @@ $(document).ready(function () {
 function populaFamilia(marketplace) {
 	
 	alert("Entrou na function!");
-	console.log($(marketplace).val());
-	
-	var categoriaTabela = marketplace.closest("#selectcategoriamkp");
-    
-	//var marketplace = $(categoriaTabela).find('.selectmarketplace');
-    
-    alert("Valor: "+ $(marketplace).val());
-    //var familia = $(linhaTabela).find('.familia');
-    //var grupo = $(linhaTabela).find('.grupo');
-    //var produto = $(linhaTabela).find('.produto');
+
     $.ajax({
         url: "/marketplacelinha",
         data: {idMarketplace: $(marketplace).val()},
         dataType: 'JSON',
         beforeSend: function () {
             $(marketplace).attr("disabled", "true");
-            //$(familia).attr("disabled", "true");
-            //$(grupo).attr("disabled", "true");
-            //$(produto).attr("disabled", "true");
-            //$(familia).html("<option value=''>Selecione</option>");
-            //$(grupo).html("<option value=''>Selecione</option>");
-            //$(produto).html("<option value=''>Selecione</option>");
         }
     }).done(function (data) {
+    	
         if (data) {
+        
             data.forEach(function (obj) {
-                $(familia).append("<option value=" + obj.codigo + ">" + obj.descricao + "</option>");
-            	alert("Teste: "+obj.nome);
+            	$("#categoriamarketplaceselect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
-            //$(familia).removeAttr("disabled");
+
+        	$('#categoriamarketplaceselect').selectpicker('refresh'); 
+
         } else {
             alert("Erro ao buscar categoria!");
         }

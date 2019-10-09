@@ -186,13 +186,14 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace) {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT codigo_categoria as idCategoria");
-		sql.append(",	   nome as nome");
-		sql.append(",	   id_marketplace as idMarketplace");
-		sql.append(",	   id_categoria_pai as idPai");	
-		sql.append(" FROM categoria_marketplace");
-		sql.append(" WHERE 1=1");
-     	sql.append(" and id_marketplace = :id");
+		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append(",	   nome as nome ");
+		sql.append(",	   id_marketplace as idMarketplace ");
+		sql.append(",	   id_categoria_pai as idPai ");	
+		sql.append(" FROM categoria_marketplace ");
+		sql.append(" WHERE 1=1 ");
+		sql.append(" and id_categoria_pai is null ");
+     	sql.append(" and id_marketplace = :id ");
 		
 
 	    SqlParameterSource param = new MapSqlParameterSource()

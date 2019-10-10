@@ -17,7 +17,7 @@ $(document).ready(function () {
     });
 });
 
-function populaFamilia(marketplace) {
+function populaLinhaMarketplace(marketplace) {
 	
 	alert("Entrou na function!");
 

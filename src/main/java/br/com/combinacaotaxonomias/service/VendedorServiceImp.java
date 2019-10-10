@@ -1,7 +1,9 @@
 package br.com.combinacaotaxonomias.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -9,10 +11,12 @@ import org.springframework.stereotype.Service;
 
 import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.dao.VendedorDao;
+import br.com.combinacaotaxonomias.helper.CategoriaHelper;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.AtributoResponse;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
+import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 
@@ -26,6 +30,8 @@ public class VendedorServiceImp implements VendedorService{
 	private ConsumoApiService consumoApiService;	
 	
 	private List<Integer> idCategorias = new ArrayList<Integer>();
+	
+	private CategoriaHelper categoriaHelper;
 	
 	@Override
 	public void inserirVendedor(Plataforma vendedor) {
@@ -105,13 +111,28 @@ public class VendedorServiceImp implements VendedorService{
 	}
 	
 	public void inserirCategorias(List<Categoria> categorias, Integer idVendedor) {
+		Map<Integer, CategoriaTO> CategoriaMap = new HashMap<Integer,CategoriaTO>();
+		
+		
 		for (Categoria categoria : categorias) {
 			Taxonomia linha = categoria;
 			Taxonomia familia = categoria.getFilhoTaxonomia(0);
 			Taxonomia grupo = familia.getFilhoTaxonomia(0);
-			vendedorDao.inserirCategoria(linha, null, idVendedor);
-			vendedorDao.inserirCategoria(familia, linha.getId(), idVendedor);
-			vendedorDao.inserirCategoria(grupo, familia.getId(), idVendedor);
+			
+			if (!CategoriaMap.containsKey(linha.getId())) {
+				CategoriaMap.put(linha.getId(), categoriaHelper.toCategoriaTO(linha, null, idVendedor));
+				vendedorDao.inserirCategoria(linha, null, idVendedor);
+			}
+			
+			if (!CategoriaMap.containsKey(familia.getId())) {
+				CategoriaMap.put(familia.getId(), categoriaHelper.toCategoriaTO(familia, linha.getId(), idVendedor));
+				vendedorDao.inserirCategoria(familia, linha.getId(), idVendedor);
+			}
+			
+			if (!CategoriaMap.containsKey(grupo.getId())) {
+				CategoriaMap.put(grupo.getId(), categoriaHelper.toCategoriaTO(grupo, familia.getId(), idVendedor));
+				vendedorDao.inserirCategoria(grupo, familia.getId(), idVendedor);
+			}
 		}
 	}
 	
@@ -121,8 +142,8 @@ public class VendedorServiceImp implements VendedorService{
 		
 		
 		for (AtributoResponse atributoResponse : atributosResponse) {
-			
-			TipoAtributo tipoAtributo = TipoAtributo.getTipo(atributoResponse.getAttributeType());
+			String key = atributoResponse.getAttributeType();
+			TipoAtributo tipoAtributo = TipoAtributo.getTipo(key);
 			
 			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), idCategoria, tipoAtributo); 
 

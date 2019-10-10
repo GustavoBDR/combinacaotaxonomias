@@ -121,11 +121,17 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		for (CategoriaResponse categoriaResponse : categoriasResponse) {
 			
 			Categoria categoriaLinha = new Categoria(categoriaResponse.getLineId(),categoriaResponse.getLineName());
-			idCategorias.add(categoriaLinha.getId());
+			if (!idCategorias.contains(categoriaLinha.getId())) {
+				idCategorias.add(categoriaLinha.getId());	
+			}
 			Categoria categoriaFamilia = new Categoria(categoriaResponse.getFamilyId(),categoriaResponse.getFamilyName());
-			idCategorias.add(categoriaFamilia.getId());
+			if (!idCategorias.contains(categoriaFamilia.getId())) {
+				idCategorias.add(categoriaFamilia.getId());	
+			}
 			Categoria categoriaGrupo = new Categoria(categoriaResponse.getGroupId(),categoriaResponse.getGroupName());
-			idCategorias.add(categoriaGrupo.getId());
+			if (!idCategorias.contains(categoriaGrupo.getId())) {
+				idCategorias.add(categoriaGrupo.getId());	
+			}
 			
 			categoriaFamilia.addTaxonomia(categoriaGrupo);
 			categoriaLinha.addTaxonomia(categoriaFamilia);
@@ -142,8 +148,8 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		
 		
 		for (AtributoResponse atributoResponse : atributosResponse) {
-			
-			TipoAtributo tipoAtributo = TipoAtributo.getTipo(atributoResponse.getAttributeType());
+			String key = atributoResponse.getAttributeType();
+			TipoAtributo tipoAtributo = TipoAtributo.getTipo(key);
 			
 			Atributo atributo = new Atributo(atributoResponse.getAttributeId(), atributoResponse.getName(), idCategoria, tipoAtributo); 
 

@@ -149,11 +149,12 @@ public class VendedorDaoImp implements VendedorDao{
 
 	@Override
 	public void inserirAtributo(Atributo atributo, Integer idVendedor) {
-		String sql = "INSERT INTO atributo_vendedor(codigo_atributo, nome, id_categoria_vendedor, id_vendedor) values (:codigoAtributo, :nomeCategoria, :idCategoriaPai, :idVendedor)";
+		String sql = "INSERT INTO atributo_vendedor(codigo_atributo, nome, tipo, id_categoria_vendedor, id_vendedor) values (:codigoAtributo, :nomeCategoria, :tipo, :idCategoriaPai, :idVendedor)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    									.addValue("codigoAtributo", atributo.getId())
 	    									.addValue("nomeCategoria", atributo.getNome())
+	    									.addValue("tipo", atributo.getTipoAtributo().toString())
 	    									.addValue("idCategoriaPai", atributo.getCategoriaId())	    									
 	    									.addValue("idVendedor", idVendedor);
 

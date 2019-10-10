@@ -1,19 +1,29 @@
 package br.com.combinacaotaxonomias.common;
 
 public enum TipoAtributo {
-    STRING,
-    BOOLEAN,
-    INT;
+    STRING("TEXT"),
+    BOOLEAN("BOOLEAN"),
+    INTEGER("INT"),
+	FLOAT("DECIMAL"),
+	ERRO("ERRO");
 	
-	public static TipoAtributo getTipo(String tipo) {
-		if (tipo == "STRING" || tipo == "TEXT") {
+	private String tipo;
+	
+	TipoAtributo(String tipo){
+		this.tipo = tipo;
+	}
+	
+	public static TipoAtributo  getTipo(String tipo) {
+		if (tipo.equals("TEXT")) {
 			return STRING;
-		}else if (tipo == "BOOLEAN") {
+		}else if (tipo.equals("BOOLEAN")) {
 			return BOOLEAN;
-		}else if (tipo == "INTEGER" || tipo == "DECIMAL") {
-			return INT;
+		}else if (tipo.equals("INT")) {
+			return INTEGER;
+		}else if (tipo.equals("DECIMAL")) {
+			return FLOAT;
 		}else {
-			return null;
+			return ERRO;
 		}
 	}
 }

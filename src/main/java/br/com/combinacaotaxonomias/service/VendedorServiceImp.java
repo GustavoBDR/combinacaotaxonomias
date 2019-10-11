@@ -159,4 +159,11 @@ public class VendedorServiceImp implements VendedorService{
 			vendedorDao.inserirAtributo(atributo, idMarketplace);
 		}
 	}
+
+	@Override
+	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor) {
+		return vendedorDao.buscaCategoriasPorVendedor(idVendedor);
+	}
+	
+	
 }

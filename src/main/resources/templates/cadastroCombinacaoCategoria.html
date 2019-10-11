@@ -61,8 +61,8 @@
                 <label class="order-form-label">Vendedor</label>
               </div>
               <div class="col-12">
-                  <select class="selectpicker col-8" data-live-search="true" id="selectvendedor">
-                      <option th:each="vendedor : ${vendedores}" th:value="${vendedor}" th:text="${vendedor.nome}"></option>
+                  <select class="selectvendedor selectpicker col-8" data-live-search="true" onchange="populaLinhaVendedor(this)" id="idVendedorSelect">
+                      <option th:each="vendedor : ${vendedores}" th:value="${vendedor.id}" th:text="${vendedor.nome}"></option>
                   </select>
 	              <div class="col-4">
 	              </div>                  

@@ -5,17 +5,17 @@ public class CategoriaTO {
     private Integer idCategoria;
     private String nome;
 	private Integer idPai;
-	private Integer idMarketplace;
+	private Integer idPlataforma;
 
 	public CategoriaTO() {
 
 	}	
 	
-	public CategoriaTO(Integer idCategoria, String nome, Integer idPai, Integer idMarketplace) {
+	public CategoriaTO(Integer idCategoria, String nome, Integer idPai, Integer idPlataforma) {
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.idPai = idPai;
-		this.idMarketplace = idMarketplace;
+		this.idPlataforma = idPlataforma;
 	}
 	
 	public Integer getIdCategoria() {
@@ -36,11 +36,11 @@ public class CategoriaTO {
 	public void setIdPai(Integer idPai) {
 		this.idPai = idPai;
 	}
-	public Integer getIdMarketplace() {
-		return idMarketplace;
+	public Integer getIdPlataforma() {
+		return idPlataforma;
 	}
-	public void setIdMarketplace(Integer idMarketplace) {
-		this.idMarketplace = idMarketplace;
+	public void setIdPlataforma(Integer idPlataforma) {
+		this.idPlataforma = idPlataforma;
 	}
 	
 }

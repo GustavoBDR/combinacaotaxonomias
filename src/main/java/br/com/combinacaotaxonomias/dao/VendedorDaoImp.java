@@ -11,6 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Atributo;
+import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 
@@ -160,5 +161,28 @@ public class VendedorDaoImp implements VendedorDao{
 
 
 	    template.update(sql,param);	
-	}	
+	}
+
+	@Override
+	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append(",	   nome as nome ");
+		sql.append(",	   id_vendedor as idPlataforma ");
+		sql.append(",	   id_categoria_pai as idPai ");	
+		sql.append(" FROM categoria_vendedor ");
+		sql.append(" WHERE 1=1 ");
+		sql.append(" and id_categoria_pai is null ");
+     	sql.append(" and id_vendedor = :id ");
+		
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("id", idVendedor);
+	    
+	    List<CategoriaTO> teste = template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	    return teste;
+	}
+	
+	
 }

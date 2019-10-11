@@ -177,7 +177,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    									.addValue("idCategoria", categoria.getIdCategoria())
 	    									.addValue("nomeCategoria", categoria.getNome())
-	    									.addValue("idMarketplace", categoria.getIdMarketplace())
+	    									.addValue("idMarketplace", categoria.getIdPlataforma())
 	    									.addValue("idCategoriaPai", categoria.getIdPai());
 
 	    template.update(sql,param);
@@ -189,7 +189,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 
 		sql.append("SELECT codigo_categoria as idCategoria ");
 		sql.append(",	   nome as nome ");
-		sql.append(",	   id_marketplace as idMarketplace ");
+		sql.append(",	   id_marketplace as idPlataforma ");
 		sql.append(",	   id_categoria_pai as idPai ");	
 		sql.append(" FROM categoria_marketplace ");
 		sql.append(" WHERE 1=1 ");
@@ -209,7 +209,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 
 		sql.append("SELECT codigo_categoria as idCategoria ");
 		sql.append(",	   nome as nome ");
-		sql.append(",	   id_marketplace as idMarketplace ");
+		sql.append(",	   id_marketplace as idPlataforma ");
 		sql.append(",	   id_categoria_pai as idPai ");	
 		sql.append(" FROM categoria_marketplace ");
 		sql.append(" WHERE 1=1 ");

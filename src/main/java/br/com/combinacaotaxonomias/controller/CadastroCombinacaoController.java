@@ -59,6 +59,13 @@ public class CadastroCombinacaoController {
     	List<CategoriaTO> tt = marketplaceService.buscaCategoriasPorMarketplace(idMarketplace);
         return tt;
     }
+    
+    @ResponseBody
+    @RequestMapping(value = "/vendedorlinha", method = RequestMethod.GET)
+    public List<CategoriaTO> getVendedorLinha(@RequestParam(required = true, name = "idVendedor") Integer idVendedor) {
+    	List<CategoriaTO> tt = vendedorService.buscaCategoriasPorVendedor(idVendedor);
+        return tt;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/marketplaceCategoriaFilha", method = RequestMethod.GET)

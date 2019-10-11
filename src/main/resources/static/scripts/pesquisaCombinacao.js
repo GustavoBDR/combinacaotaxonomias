@@ -119,3 +119,39 @@ function populaGrupoMarketplace(idFamiliaMarketplace) {
         $(marketplace).removeAttr("disabled");
     });
 }
+
+function populaLinhaVendedor(vendedor) {
+	
+	alert("Vendedor: " + $(vendedor).val());
+	
+    $.ajax({
+        url: "/vendedorlinha",
+        data: {idVendedor: $(vendedor).val()},
+        dataType: 'JSON',
+        beforeSend: function () {
+            $(vendedor).attr("disabled", "true");
+
+        	$('#linhaVendedorSelect')
+    	    .find('option')
+    	    .remove()
+    	    .end();
+        }
+    }).done(function (data) {
+    	
+        if (data) {
+        
+            data.forEach(function (obj) {
+            	$("#linhaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            });
+
+        	$('#linhaVendedorSelect').selectpicker('refresh'); 
+
+        } else {
+            alert("Erro ao buscar categoria!");
+        }
+    }).fail(function () {
+        alert("Erro ao buscar categoria.");
+    }).always(function () {
+        $(vendedor).removeAttr("disabled");
+    });
+}

@@ -49,7 +49,7 @@
                 <label class="order-form-label">Marketplace</label>
               </div>
               <div class="col-12">
-	              <select class="selectmarketplace selectpicker col-8" data-live-search="true" onchange="populaLinhaMarketplace(this)" >
+	              <select class="selectmarketplace selectpicker col-8" data-live-search="true" onchange="populaLinhaMarketplace(this)" id="idMarketplaceSelect">
 	                  <option th:each="marketplace : ${marketplaces}" th:value="${marketplace.id}" th:text="${marketplace.nome}"></option>
 	              </select>
 	              <div class="col-4">
@@ -82,29 +82,25 @@
                   </div>
                   <div class="col-4">
                     <div class="col-sm-3">               
-                        <select id="categoriamarketplaceselect" class="selectpicker" data-live-search="true">
+                        <select id="linhaMarketplaceSelect" class="selectpicker" data-live-search="true" onchange="populaFamiliaMarketplace(this)">
                            
                         </select>             
                     </div>
                   </div>
                   <div class="col-4">
-                    <select class="selectpicker" data-live-search="true" id="teste">
-                            <option value="4444">4444</option>
-                            <option value="Fedex">Fedex</option>
-                            <option value="Elite">Elite</option>
-                            <option value="Interp">Interp</option>
-                            <option value="Test">Test</option>
-                    </select>
+                    <div class="col-sm-3">               
+                        <select id="familiaMarketplaceSelect" class="selectpicker" data-live-search="true" onchange="populaGrupoMarketplace(this)">
+                           
+                        </select>             
+                    </div>
                   </div>
                   <div class="col-4">
-                    <select class="selectpicker" data-live-search="true">
-                            <option value="4444">4444</option>
-                            <option value="Fedex">Fedex</option>
-                            <option value="Elite">Elite</option>
-                            <option value="Interp">Interp</option>
-                            <option value="Test">Test</option>
-                    </select>
-                  </div>                          
+                    <div class="col-sm-3">               
+                        <select id="grupoMarketplaceSelect" class="selectpicker" data-live-search="true">
+                           
+                        </select>             
+                    </div>
+                  </div>                         
                 </div>
                 
                 <div class="row mt-3 mx-4">              
@@ -113,29 +109,24 @@
                   </div>
                   <div class="col-4">
                     <div class="col-sm-3">               
-                        <select id="categoriavendedorselect" class="selectpicker" data-live-search="true">
+                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true">
                            
                         </select>             
                     </div>
-                  </div>                  
-                  
+                  </div>                 
                   <div class="col-4">
-                    <select class="selectpicker" data-live-search="true">
-                            <option value="4444">4444</option>
-                            <option value="Fedex">Fedex</option>
-                            <option value="Elite">Elite</option>
-                            <option value="Interp">Interp</option>
-                            <option value="Test">Test</option>
-                    </select>
+                    <div class="col-sm-3">               
+                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true">
+                           
+                        </select>             
+                    </div>
                   </div>
                   <div class="col-4">
-                    <select class="selectpicker" data-live-search="true">
-                            <option value="4444">4444</option>
-                            <option value="Fedex">Fedex</option>
-                            <option value="Elite">Elite</option>
-                            <option value="Interp">Interp</option>
-                            <option value="Test">Test</option>
-                    </select>
+                    <div class="col-sm-3">               
+                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true">
+                           
+                        </select>             
+                    </div>
                   </div>                          
                 </div>
                 

@@ -164,4 +164,10 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace) {
 		return marketplaceDao.buscaCategoriasPorMarketplace(idMarketplace);
 	}
+
+	@Override
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idMarketplace, Integer idCategoriaPai) {
+		return marketplaceDao.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
+	}
+
 }

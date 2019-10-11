@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.Atributo;
-import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 
@@ -19,4 +18,5 @@ public interface MarketplaceDao {
 	public Integer getUltimoIdMarketplace();
 	public void inserirAtributo(Atributo atributo, Integer idMarketplace);
 	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace);
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idMarketplace, Integer idCategoriaPai);
 }

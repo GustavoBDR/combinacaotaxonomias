@@ -17,4 +17,5 @@ public interface MarketplaceService {
 	public void alterarMarketplace(Plataforma marketplace);
 	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Integer idCategoria);
 	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace);
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idMarketplace, Integer idCategoriaPai);
 }

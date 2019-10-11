@@ -60,4 +60,10 @@ public class CadastroCombinacaoController {
         return tt;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/marketplaceCategoriaFilha", method = RequestMethod.GET)
+    public List<CategoriaTO> getMarketplaceFamilia(@RequestParam(required = true, name = "idMarketplace") Integer idMarketplace, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
+    	List<CategoriaTO> tt = marketplaceService.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
+        return tt;
+    }
 }

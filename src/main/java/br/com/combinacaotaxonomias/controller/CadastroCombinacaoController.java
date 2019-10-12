@@ -69,8 +69,15 @@ public class CadastroCombinacaoController {
 
     @ResponseBody
     @RequestMapping(value = "/marketplaceCategoriaFilha", method = RequestMethod.GET)
-    public List<CategoriaTO> getMarketplaceFamilia(@RequestParam(required = true, name = "idMarketplace") Integer idMarketplace, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
+    public List<CategoriaTO> getMarketplaceCategoriaFilha(@RequestParam(required = true, name = "idMarketplace") Integer idMarketplace, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
     	List<CategoriaTO> tt = marketplaceService.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
+        return tt;
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/vendedorCategoriaFilha", method = RequestMethod.GET)
+    public List<CategoriaTO> getVendedorCategoriaFilha(@RequestParam(required = true, name = "idVendedor") Integer idVendedor, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
+    	List<CategoriaTO> tt = vendedorService.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
         return tt;
     }
 }

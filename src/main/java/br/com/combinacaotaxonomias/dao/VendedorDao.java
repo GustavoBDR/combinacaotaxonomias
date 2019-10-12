@@ -17,4 +17,5 @@ public interface VendedorDao {
 	public Integer getUltimoIdVendedor();
 	public void inserirAtributo(Atributo atributo, Integer idVendedor);
 	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor);
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai);
 }

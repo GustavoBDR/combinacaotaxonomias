@@ -9,12 +9,6 @@ $(document).ready(function () {
     $( "#btnSubmit" ).click(function() {
   	  $( "#formPesquisa" ).submit();
   	});
-    
-    $('#selectmarketplace').change(function(){
-    	let valor = $(this).val();
-    	alert("Entrou no change!");
-    	populaFamilia(linha)
-    });
 });
 
 function populaLinhaMarketplace(marketplace) {
@@ -24,7 +18,6 @@ function populaLinhaMarketplace(marketplace) {
         data: {idMarketplace: $(marketplace).val()},
         dataType: 'JSON',
         beforeSend: function () {
-            $(marketplace).attr("disabled", "true");
 
         	$('#linhaMarketplaceSelect')
     	    .find('option')
@@ -34,7 +27,7 @@ function populaLinhaMarketplace(marketplace) {
     }).done(function (data) {
     	
         if (data) {
-        
+        	$("#linhaMarketplaceSelect").append("<option>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#linhaMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -47,7 +40,7 @@ function populaLinhaMarketplace(marketplace) {
     }).fail(function () {
         alert("Erro ao buscar categoria.");
     }).always(function () {
-        $(marketplace).removeAttr("disabled");
+
     });
 }
 
@@ -58,7 +51,6 @@ function populaFamiliaMarketplace(idLinhaMarketplace) {
         data: {idMarketplace: $('#idMarketplaceSelect').val(), idCategoriaPai: $(idLinhaMarketplace).val()},
         dataType: 'JSON',
         beforeSend: function () {
-            $('#linhaMarketplaceSelect').attr("disabled", "true");
 
         	$('#familiaMarketplaceSelect')
     	    .find('option')
@@ -68,7 +60,7 @@ function populaFamiliaMarketplace(idLinhaMarketplace) {
     }).done(function (data) {
     	
         if (data) {
-        
+        	$("#familiaMarketplaceSelect").append("<option>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#familiaMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -81,7 +73,7 @@ function populaFamiliaMarketplace(idLinhaMarketplace) {
     }).fail(function () {
         alert("Erro ao buscar categoria.");
     }).always(function () {
-        $(marketplace).removeAttr("disabled");
+
     });
 }
 
@@ -92,8 +84,6 @@ function populaGrupoMarketplace(idFamiliaMarketplace) {
         data: {idMarketplace: $('#idMarketplaceSelect').val(), idCategoriaPai: $(idFamiliaMarketplace).val()},
         dataType: 'JSON',
         beforeSend: function () {
-        	$('#linhaMarketplaceSelect').attr("disabled", "true");
-        	$('#familiaMarketplaceSelect').attr("disabled", "true");
 
         	$('#grupoMarketplaceSelect')
     	    .find('option')
@@ -103,7 +93,7 @@ function populaGrupoMarketplace(idFamiliaMarketplace) {
     }).done(function (data) {
     	
         if (data) {
-        
+        	$("#grupoMarketplaceSelect").append("<option>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#grupoMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -116,20 +106,17 @@ function populaGrupoMarketplace(idFamiliaMarketplace) {
     }).fail(function () {
         alert("Erro ao buscar categoria.");
     }).always(function () {
-        $(marketplace).removeAttr("disabled");
+
     });
 }
 
 function populaLinhaVendedor(vendedor) {
-	
-	alert("Vendedor: " + $(vendedor).val());
 	
     $.ajax({
         url: "/vendedorlinha",
         data: {idVendedor: $(vendedor).val()},
         dataType: 'JSON',
         beforeSend: function () {
-            $(vendedor).attr("disabled", "true");
 
         	$('#linhaVendedorSelect')
     	    .find('option')
@@ -139,7 +126,7 @@ function populaLinhaVendedor(vendedor) {
     }).done(function (data) {
     	
         if (data) {
-        
+        	$("#linhaVendedorSelect").append("<option>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#linhaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -152,6 +139,73 @@ function populaLinhaVendedor(vendedor) {
     }).fail(function () {
         alert("Erro ao buscar categoria.");
     }).always(function () {
-        $(vendedor).removeAttr("disabled");
+
+    });
+    
+}
+
+function populaFamiliaVendedor(idLinhaVendedor) {
+	
+    $.ajax({
+        url: "/vendedorCategoriaFilha",
+        data: {idVendedor: $('#idVendedorSelect').val(), idCategoriaPai: $(idLinhaVendedor).val()},
+        dataType: 'JSON',
+        beforeSend: function () {
+
+        	$('#familiaVendedorSelect')
+    	    .find('option')
+    	    .remove()
+    	    .end();
+        }
+    }).done(function (data) {
+    	
+        if (data) {
+        	$("#familiaVendedorSelect").append("<option>Selecione uma opção</option>");
+            data.forEach(function (obj) {
+            	$("#familiaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            });
+
+        	$('#familiaVendedorSelect').selectpicker('refresh'); 
+
+        } else {
+            alert("Erro ao buscar categoria!");
+        }
+    }).fail(function () {
+        alert("Erro ao buscar categoria.");
+    }).always(function () {
+
+    });
+}
+
+function populaGrupoVendedor(idFamiliaVendedor) {
+	
+    $.ajax({
+        url: "/vendedorCategoriaFilha",
+        data: {idVendedor: $('#idVendedorSelect').val(), idCategoriaPai: $(idFamiliaVendedor).val()},
+        dataType: 'JSON',
+        beforeSend: function () {
+
+        	$('#grupoVendedorSelect')
+    	    .find('option')
+    	    .remove()
+    	    .end();
+        }
+    }).done(function (data) {
+    	
+        if (data) {
+        	$("#grupoVendedorSelect").append("<option>Selecione uma opção</option>");
+            data.forEach(function (obj) {
+            	$("#grupoVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            });
+
+        	$('#grupoVendedorSelect').selectpicker('refresh'); 
+
+        } else {
+            alert("Erro ao buscar categoria!");
+        }
+    }).fail(function () {
+        alert("Erro ao buscar categoria.");
+    }).always(function () {
+
     });
 }

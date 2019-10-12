@@ -41,11 +41,18 @@ public class VendedorDaoImp implements VendedorDao{
 
 	@Override
 	public List<Plataforma> buscaTodosVendedores() {
-        String sql = "SELECT * FROM vendedor";
+		
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("SELECT id_vendedor as id");
+		sql.append(",	   nome as nome");
+		sql.append(",	   api_get_categoria as urlAPIGetCategorias");
+		sql.append(",	   api_get_atributo as urlAPIGetAtributos");
+		sql.append(" FROM vendedor");
         
         SqlParameterSource param = new MapSqlParameterSource();
         
-        return template.query(sql, param, new BeanPropertyRowMapper(Plataforma.class));
+        return template.query(sql.toString(), param, new BeanPropertyRowMapper(Plataforma.class));
 	}
 
 	@Override
@@ -180,9 +187,28 @@ public class VendedorDaoImp implements VendedorDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("id", idVendedor);
 	    
-	    List<CategoriaTO> teste = template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
-	    return teste;
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
 	}
 	
-	
+	@Override
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append(",	   nome as nome ");
+		sql.append(",	   id_vendedor as idPlataforma ");
+		sql.append(",	   id_categoria_pai as idPai ");	
+		sql.append(" FROM categoria_vendedor ");
+		sql.append(" WHERE 1=1 ");
+		sql.append(" and id_categoria_pai = :idCategoriaPai ");
+     	sql.append(" and id_vendedor = :idVendedor ");
+		
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idVendedor", idVendedor)
+	    		.addValue("idCategoriaPai", idCategoriaPai);
+	    
+	    
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	}
 }

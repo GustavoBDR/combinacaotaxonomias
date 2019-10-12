@@ -164,6 +164,11 @@ public class VendedorServiceImp implements VendedorService{
 	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor) {
 		return vendedorDao.buscaCategoriasPorVendedor(idVendedor);
 	}
+
+	@Override
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai) {
+		return vendedorDao.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
+	}
 	
 	
 }

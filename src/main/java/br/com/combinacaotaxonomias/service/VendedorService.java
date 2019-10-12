@@ -13,4 +13,5 @@ public interface VendedorService {
 	public boolean isVendedor(Plataforma vendedor);
 	public void alterarVendedor(Plataforma vendedor);
 	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor);
+	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai);
 }

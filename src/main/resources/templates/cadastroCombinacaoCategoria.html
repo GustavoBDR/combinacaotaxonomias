@@ -49,7 +49,8 @@
                 <label class="order-form-label">Marketplace</label>
               </div>
               <div class="col-12">
-	              <select class="selectmarketplace selectpicker col-8" data-live-search="true" onchange="populaLinhaMarketplace(this)" id="idMarketplaceSelect">
+	              <select class="selectpicker col-8" data-live-search="true" onchange="populaLinhaMarketplace(this)" id="idMarketplaceSelect">
+	                  <option>Selecione uma opção</option>
 	                  <option th:each="marketplace : ${marketplaces}" th:value="${marketplace.id}" th:text="${marketplace.nome}"></option>
 	              </select>
 	              <div class="col-4">
@@ -61,7 +62,8 @@
                 <label class="order-form-label">Vendedor</label>
               </div>
               <div class="col-12">
-                  <select class="selectvendedor selectpicker col-8" data-live-search="true" onchange="populaLinhaVendedor(this)" id="idVendedorSelect">
+                  <select class="selectpicker col-8" data-live-search="true" onchange="populaLinhaVendedor(this)" id="idVendedorSelect">
+                      <option>Selecione uma opção</option>
                       <option th:each="vendedor : ${vendedores}" th:value="${vendedor.id}" th:text="${vendedor.nome}"></option>
                   </select>
 	              <div class="col-4">
@@ -83,21 +85,21 @@
                   <div class="col-4">
                     <div class="col-sm-3">               
                         <select id="linhaMarketplaceSelect" class="selectpicker" data-live-search="true" onchange="populaFamiliaMarketplace(this)">
-                           
+                        	
                         </select>             
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="col-sm-3">               
                         <select id="familiaMarketplaceSelect" class="selectpicker" data-live-search="true" onchange="populaGrupoMarketplace(this)">
-                           
+                         	  
                         </select>             
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="col-sm-3">               
                         <select id="grupoMarketplaceSelect" class="selectpicker" data-live-search="true">
-                           
+                        	 
                         </select>             
                     </div>
                   </div>                         
@@ -109,22 +111,22 @@
                   </div>
                   <div class="col-4">
                     <div class="col-sm-3">               
-                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true">
-                           
+                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true" onchange="populaFamiliaVendedor(this)">
+                         	
                         </select>             
                     </div>
                   </div>                 
                   <div class="col-4">
                     <div class="col-sm-3">               
-                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true">
-                           
+                        <select id="familiaVendedorSelect" class="selectpicker" data-live-search="true" onchange="populaGrupoVendedor(this)">
+                        	
                         </select>             
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="col-sm-3">               
-                        <select id="linhaVendedorSelect" class="selectpicker" data-live-search="true">
-                           
+                        <select id="grupoVendedorSelect" class="selectpicker" data-live-search="true">
+                        	
                         </select>             
                     </div>
                   </div>                          

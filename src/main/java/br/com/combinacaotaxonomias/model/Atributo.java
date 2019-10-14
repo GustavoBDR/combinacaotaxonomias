@@ -13,6 +13,10 @@ public class Atributo extends Taxonomia{
 		this.tipoAtributo = tipoAtributo;
 	}
 
+	public Atributo(Integer id, String nome) {
+		super(id, nome);
+	}
+	
 	public Integer getCategoriaId() {
 		return categoriaId;
 	}

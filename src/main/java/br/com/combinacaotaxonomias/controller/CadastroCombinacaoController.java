@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.combinacaotaxonomias.helper.PlataformaHelper;
 import br.com.combinacaotaxonomias.model.Atributo;
+import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.CombinacaoTO;
@@ -53,34 +54,35 @@ public class CadastroCombinacaoController {
 	public String salvaCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
 		model.addAttribute("novaCombinacao", novaCombinacao);
 
-		List<Atributo> atributosLinhaMarketplace= new ArrayList<Atributo>();
+		List<AtributoTO> atributosLinhaMarketplace= new ArrayList<AtributoTO>();
 		atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdLinhaMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));
 
-		List<Atributo> atributosFamiliaMarketplace= new ArrayList<Atributo>();
+		List<AtributoTO> atributosFamiliaMarketplace= new ArrayList<AtributoTO>();
 		atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdFamiliaMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));		
 		
-		List<Atributo> atributosGrupoMarketplace= new ArrayList<Atributo>();
+		List<AtributoTO> atributosGrupoMarketplace= new ArrayList<AtributoTO>();
 		atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));
 		
-		List<Atributo> atributosMarketplace = new ArrayList<Atributo>();
+		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
 		atributosMarketplace.addAll(atributosLinhaMarketplace);
 		atributosMarketplace.addAll(atributosGrupoMarketplace);
 		atributosMarketplace.addAll(atributosFamiliaMarketplace);
 		model.addAttribute("atributosMarketplace", atributosMarketplace);
 		
-		List<Atributo> atributosLinhaVendedor= new ArrayList<Atributo>();
-		atributosLinhaVendedor = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdLinhaVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
 		
-		List<Atributo> atributosFamiliaVendedor= new ArrayList<Atributo>();
-		atributosFamiliaVendedor = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdFamiliaVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
+		List<AtributoTO> atributosLinhaVendedor= new ArrayList<AtributoTO>();
+		atributosLinhaVendedor = vendedorService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdLinhaVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
 		
-		List<Atributo> atributosGrupoVendedor= new ArrayList<Atributo>();
-		atributosGrupoVendedor = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
+		List<AtributoTO> atributosFamiliaVendedor= new ArrayList<AtributoTO>();
+		atributosFamiliaVendedor = vendedorService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdFamiliaVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
 		
-		List<Atributo> atributosVendedor = new ArrayList<Atributo>();
-		atributosVendedor.addAll(atributosLinhaMarketplace);
-		atributosVendedor.addAll(atributosFamiliaMarketplace);
-		atributosVendedor.addAll(atributosGrupoMarketplace);	
+		List<AtributoTO> atributosGrupoVendedor= new ArrayList<AtributoTO>();
+		atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
+		
+		List<AtributoTO> atributosVendedor = new ArrayList<AtributoTO>();
+		atributosVendedor.addAll(atributosLinhaVendedor);
+		atributosVendedor.addAll(atributosFamiliaVendedor);
+		atributosVendedor.addAll(atributosGrupoVendedor);	
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
 		return "cadastroCombinacaoAtributos";
@@ -111,7 +113,8 @@ public class CadastroCombinacaoController {
     @ResponseBody
     @RequestMapping(value = "/vendedorCategoriaFilha", method = RequestMethod.GET)
     public List<CategoriaTO> getVendedorCategoriaFilha(@RequestParam(required = true, name = "idVendedor") Integer idVendedor, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
-    	List<CategoriaTO> tt = vendedorService.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
-        return tt;
+    	return vendedorService.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
     }
+    
+    
 }

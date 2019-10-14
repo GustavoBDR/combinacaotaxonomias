@@ -15,6 +15,7 @@ import br.com.combinacaotaxonomias.helper.CategoriaHelper;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.AtributoResponse;
+import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
@@ -171,7 +172,8 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	}
 
 	@Override
-	public List<Atributo> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace) {
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace) {
 		return marketplaceDao.buscaAtributosPorCategoria(idCategoria, idMarletplace);
 	}
+	
 }

@@ -14,6 +14,7 @@ import br.com.combinacaotaxonomias.dao.VendedorDao;
 import br.com.combinacaotaxonomias.helper.CategoriaHelper;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.AtributoResponse;
+import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
@@ -170,5 +171,9 @@ public class VendedorServiceImp implements VendedorService{
 		return vendedorDao.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
 	}
 	
-	
+	@Override
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace) {
+		return vendedorDao.buscaAtributosPorCategoria(idCategoria, idMarletplace);
+	}
+
 }

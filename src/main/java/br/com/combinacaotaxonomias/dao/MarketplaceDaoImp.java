@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.model.Atributo;
+import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
@@ -225,24 +226,22 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public List<Atributo> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarketplace) {
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarketplace) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_atributo as id ");
 		sql.append(",	   nome as nome ");
-		sql.append(",	   tipo as tipoAtributo ");
 		sql.append(",	   id_categoria_marketplace as categoriaId ");	
+		sql.append(",	   tipo as tipoAtributo ");
 		sql.append(" FROM atributo_marketplace ");
 		sql.append(" WHERE 1=1 ");
 		sql.append(" and id_categoria_marketplace = :idCategoria ");
      	sql.append(" and id_marketplace = :idMarketplace ");
-		
 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("idMarketplace", idMarketplace)
 	    		.addValue("idCategoria", idCategoria);
 	    
-	    List<Atributo> t = template.query(sql.toString(), param, new BeanPropertyRowMapper(Atributo.class));
-	    return t;
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(AtributoTO.class));
 	}	
 }

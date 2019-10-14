@@ -2,6 +2,8 @@ package br.com.combinacaotaxonomias.service;
 
 import java.util.List;
 
+import br.com.combinacaotaxonomias.model.Atributo;
+import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 
@@ -14,4 +16,5 @@ public interface VendedorService {
 	public void alterarVendedor(Plataforma vendedor);
 	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor);
 	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai);
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace);
 }

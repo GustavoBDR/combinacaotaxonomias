@@ -170,4 +170,8 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		return marketplaceDao.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
 	}
 
+	@Override
+	public List<Atributo> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace) {
+		return marketplaceDao.buscaAtributosPorCategoria(idCategoria, idMarletplace);
+	}
 }

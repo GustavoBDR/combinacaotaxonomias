@@ -27,7 +27,7 @@ function populaLinhaMarketplace(marketplace) {
     }).done(function (data) {
     	
         if (data) {
-        	$("#linhaMarketplaceSelect").append("<option>Selecione uma opção</option>");
+        	$("#linhaMarketplaceSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#linhaMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -60,7 +60,7 @@ function populaFamiliaMarketplace(idLinhaMarketplace) {
     }).done(function (data) {
     	
         if (data) {
-        	$("#familiaMarketplaceSelect").append("<option>Selecione uma opção</option>");
+        	$("#familiaMarketplaceSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#familiaMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -93,7 +93,7 @@ function populaGrupoMarketplace(idFamiliaMarketplace) {
     }).done(function (data) {
     	
         if (data) {
-        	$("#grupoMarketplaceSelect").append("<option>Selecione uma opção</option>");
+        	$("#grupoMarketplaceSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#grupoMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -126,7 +126,7 @@ function populaLinhaVendedor(vendedor) {
     }).done(function (data) {
     	
         if (data) {
-        	$("#linhaVendedorSelect").append("<option>Selecione uma opção</option>");
+        	$("#linhaVendedorSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#linhaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -160,7 +160,7 @@ function populaFamiliaVendedor(idLinhaVendedor) {
     }).done(function (data) {
     	
         if (data) {
-        	$("#familiaVendedorSelect").append("<option>Selecione uma opção</option>");
+        	$("#familiaVendedorSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#familiaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });
@@ -193,7 +193,7 @@ function populaGrupoVendedor(idFamiliaVendedor) {
     }).done(function (data) {
     	
         if (data) {
-        	$("#grupoVendedorSelect").append("<option>Selecione uma opção</option>");
+        	$("#grupoVendedorSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
             	$("#grupoVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
             });

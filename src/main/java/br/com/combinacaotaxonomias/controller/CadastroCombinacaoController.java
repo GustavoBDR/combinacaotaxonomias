@@ -1,5 +1,6 @@
 package br.com.combinacaotaxonomias.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.combinacaotaxonomias.helper.PlataformaHelper;
+import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
-import br.com.combinacaotaxonomias.model.Combinacao;
+import br.com.combinacaotaxonomias.model.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.PlataformaTO;
 import br.com.combinacaotaxonomias.model.Taxonomia;
@@ -32,7 +34,7 @@ public class CadastroCombinacaoController {
     private PlataformaHelper plataformaHelper;
 	
 	@RequestMapping(value = "/cadastrocombinacaocategoria", method = RequestMethod.GET)
-	public String getCadastroCombinacao(Model model){
+	public String getCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
 		List<Plataforma> marketplaces = marketplaceService.buscaTodosMarketplaces();
 		List<Plataforma> vendedores = vendedorService.buscaTodosVendedores();
 		
@@ -41,15 +43,47 @@ public class CadastroCombinacaoController {
 		model.addAttribute("vendedores", vendedores);
 		model.addAttribute("marketplaces", plataformasTO);
 
-		Combinacao novaCombinacao = new Combinacao();
+		novaCombinacao = new CombinacaoTO();
 		model.addAttribute("novaCombinacao", novaCombinacao);
 
 		return "cadastroCombinacaoCategoria";
 	}
 
 	@RequestMapping(value = "/salvacadastrocombinacao", method = RequestMethod.POST)
-	public String salvaCadastroCombinacao(@RequestParam("novaCombinacao") Combinacao novaCombinacao, List<Plataforma> marketplaces){
-		return "cadastroCombinacaoCategoria";
+	public String salvaCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
+		model.addAttribute("novaCombinacao", novaCombinacao);
+
+		List<Atributo> atributosLinhaMarketplace= new ArrayList<Atributo>();
+		atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdLinhaMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));
+
+		List<Atributo> atributosFamiliaMarketplace= new ArrayList<Atributo>();
+		atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdFamiliaMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));		
+		
+		List<Atributo> atributosGrupoMarketplace= new ArrayList<Atributo>();
+		atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));
+		
+		List<Atributo> atributosMarketplace = new ArrayList<Atributo>();
+		atributosMarketplace.addAll(atributosLinhaMarketplace);
+		atributosMarketplace.addAll(atributosGrupoMarketplace);
+		atributosMarketplace.addAll(atributosFamiliaMarketplace);
+		model.addAttribute("atributosMarketplace", atributosMarketplace);
+		
+		List<Atributo> atributosLinhaVendedor= new ArrayList<Atributo>();
+		atributosLinhaVendedor = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdLinhaVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
+		
+		List<Atributo> atributosFamiliaVendedor= new ArrayList<Atributo>();
+		atributosFamiliaVendedor = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdFamiliaVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
+		
+		List<Atributo> atributosGrupoVendedor= new ArrayList<Atributo>();
+		atributosGrupoVendedor = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
+		
+		List<Atributo> atributosVendedor = new ArrayList<Atributo>();
+		atributosVendedor.addAll(atributosLinhaMarketplace);
+		atributosVendedor.addAll(atributosFamiliaMarketplace);
+		atributosVendedor.addAll(atributosGrupoMarketplace);	
+		model.addAttribute("atributosVendedor", atributosVendedor);
+		
+		return "cadastroCombinacaoAtributos";
 	}
 	
 	

@@ -223,5 +223,26 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	    
 	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
 	}
-	
+
+	@Override
+	public List<Atributo> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarketplace) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT codigo_atributo as id ");
+		sql.append(",	   nome as nome ");
+		sql.append(",	   tipo as tipoAtributo ");
+		sql.append(",	   id_categoria_marketplace as categoriaId ");	
+		sql.append(" FROM atributo_marketplace ");
+		sql.append(" WHERE 1=1 ");
+		sql.append(" and id_categoria_marketplace = :idCategoria ");
+     	sql.append(" and id_marketplace = :idMarketplace ");
+		
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idMarketplace", idMarketplace)
+	    		.addValue("idCategoria", idCategoria);
+	    
+	    List<Atributo> t = template.query(sql.toString(), param, new BeanPropertyRowMapper(Atributo.class));
+	    return t;
+	}	
 }

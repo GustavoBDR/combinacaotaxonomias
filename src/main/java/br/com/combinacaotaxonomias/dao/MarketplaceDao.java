@@ -19,4 +19,5 @@ public interface MarketplaceDao {
 	public void inserirAtributo(Atributo atributo, Integer idMarketplace);
 	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace);
 	public List<CategoriaTO> buscaCategoriasFilhas(Integer idMarketplace, Integer idCategoriaPai);
+	public List<Atributo> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace);
 }

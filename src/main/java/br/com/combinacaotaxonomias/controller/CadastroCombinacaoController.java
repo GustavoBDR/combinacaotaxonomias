@@ -53,7 +53,12 @@ public class CadastroCombinacaoController {
 	@RequestMapping(value = "/salvacadastrocombinacao", method = RequestMethod.POST)
 	public String salvaCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
 		model.addAttribute("novaCombinacao", novaCombinacao);
-
+		
+		Plataforma marketplace = marketplaceService.buscaMarketplacePorId(Long.parseLong(novaCombinacao.getIdMarketplace()));
+		Plataforma vendedor = vendedorService.buscaVendedorPorId(Long.parseLong(novaCombinacao.getIdVendedor()));
+		model.addAttribute("marketplace", marketplace);
+		model.addAttribute("vendedor", vendedor);
+		
 		List<AtributoTO> atributosLinhaMarketplace= new ArrayList<AtributoTO>();
 		atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdLinhaMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));
 

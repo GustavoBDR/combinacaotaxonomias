@@ -16,6 +16,7 @@ import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
+import br.com.combinacaotaxonomias.model.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.PlataformaTO;
@@ -69,9 +70,9 @@ public class CadastroCombinacaoController {
 		atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoMarketplace()), Integer.parseInt(novaCombinacao.getIdMarketplace()));
 		
 		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
-		atributosMarketplace.addAll(atributosLinhaMarketplace);
+		//atributosMarketplace.addAll(atributosLinhaMarketplace);
+		//atributosMarketplace.addAll(atributosFamiliaMarketplace);
 		atributosMarketplace.addAll(atributosGrupoMarketplace);
-		atributosMarketplace.addAll(atributosFamiliaMarketplace);
 		model.addAttribute("atributosMarketplace", atributosMarketplace);
 		
 		
@@ -85,10 +86,13 @@ public class CadastroCombinacaoController {
 		atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(Integer.parseInt(novaCombinacao.getIdGrupoVendedor()), Integer.parseInt(novaCombinacao.getIdVendedor()));
 		
 		List<AtributoTO> atributosVendedor = new ArrayList<AtributoTO>();
-		atributosVendedor.addAll(atributosLinhaVendedor);
-		atributosVendedor.addAll(atributosFamiliaVendedor);
+		//atributosVendedor.addAll(atributosLinhaVendedor);
+		//atributosVendedor.addAll(atributosFamiliaVendedor);
 		atributosVendedor.addAll(atributosGrupoVendedor);	
 		model.addAttribute("atributosVendedor", atributosVendedor);
+		
+		CombinacaoAtributoTO combinacaoAtributo = new CombinacaoAtributoTO();
+		model.addAttribute("combinacaoAtributo", combinacaoAtributo);
 		
 		return "cadastroCombinacaoAtributos";
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributoTO;
+import br.com.combinacaotaxonomias.model.CombinacaoAtributoWrapper;
 import br.com.combinacaotaxonomias.model.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.PlataformaTO;
@@ -91,12 +93,19 @@ public class CadastroCombinacaoController {
 		atributosVendedor.addAll(atributosGrupoVendedor);	
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
-		CombinacaoAtributoTO combinacaoAtributo = new CombinacaoAtributoTO();
-		model.addAttribute("combinacaoAtributo", combinacaoAtributo);
+		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper();
+		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		
 		return "cadastroCombinacaoAtributos";
 	}
 	
+	@RequestMapping(value = "/salvacadastrocombinacaoatributos", method = RequestMethod.POST)
+	public String salvaCadastroCombinacaoAtributos(@ModelAttribute CombinacaoAtributoWrapper combinacaoAtributo){
+		Integer i;
+		i = 1+1;
+		
+		return "index";
+	}
 	
     @ResponseBody
     @RequestMapping(value = "/marketplacelinha", method = RequestMethod.GET)

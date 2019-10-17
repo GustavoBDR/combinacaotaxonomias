@@ -93,14 +93,23 @@ public class CadastroCombinacaoController {
 		atributosVendedor.addAll(atributosGrupoVendedor);	
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
-		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper();
+		
+		List<CombinacaoAtributoTO> combinacaoAtributos = new ArrayList<CombinacaoAtributoTO>();
+		
+		for (int i = 0; i < 10; i++) {
+			combinacaoAtributos.add(new CombinacaoAtributoTO());
+		}
+		
+		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributos);
+		
+		
 		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		
 		return "cadastroCombinacaoAtributos";
 	}
 	
 	@RequestMapping(value = "/salvacadastrocombinacaoatributos", method = RequestMethod.POST)
-	public String salvaCadastroCombinacaoAtributos(@ModelAttribute CombinacaoAtributoWrapper combinacaoAtributo){
+	public String salvaCadastroCombinacaoAtributos(@ModelAttribute CombinacaoAtributoWrapper combinacaoWrapper){
 		Integer i;
 		i = 1+1;
 		

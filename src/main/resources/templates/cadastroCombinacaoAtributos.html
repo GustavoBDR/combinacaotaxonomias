@@ -60,10 +60,12 @@
 				    	<th:block th:each="atributoMartketplace,stat : ${atributosMarketplace}">
 				        <tr>
 				          <th scope="row" th:text="${atributoMartketplace.nome}">
-				              <input th:value="${atributoMartketplace.id}" th:field="*{combinacaoWrapper.combinacaoAtributos[__${stat.index}__].idAtributoMarketplace}" hidden/>
 				          </th>
 				          <td>
-				              <select class="selectpicker" data-live-search="true" th:field="*{combinacaoWrapper.combinacaoAtributos[__${stat.index}__].idAtributoVendedor}"> 
+				          	  <input th:value="${atributoMartketplace.id}" th:field="*{combinacaoAtributos[__${stat.index}__].idAtributoMarketplace}" hidden/>
+				          </td>
+				          <td>
+				              <select class="selectpicker" data-live-search="true" th:field="*{combinacaoAtributos[__${stat.index}__].idAtributoVendedor}"> 
 				                  <option th:value="0">Selecione uma opção</option>
 				                  <option th:each="atributoVendedor : ${atributosVendedor}" th:value="${atributoVendedor.id}" th:text="${atributoVendedor.nome}"></option>
 				              </select>

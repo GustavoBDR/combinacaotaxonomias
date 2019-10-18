@@ -1,4 +1,4 @@
-package br.com.combinacaotaxonomias.model;
+package br.com.combinacaotaxonomias.model.to;
 
 public class PlataformaTO {
 	private String id;

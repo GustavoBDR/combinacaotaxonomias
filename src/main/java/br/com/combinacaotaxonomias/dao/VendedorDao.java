@@ -3,10 +3,10 @@ package br.com.combinacaotaxonomias.dao;
 import java.util.List;
 
 import br.com.combinacaotaxonomias.model.Atributo;
-import br.com.combinacaotaxonomias.model.AtributoTO;
-import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
+import br.com.combinacaotaxonomias.model.to.AtributoTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaTO;
 
 public interface VendedorDao {
 	public void inserirVendedor(Plataforma vendedor);

@@ -1,27 +1,27 @@
-package br.com.combinacaotaxonomias.model;
+package br.com.combinacaotaxonomias.model.to;
 
 public class CategoriaTO {
 
-    private Integer idCategoria;
+    private String idCategoria;
     private String nome;
-	private Integer idPai;
-	private Integer idPlataforma;
+	private String idPai;
+	private String idPlataforma;
 
 	public CategoriaTO() {
 
 	}	
 	
-	public CategoriaTO(Integer idCategoria, String nome, Integer idPai, Integer idPlataforma) {
+	public CategoriaTO(String idCategoria, String nome, String idPai, String idPlataforma) {
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.idPai = idPai;
 		this.idPlataforma = idPlataforma;
 	}
 	
-	public Integer getIdCategoria() {
+	public String getIdCategoria() {
 		return idCategoria;
 	}
-	public void setIdCategoria(Integer idCategoria) {
+	public void setIdCategoria(String idCategoria) {
 		this.idCategoria = idCategoria;
 	}
 	public String getNome() {
@@ -30,16 +30,16 @@ public class CategoriaTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Integer getIdPai() {
+	public String getIdPai() {
 		return idPai;
 	}
-	public void setIdPai(Integer idPai) {
+	public void setIdPai(String idPai) {
 		this.idPai = idPai;
 	}
-	public Integer getIdPlataforma() {
+	public String getIdPlataforma() {
 		return idPlataforma;
 	}
-	public void setIdPlataforma(Integer idPlataforma) {
+	public void setIdPlataforma(String idPlataforma) {
 		this.idPlataforma = idPlataforma;
 	}
 	

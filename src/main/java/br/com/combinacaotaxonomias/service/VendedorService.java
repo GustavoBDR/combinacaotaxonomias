@@ -3,9 +3,9 @@ package br.com.combinacaotaxonomias.service;
 import java.util.List;
 
 import br.com.combinacaotaxonomias.model.Atributo;
-import br.com.combinacaotaxonomias.model.AtributoTO;
-import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
+import br.com.combinacaotaxonomias.model.to.AtributoTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaTO;
 
 public interface VendedorService {
 	public void inserirVendedor(Plataforma vendedor);

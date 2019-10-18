@@ -26,4 +26,14 @@ public enum TipoAtributo {
 			return ERRO;
 		}
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	
 }

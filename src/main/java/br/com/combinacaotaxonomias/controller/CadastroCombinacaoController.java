@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.combinacaotaxonomias.helper.PlataformaHelper;
 import br.com.combinacaotaxonomias.model.Atributo;
-import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
-import br.com.combinacaotaxonomias.model.CategoriaTO;
-import br.com.combinacaotaxonomias.model.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributoWrapper;
-import br.com.combinacaotaxonomias.model.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
-import br.com.combinacaotaxonomias.model.PlataformaTO;
 import br.com.combinacaotaxonomias.model.Taxonomia;
+import br.com.combinacaotaxonomias.model.to.AtributoTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
+import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
+import br.com.combinacaotaxonomias.model.to.PlataformaTO;
 import br.com.combinacaotaxonomias.service.MarketplaceService;
 import br.com.combinacaotaxonomias.service.VendedorService;
 

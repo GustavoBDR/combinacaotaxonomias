@@ -11,10 +11,10 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Atributo;
-import br.com.combinacaotaxonomias.model.AtributoTO;
-import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
+import br.com.combinacaotaxonomias.model.to.AtributoTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaTO;
 
 @Repository("vendedorDao")
 public class VendedorDaoImp implements VendedorDao{

@@ -13,12 +13,12 @@ import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.dao.MarketplaceDao;
 import br.com.combinacaotaxonomias.helper.CategoriaHelper;
 import br.com.combinacaotaxonomias.model.Taxonomia;
+import br.com.combinacaotaxonomias.model.to.AtributoTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.AtributoResponse;
-import br.com.combinacaotaxonomias.model.AtributoTO;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.CategoriaResponse;
-import br.com.combinacaotaxonomias.model.CategoriaTO;
 import br.com.combinacaotaxonomias.model.Plataforma;
 
 @Service("marketplaceService")

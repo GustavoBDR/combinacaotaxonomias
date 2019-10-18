@@ -1,4 +1,4 @@
-package br.com.combinacaotaxonomias.model;
+package br.com.combinacaotaxonomias.model.to;
 
 public class CombinacaoAtributoTO {
 	private String idMarketplace;

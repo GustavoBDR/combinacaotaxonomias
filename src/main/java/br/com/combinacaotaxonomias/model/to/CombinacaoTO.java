@@ -1,4 +1,4 @@
-package br.com.combinacaotaxonomias.model;
+package br.com.combinacaotaxonomias.model.to;
 
 public class CombinacaoTO {
 	private String nome;
@@ -11,7 +11,8 @@ public class CombinacaoTO {
 	private String idLinhaVendedor;
 	private String idFamiliaVendedor;
 	private String idGrupoVendedor;
-	public String getNome() {
+	
+	public  String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {

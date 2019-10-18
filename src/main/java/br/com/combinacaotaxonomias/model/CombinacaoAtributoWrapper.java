@@ -2,6 +2,8 @@ package br.com.combinacaotaxonomias.model;
 
 import java.util.List;
 
+import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
+
 public class CombinacaoAtributoWrapper {
 	private List<CombinacaoAtributoTO>  combinacaoAtributos;
 

@@ -1,22 +1,22 @@
-package br.com.combinacaotaxonomias.model;
+package br.com.combinacaotaxonomias.model.to;
 
 import br.com.combinacaotaxonomias.common.TipoAtributo;
 
 public class AtributoTO {
-	private Integer id;
+	private String id;
 	private String nome;
-	private Integer categoriaId;
+	private String categoriaId;
 	private String tipoAtributo;
 
 	public AtributoTO(){
 		
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -28,11 +28,11 @@ public class AtributoTO {
 		this.nome = nome;
 	}
 
-	public Integer getCategoriaId() {
+	public String getCategoriaId() {
 		return categoriaId;
 	}
 
-	public void setCategoriaId(Integer categoriaId) {
+	public void setCategoriaId(String categoriaId) {
 		this.categoriaId = categoriaId;
 	}
 

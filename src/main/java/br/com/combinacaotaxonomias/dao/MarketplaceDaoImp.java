@@ -131,7 +131,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Integer idMarketplace) {
+	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Long idMarketplace) {
 		String sql = "INSERT INTO categoria_marketplace(codigo_categoria, nome, id_marketplace, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idMarketplace, :idCategoriaPai)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
@@ -144,7 +144,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public Integer getUltimoIdMarketplace() {
+	public Long getUltimoIdMarketplace() {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT max(id_marketplace) as id");
@@ -152,12 +152,12 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	
 	    SqlParameterSource param = new MapSqlParameterSource();	
 
-	    List<Integer> id = template.queryForList(sql.toString(), param, Integer.class);
+	    List<Long> id = template.queryForList(sql.toString(), param, Long.class);
 	    return id.get(0);
 	}
 
 	@Override
-	public void inserirAtributo(Atributo atributo, Integer idMarketplace) {
+	public void inserirAtributo(Atributo atributo, Long idMarketplace) {
 		String sql = "INSERT INTO atributo_marketplace(codigo_atributo, nome, tipo, id_categoria_marketplace, id_marketplace) values (:codigoAtributo, :nomeCategoria, :tipo, :idCategoriaPai, :idMarketplace)";
 		 		
 	    SqlParameterSource param = new MapSqlParameterSource()
@@ -185,7 +185,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace) {
+	public List<CategoriaTO> buscaCategoriasPorMarketplace(Long idMarketplace) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_categoria as idCategoria ");
@@ -205,7 +205,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Integer idMarketplace, Integer idCategoriaPai) {
+	public List<CategoriaTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_categoria as idCategoria ");
@@ -226,7 +226,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarketplace) {
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idMarketplace) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_atributo as id ");

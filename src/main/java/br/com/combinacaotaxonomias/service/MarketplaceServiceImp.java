@@ -41,7 +41,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		List<CategoriaResponse> categoriasResponse = consumoApiService.getCategorias(marketplace);
 		List<Categoria> categorias = extrairCategorias(categoriasResponse);
 		
-		Integer idMarketplace = marketplaceDao.getUltimoIdMarketplace();
+		Long idMarketplace = marketplaceDao.getUltimoIdMarketplace();
 		
 		inserirCategorias(categorias, idMarketplace);
 		
@@ -82,7 +82,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	}
 	
 	
-	public void inserirCategorias(List<Categoria> categorias, Integer idMarketplace) {
+	public void inserirCategorias(List<Categoria> categorias, Long idMarketplace) {
 		Map<Integer, CategoriaTO> CategoriaMap = new HashMap<Integer,CategoriaTO>();
 		
 		
@@ -108,7 +108,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 		}
 	}
 	
-	public void inserirAtributos(List<Atributo> atributos, Integer idMarketplace) {
+	public void inserirAtributos(List<Atributo> atributos, Long idMarketplace) {
 		for (Atributo atributo : atributos) {
 			marketplaceDao.inserirAtributo(atributo, idMarketplace);
 		}
@@ -162,18 +162,18 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorMarketplace(Integer idMarketplace) {
+	public List<CategoriaTO> buscaCategoriasPorMarketplace(Long idMarketplace) {
 		return marketplaceDao.buscaCategoriasPorMarketplace(idMarketplace);
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Integer idMarketplace, Integer idCategoriaPai) {
+	public List<CategoriaTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai) {
 		return marketplaceDao.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
 	}
 
 	@Override
-	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace) {
-		return marketplaceDao.buscaAtributosPorCategoria(idCategoria, idMarletplace);
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idMarketplace) {
+		return marketplaceDao.buscaAtributosPorCategoria(idCategoria, idMarketplace);
 	}
 	
 }

@@ -131,7 +131,7 @@ public class VendedorDaoImp implements VendedorDao{
 	}
 
 	@Override
-	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Integer idVendedor) {
+	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Long idVendedor) {
 		String sql = "INSERT INTO categoria_vendedor(codigo_categoria, nome, id_vendedor, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idVendedor, :idCategoriaPai)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
@@ -144,7 +144,7 @@ public class VendedorDaoImp implements VendedorDao{
 	}
 
 	@Override
-	public Integer getUltimoIdVendedor() {
+	public Long getUltimoIdVendedor() {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT max(id_vendedor) as id");
@@ -152,12 +152,12 @@ public class VendedorDaoImp implements VendedorDao{
 	
 	    SqlParameterSource param = new MapSqlParameterSource();	
 
-	    List<Integer> id = template.queryForList(sql.toString(), param, Integer.class);
+	    List<Long> id = template.queryForList(sql.toString(), param, Long.class);
 	    return id.get(0);
 	}
 
 	@Override
-	public void inserirAtributo(Atributo atributo, Integer idVendedor) {
+	public void inserirAtributo(Atributo atributo, Long idVendedor) {
 		String sql = "INSERT INTO atributo_vendedor(codigo_atributo, nome, tipo, id_categoria_vendedor, id_vendedor) values (:codigoAtributo, :nomeCategoria, :tipo, :idCategoriaPai, :idVendedor)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
@@ -172,7 +172,7 @@ public class VendedorDaoImp implements VendedorDao{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor) {
+	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_categoria as idCategoria ");
@@ -192,7 +192,7 @@ public class VendedorDaoImp implements VendedorDao{
 	}
 	
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai) {
+	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_categoria as idCategoria ");
@@ -214,7 +214,7 @@ public class VendedorDaoImp implements VendedorDao{
 	}
 	
 	@Override
-	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idVendedor) {
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT codigo_atributo as id ");

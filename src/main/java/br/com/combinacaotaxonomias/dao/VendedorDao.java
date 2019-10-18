@@ -14,10 +14,10 @@ public interface VendedorDao {
 	public List<Plataforma> buscaVendedores(Plataforma vendedor);
 	public Plataforma buscaVendedorPorId(Long id);
 	public void alterarVendedor(Plataforma vendedor);
-	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Integer idVendedor);
-	public Integer getUltimoIdVendedor();
-	public void inserirAtributo(Atributo atributo, Integer idVendedor);
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor);
-	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai);
-	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace);
+	public void inserirCategoria(Taxonomia categoria, Integer idCategoriaPai, Long idVendedor);
+	public Long getUltimoIdVendedor();
+	public void inserirAtributo(Atributo atributo, Long idVendedor);
+	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor);
+	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai);
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor);
 }

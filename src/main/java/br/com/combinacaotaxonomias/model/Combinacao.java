@@ -3,8 +3,8 @@ package br.com.combinacaotaxonomias.model;
 public class Combinacao {
 	private String nome;
 	private String descricao;
-	private Integer idMarketplace;
-	private Integer idVendedor;
+	private Long idMarketplace;
+	private Long idVendedor;
 	private Integer idLinhaMarketplace;
 	private Integer idFamiliaMarketplace;
 	private Integer idGrupoMarketplace;
@@ -24,16 +24,16 @@ public class Combinacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Integer getIdMarketplace() {
+	public Long getIdMarketplace() {
 		return idMarketplace;
 	}
-	public void setIdMarketplace(Integer idMarketplace) {
+	public void setIdMarketplace(Long idMarketplace) {
 		this.idMarketplace = idMarketplace;
 	}
-	public Integer getIdVendedor() {
+	public Long getIdVendedor() {
 		return idVendedor;
 	}
-	public void setIdVendedor(Integer idVendedor) {
+	public void setIdVendedor(Long idVendedor) {
 		this.idVendedor = idVendedor;
 	}
 	public Integer getIdLinhaMarketplace() {

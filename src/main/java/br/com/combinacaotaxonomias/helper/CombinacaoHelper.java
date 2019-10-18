@@ -12,8 +12,8 @@ public class CombinacaoHelper {
 		
 		combinacao.setNome(combinacaoTO.getNome());
 		combinacao.setDescricao(combinacaoTO.getDescricao());
-		combinacao.setIdMarketplace(Integer.valueOf(combinacaoTO.getIdMarketplace()));
-		combinacao.setIdVendedor(Integer.valueOf(combinacaoTO.getIdVendedor()));
+		combinacao.setIdMarketplace(Long.valueOf(combinacaoTO.getIdMarketplace()));
+		combinacao.setIdVendedor(Long.valueOf(combinacaoTO.getIdVendedor()));
 		combinacao.setIdLinhaMarketplace(Integer.valueOf(combinacaoTO.getIdLinhaMarketplace()));
 		combinacao.setIdFamiliaMarketplace(Integer.valueOf(combinacaoTO.getIdLinhaMarketplace()));
 		combinacao.setIdGrupoMarketplace(Integer.valueOf(combinacaoTO.getIdGrupoMarketplace()));
@@ -72,8 +72,8 @@ public class CombinacaoHelper {
 			
 			combinacao.setNome(combinacaoTO.getNome());
 			combinacao.setDescricao(combinacaoTO.getDescricao());
-			combinacao.setIdMarketplace(Integer.valueOf(combinacaoTO.getIdMarketplace()));
-			combinacao.setIdVendedor(Integer.valueOf(combinacaoTO.getIdVendedor()));
+			combinacao.setIdMarketplace(Long.valueOf(combinacaoTO.getIdMarketplace()));
+			combinacao.setIdVendedor(Long.valueOf(combinacaoTO.getIdVendedor()));
 			combinacao.setIdLinhaMarketplace(Integer.valueOf(combinacaoTO.getIdLinhaMarketplace()));
 			combinacao.setIdFamiliaMarketplace(Integer.valueOf(combinacaoTO.getIdLinhaMarketplace()));
 			combinacao.setIdGrupoMarketplace(Integer.valueOf(combinacaoTO.getIdGrupoMarketplace()));

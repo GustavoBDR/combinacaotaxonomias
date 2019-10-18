@@ -14,7 +14,7 @@ public interface VendedorService {
 	public Plataforma buscaVendedorPorId(Long id);
 	public boolean isVendedor(Plataforma vendedor);
 	public void alterarVendedor(Plataforma vendedor);
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor);
-	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai);
-	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace);
+	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor);
+	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai);
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor);
 }

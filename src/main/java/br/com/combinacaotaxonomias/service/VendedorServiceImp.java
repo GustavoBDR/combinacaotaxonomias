@@ -41,7 +41,7 @@ public class VendedorServiceImp implements VendedorService{
 		List<CategoriaResponse> categoriasResponse = consumoApiService.getCategorias(vendedor);
 		List<Categoria> categorias = extrairCategorias(categoriasResponse);
 		
-		Integer idMarketplace = vendedorDao.getUltimoIdVendedor();
+		Long idMarketplace = vendedorDao.getUltimoIdVendedor();
 		
 		inserirCategorias(categorias, idMarketplace);
 		
@@ -111,7 +111,7 @@ public class VendedorServiceImp implements VendedorService{
 		return categoriasExtraidas;
 	}
 	
-	public void inserirCategorias(List<Categoria> categorias, Integer idVendedor) {
+	public void inserirCategorias(List<Categoria> categorias, Long idVendedor) {
 		Map<Integer, CategoriaTO> CategoriaMap = new HashMap<Integer,CategoriaTO>();
 		
 		
@@ -155,25 +155,25 @@ public class VendedorServiceImp implements VendedorService{
 		return atributosExtraidos;
 	}
 	
-	public void inserirAtributos(List<Atributo> atributos, Integer idMarketplace) {
+	public void inserirAtributos(List<Atributo> atributos, Long idMarketplace) {
 		for (Atributo atributo : atributos) {
 			vendedorDao.inserirAtributo(atributo, idMarketplace);
 		}
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Integer idVendedor) {
+	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor) {
 		return vendedorDao.buscaCategoriasPorVendedor(idVendedor);
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Integer idVendedor, Integer idCategoriaPai) {
+	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai) {
 		return vendedorDao.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
 	}
 	
 	@Override
-	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Integer idMarletplace) {
-		return vendedorDao.buscaAtributosPorCategoria(idCategoria, idMarletplace);
+	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor) {
+		return vendedorDao.buscaAtributosPorCategoria(idCategoria, idVendedor);
 	}
 
 }

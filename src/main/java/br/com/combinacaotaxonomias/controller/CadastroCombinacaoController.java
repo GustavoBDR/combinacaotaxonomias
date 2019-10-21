@@ -75,45 +75,37 @@ public class CadastroCombinacaoController {
 		
 		List<AtributoTO> atributosLinhaMarketplace= new ArrayList<AtributoTO>();
 		atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaMarketplace(), novaCombinacao.getIdMarketplace());
-
 		List<AtributoTO> atributosFamiliaMarketplace= new ArrayList<AtributoTO>();
-		atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());		
-		
+		atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());				
 		List<AtributoTO> atributosGrupoMarketplace= new ArrayList<AtributoTO>();
 		atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoMarketplace(), novaCombinacao.getIdMarketplace());
 		
 		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
-		//atributosMarketplace.addAll(atributosLinhaMarketplace);
-		//atributosMarketplace.addAll(atributosFamiliaMarketplace);
+		atributosMarketplace.addAll(atributosLinhaMarketplace);
+		atributosMarketplace.addAll(atributosFamiliaMarketplace);
 		atributosMarketplace.addAll(atributosGrupoMarketplace);
 		model.addAttribute("atributosMarketplace", atributosMarketplace);
 		
 		
 		List<AtributoTO> atributosLinhaVendedor= new ArrayList<AtributoTO>();
 		atributosLinhaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaVendedor(), novaCombinacao.getIdVendedor());
-		
 		List<AtributoTO> atributosFamiliaVendedor= new ArrayList<AtributoTO>();
 		atributosFamiliaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaVendedor(), novaCombinacao.getIdVendedor());
-		
 		List<AtributoTO> atributosGrupoVendedor= new ArrayList<AtributoTO>();
 		atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoVendedor(), novaCombinacao.getIdVendedor());
 		
 		List<AtributoTO> atributosVendedor = new ArrayList<AtributoTO>();
-		//atributosVendedor.addAll(atributosLinhaVendedor);
-		//atributosVendedor.addAll(atributosFamiliaVendedor);
+		atributosVendedor.addAll(atributosLinhaVendedor);
+		atributosVendedor.addAll(atributosFamiliaVendedor);
 		atributosVendedor.addAll(atributosGrupoVendedor);	
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
 		
 		List<CombinacaoAtributoTO> combinacaoAtributos = new ArrayList<CombinacaoAtributoTO>();
-		
-		for (int i = 0; i < 10; i++) {
-			combinacaoAtributos.add(new CombinacaoAtributoTO());
-		}
-		
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributos);
 		
-		
+		//Após inserir no banco adicionar o id
+		combinacaoWrapper.setIdCombinacaoCategoria("122");
 		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		
 		return "cadastroCombinacaoAtributos";

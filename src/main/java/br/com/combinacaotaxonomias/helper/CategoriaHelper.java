@@ -12,8 +12,21 @@ public class CategoriaHelper {
 		return categoria;
 	}
 	
-	public  static CategoriaTO toCategoriaTO(Taxonomia categoria, Integer idPai, Long idPlataforma) {	
-		CategoriaTO categoriaTO = new CategoriaTO(categoria.getId().toString(), categoria.getNome(), idPai.toString(), idPlataforma.toString());
+	public  static CategoriaTO toCategoriaTO(Taxonomia categoria, Integer idPai, Long idPlataforma) {
+		String idCategoria = null;
+		if (categoria.getId() != null) {
+			idCategoria = categoria.getId().toString();
+		}
+		String idCategoriaPai = null;
+		if (idPai != null) {
+			idCategoriaPai = idPai.toString();
+		}
+		String idPlataforma2 = null;
+		if (idPlataforma != null) {
+			idPlataforma2 = idPlataforma.toString();
+		}
+		
+		CategoriaTO categoriaTO = new CategoriaTO(idCategoria, categoria.getNome(), idCategoriaPai, idPlataforma2);
 		
 		return categoriaTO;
 	}

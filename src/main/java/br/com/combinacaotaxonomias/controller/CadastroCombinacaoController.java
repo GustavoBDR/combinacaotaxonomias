@@ -36,6 +36,9 @@ public class CadastroCombinacaoController {
     
     @Autowired
     private VendedorService vendedorService;
+
+    @Autowired
+    private CombinacaoService combinacaoService;    
     
     private PlataformaHelper plataformaHelper;
     
@@ -67,18 +70,12 @@ public class CadastroCombinacaoController {
 		Plataforma marketplace = marketplaceService.buscaMarketplacePorId(novaCombinacao.getIdMarketplace());
 		Plataforma vendedor = vendedorService.buscaVendedorPorId(novaCombinacao.getIdVendedor());
 		
-		PlataformaTO marketplaceTO = plataformaHelper.toPlataformaTO(marketplace);
-		PlataformaTO vendedorTO = plataformaHelper.toPlataformaTO(vendedor);
+		model.addAttribute("marketplace", plataformaHelper.toPlataformaTO(marketplace));
+		model.addAttribute("vendedor", plataformaHelper.toPlataformaTO(vendedor));
 		
-		model.addAttribute("marketplace", marketplaceTO);
-		model.addAttribute("vendedor", vendedorTO);
-		
-		List<AtributoTO> atributosLinhaMarketplace= new ArrayList<AtributoTO>();
-		atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaMarketplace(), novaCombinacao.getIdMarketplace());
-		List<AtributoTO> atributosFamiliaMarketplace= new ArrayList<AtributoTO>();
-		atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());				
-		List<AtributoTO> atributosGrupoMarketplace= new ArrayList<AtributoTO>();
-		atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoMarketplace(), novaCombinacao.getIdMarketplace());
+		List<AtributoTO> atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaMarketplace(), novaCombinacao.getIdMarketplace());
+		List<AtributoTO> atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());				
+		List<AtributoTO> atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoMarketplace(), novaCombinacao.getIdMarketplace());
 		
 		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
 		atributosMarketplace.addAll(atributosLinhaMarketplace);
@@ -87,12 +84,9 @@ public class CadastroCombinacaoController {
 		model.addAttribute("atributosMarketplace", atributosMarketplace);
 		
 		
-		List<AtributoTO> atributosLinhaVendedor= new ArrayList<AtributoTO>();
-		atributosLinhaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaVendedor(), novaCombinacao.getIdVendedor());
-		List<AtributoTO> atributosFamiliaVendedor= new ArrayList<AtributoTO>();
-		atributosFamiliaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaVendedor(), novaCombinacao.getIdVendedor());
-		List<AtributoTO> atributosGrupoVendedor= new ArrayList<AtributoTO>();
-		atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoVendedor(), novaCombinacao.getIdVendedor());
+		List<AtributoTO> atributosLinhaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaVendedor(), novaCombinacao.getIdVendedor());
+		List<AtributoTO> atributosFamiliaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaVendedor(), novaCombinacao.getIdVendedor());
+		List<AtributoTO> atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoVendedor(), novaCombinacao.getIdVendedor());
 		
 		List<AtributoTO> atributosVendedor = new ArrayList<AtributoTO>();
 		atributosVendedor.addAll(atributosLinhaVendedor);
@@ -101,11 +95,17 @@ public class CadastroCombinacaoController {
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
 		
-		List<CombinacaoAtributoTO> combinacaoAtributos = new ArrayList<CombinacaoAtributoTO>();
-		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributos);
+		Combinacao combinacao = combinacaoHelper.toCombinacao(novaCombinacaoTO);
+		
+		combinacaoService.inserirCombinacao(combinacao);
+		
+		Integer idCombinacao = combinacaoService.buscaUltimaCombinacaoCadastrada();
+		
+		List<CombinacaoAtributoTO> combinacaoAtributosTO = new ArrayList<CombinacaoAtributoTO>();
+		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributosTO);
 		
 		//Após inserir no banco, adicionar o id
-		combinacaoWrapper.setIdCombinacaoCategoria("122");
+		combinacaoWrapper.setIdCombinacaoCategoria(idCombinacao);
 		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		
 		return "cadastroCombinacaoAtributos";

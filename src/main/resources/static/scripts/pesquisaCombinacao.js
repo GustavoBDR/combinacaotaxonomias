@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $("#bntCancelaCadastro").click(function(){
-    	alert("teste!");
         location.href="/";
     });
 });

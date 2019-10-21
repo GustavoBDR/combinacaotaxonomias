@@ -64,7 +64,59 @@ CREATE TABLE atributo_marketplace (
     CONSTRAINT id_atributo_marketplace PRIMARY KEY(id_atributo_marketplace),
     CONSTRAINT fk_codigo_categoria_marketplace FOREIGN KEY (id_categoria_marketplace, id_marketplace) REFERENCES categoria_marketplace (codigo_categoria, id_marketplace)
 );
+------------------------------------------
 
+CREATE SEQUENCE combinacao_id_seq
+    INCREMENT 1
+    START 252313
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+
+CREATE TABLE combinacao (
+	id_combinacao 	INTEGER DEFAULT NEXTVAL('combinacao_id_seq'),
+	nome          	varchar(100),
+	descricao     	varchar(500),
+	id_marketplace  integer REFERENCES marketplace (id_marketplace),
+	id_vendedor     integer REFERENCES vendedor (id_vendedor),
+	data_cadastro   timestamp DEFAULT current_timestamp,
+	CONSTRAINT id_combinacao PRIMARY KEY(id_combinacao)
+);
+
+
+CREATE SEQUENCE combinacao_categoria_id_seq
+    INCREMENT 1
+    START 252313
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+CREATE TABLE combinacao_categoria (
+	id_combinacao_categoria 	INTEGER DEFAULT NEXTVAL('combinacao_categoria_id_seq'),
+	id_combinacao 				INTEGER REFERENCES combinacao (id_combinacao),
+	id_categoria_marketplace 	INTEGER REFERENCES categoria_marketplace (id_categoria_marketplace), 
+	id_categoria_vendedor 		INTEGER REFERENCES categoria_vendedor (id_categoria_vendedor),
+	CONSTRAINT id_combinacao_categoria PRIMARY KEY(id_combinacao_categoria)
+);
+
+CREATE SEQUENCE combinacao_atributo_id_seq
+    INCREMENT 1
+    START 252313
+    MINVALUE 1
+    MAXVALUE 9223372036854775807
+    CACHE 1;
+
+CREATE TABLE combinacao_atributo (
+	id_combinacao_atributo   	INTEGER DEFAULT NEXTVAL('combinacao_atributo_id_seq'),
+	id_combinacao_categoria		INTEGER REFERENCES combinacao_categoria (id_combinacao_categoria),
+	id_atributo_marketplace 	INTEGER REFERENCES atributo_marketplace (id_atributo_marketplace), 
+	id_atributo_vendedor 		INTEGER REFERENCES atributo_vendedor (id_atributo_vendedor),
+	CONSTRAINT id_combinacao_atributo PRIMARY KEY(id_combinacao_atributo)
+);
+
+
+------------------------------------------
 drop table atributo_vendedor;
 drop table categoria_vendedor;
 drop table vendedor;
@@ -72,3 +124,6 @@ drop table vendedor;
 drop table atributo_marketplace;
 drop table categoria_marketplace;
 drop table marketplace;
+
+-------------------------------------------
+

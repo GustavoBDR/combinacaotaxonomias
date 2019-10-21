@@ -1,14 +1,8 @@
 $(document).ready(function () {
-
-    $("#btnCadastrar").click(function(){
-        location.href="/cadastromarketplace";
-    });
-    $("#bntCancelarBusca").click(function(){
+    $("#bntCancelaCadastro").click(function(){
+    	alert("teste!");
         location.href="/";
-    });    
-    $( "#btnSubmit" ).click(function() {
-  	  $( "#formPesquisa" ).submit();
-  	});
+    });
 });
 
 function populaLinhaMarketplace(marketplace) {

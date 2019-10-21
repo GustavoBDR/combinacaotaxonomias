@@ -104,7 +104,7 @@ public class CadastroCombinacaoController {
 		List<CombinacaoAtributoTO> combinacaoAtributos = new ArrayList<CombinacaoAtributoTO>();
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributos);
 		
-		//Após inserir no banco adicionar o id
+		//Após inserir no banco, adicionar o id
 		combinacaoWrapper.setIdCombinacaoCategoria("122");
 		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		

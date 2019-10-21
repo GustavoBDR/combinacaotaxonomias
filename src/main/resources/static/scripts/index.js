@@ -4,6 +4,9 @@ $(document).ready(function () {
     }); 
     $("#btnMarketplace").click(function(){
         location.href="/marketplace";
-    });  
+    });
+    $("#btnCombinacao").click(function(){
+        location.href="/cadastrocombinacaocategoria";
+    });     
 });
 

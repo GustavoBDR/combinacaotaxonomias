@@ -1,14 +1,10 @@
 package br.com.combinacaotaxonomias.model.to;
 
 public class CombinacaoAtributoTO {
-	private String idMarketplace;
-	private String idVendedor;
 	private String idAtributoMarketplace;
 	private String idAtributoVendedor;	
 	
-	public CombinacaoAtributoTO(String idMarketplace, String idVendedor, String idAtributoMarketplace, String idAtributoVendedor) {
-		this.idMarketplace = idMarketplace;
-		this.idVendedor = idVendedor;
+	public CombinacaoAtributoTO(String idAtributoMarketplace, String idAtributoVendedor) {
 		this.idAtributoMarketplace = idAtributoMarketplace;
 		this.idAtributoVendedor = idAtributoVendedor;
 	}
@@ -17,28 +13,6 @@ public class CombinacaoAtributoTO {
 
 	}	
 	
-	public CombinacaoAtributoTO(String idMarketplace) {
-		this.idMarketplace = idMarketplace;
-	}	
-	
-	public CombinacaoAtributoTO(String idMarketplace, String idVendedor) {
-		this.idMarketplace = idMarketplace;
-		this.idVendedor = idVendedor;
-	}	
-	
-	
-	public String getIdMarketplace() {
-		return idMarketplace;
-	}
-	public void setIdMarketplace(String idMarketplace) {
-		this.idMarketplace = idMarketplace;
-	}
-	public String getIdVendedor() {
-		return idVendedor;
-	}
-	public void setIdVendedor(String idVendedor) {
-		this.idVendedor = idVendedor;
-	}
 	public String getIdAtributoMarketplace() {
 		return idAtributoMarketplace;
 	}

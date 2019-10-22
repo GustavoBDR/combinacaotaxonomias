@@ -25,6 +25,7 @@ import br.com.combinacaotaxonomias.model.to.CategoriaTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.to.PlataformaTO;
+import br.com.combinacaotaxonomias.service.CombinacaoService;
 import br.com.combinacaotaxonomias.service.MarketplaceService;
 import br.com.combinacaotaxonomias.service.VendedorService;
 
@@ -105,7 +106,7 @@ public class CadastroCombinacaoController {
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributosTO);
 		
 		//Após inserir no banco, adicionar o id
-		combinacaoWrapper.setIdCombinacaoCategoria(idCombinacao);
+		combinacaoWrapper.setIdCombinacaoCategoria(idCombinacao.toString());
 		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		
 		return "cadastroCombinacaoAtributos";

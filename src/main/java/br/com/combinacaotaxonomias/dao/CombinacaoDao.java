@@ -4,5 +4,6 @@ import br.com.combinacaotaxonomias.model.Combinacao;
 
 public interface CombinacaoDao {
 	public void inserirCombinacao(Combinacao combinacao);
-	public Integer buscaUltimaCombinacaoCadastrada();
+	public void inserirCombinacaoCategoria(Combinacao combinacao);
+	public Long buscaUltimaCombinacaoCadastrada();
 }

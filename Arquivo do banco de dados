@@ -93,10 +93,12 @@ CREATE SEQUENCE combinacao_categoria_id_seq
     CACHE 1;
 
 CREATE TABLE combinacao_categoria (
-	id_combinacao_categoria 	INTEGER DEFAULT NEXTVAL('combinacao_categoria_id_seq'),
-	id_combinacao 				INTEGER REFERENCES combinacao (id_combinacao),
-	id_categoria_marketplace 	INTEGER REFERENCES categoria_marketplace (id_categoria_marketplace), 
-	id_categoria_vendedor 		INTEGER REFERENCES categoria_vendedor (id_categoria_vendedor),
+	id_combinacao_categoria 	 INTEGER DEFAULT NEXTVAL('combinacao_categoria_id_seq'),
+	id_combinacao 				 INTEGER REFERENCES combinacao (id_combinacao),
+	id_categoria_marketplace 	 INTEGER REFERENCES categoria_marketplace (id_categoria_marketplace), 
+	id_categoria_vendedor 		 INTEGER REFERENCES categoria_vendedor (id_categoria_vendedor),
+	id_categoria_pai_marketplace INTEGER, 
+	id_categoria_pai_vendedor 	 INTEGER,	
 	CONSTRAINT id_combinacao_categoria PRIMARY KEY(id_combinacao_categoria)
 );
 

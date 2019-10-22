@@ -1,7 +1,11 @@
 package br.com.combinacaotaxonomias.helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
 import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
+import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 
 public class CombinacaoAtributoHelper {
 
@@ -21,5 +25,15 @@ public class CombinacaoAtributoHelper {
 		combinacaoAtributoTO.setIdAtributoVendedor(combinacaoAtributoTO.getIdAtributoVendedor().toString());
 		
 		return combinacaoAtributoTO;
-	}	
+	}
+	
+	public static List<CombinacaoAtributo> toListCombinacao(List<CombinacaoAtributoTO> listCombinacaoAtributoTO){
+		List<CombinacaoAtributo> listCombinacao = new ArrayList<CombinacaoAtributo>();
+
+		for (CombinacaoAtributoTO combinacaoAtributoTO : listCombinacaoAtributoTO) {
+			listCombinacao.add(toCombinacaoAtributo(combinacaoAtributoTO));
+		}
+
+		return listCombinacao;
+	} 
 }

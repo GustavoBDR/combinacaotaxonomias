@@ -2,6 +2,7 @@ package br.com.combinacaotaxonomias.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.LongFunction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.combinacaotaxonomias.helper.CombinacaoAtributoHelper;
 import br.com.combinacaotaxonomias.helper.CombinacaoHelper;
 import br.com.combinacaotaxonomias.helper.PlataformaHelper;
 import br.com.combinacaotaxonomias.model.Atributo;
@@ -44,6 +46,8 @@ public class CadastroCombinacaoController {
     private PlataformaHelper plataformaHelper;
     
     private CombinacaoHelper combinacaoHelper;
+    
+    private CombinacaoAtributoHelper combinacaoAtributoHelper;
 	
 	@RequestMapping(value = "/cadastrocombinacaocategoria", method = RequestMethod.GET)
 	public String getCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
@@ -100,7 +104,7 @@ public class CadastroCombinacaoController {
 		
 		combinacaoService.inserirCombinacao(combinacao);
 		
-		Integer idCombinacao = combinacaoService.buscaUltimaCombinacaoCadastrada();
+		Long idCombinacao = combinacaoService.buscaUltimaCombinacaoCadastrada();
 		
 		List<CombinacaoAtributoTO> combinacaoAtributosTO = new ArrayList<CombinacaoAtributoTO>();
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributosTO);
@@ -114,8 +118,8 @@ public class CadastroCombinacaoController {
 	
 	@RequestMapping(value = "/salvacadastrocombinacaoatributos", method = RequestMethod.POST)
 	public String salvaCadastroCombinacaoAtributos(@ModelAttribute CombinacaoAtributoWrapper combinacaoWrapper){
-		Integer i;
-		i = 1+1;
+
+		combinacaoService.inserirCombinacaoAtibutos(Long.valueOf(combinacaoWrapper.getIdCombinacaoCategoria()), combinacaoAtributoHelper.toListCombinacao(combinacaoWrapper.getCombinacaoAtributos()));
 		
 		return "index";
 	}

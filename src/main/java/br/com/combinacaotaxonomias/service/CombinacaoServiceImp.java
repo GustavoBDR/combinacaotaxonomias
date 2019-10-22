@@ -1,11 +1,14 @@
 package br.com.combinacaotaxonomias.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import br.com.combinacaotaxonomias.dao.CombinacaoDao;
 import br.com.combinacaotaxonomias.model.Combinacao;
+import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
 
 @Service("combinacaoService")
 public class CombinacaoServiceImp implements CombinacaoService{
@@ -16,12 +19,24 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	@Override
 	public void inserirCombinacao(Combinacao combinacao) {
 		combinacaoDao.inserirCombinacao(combinacao);
+		combinacao.setId(buscaUltimaCombinacaoCadastrada());
+		inserirCombinacaoCategoria(combinacao);
 	}
 
 	@Override
-	public Integer buscaUltimaCombinacaoCadastrada() {
-		// TODO Auto-generated method stub
-		return null;
+	public void inserirCombinacaoCategoria(Combinacao combinacao) {
+		combinacaoDao.inserirCombinacaoCategoria(combinacao);
+	}	
+	
+	@Override
+	public Long buscaUltimaCombinacaoCadastrada() {
+		return combinacaoDao.buscaUltimaCombinacaoCadastrada();
+	}
+
+	@Override
+	public void inserirCombinacaoAtibutos(Long idCombinacaoCategoria, List<CombinacaoAtributo> listCombinacao) {
+	
+		
 	}
 
 }

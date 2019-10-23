@@ -35,8 +35,9 @@ public class CombinacaoServiceImp implements CombinacaoService{
 
 	@Override
 	public void inserirCombinacaoAtibutos(Long idCombinacaoCategoria, List<CombinacaoAtributo> listCombinacao) {
-	
-		
+		for (CombinacaoAtributo combinacaoAtributo : listCombinacao) {
+			combinacaoDao.inserirCombinacaoAtributos(idCombinacaoCategoria, combinacaoAtributo);	
+		}
 	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Combinacao;
+import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
 
 @Repository("combinacaoDao")
 public class CombinacaoDaoImp implements CombinacaoDao{
@@ -17,8 +18,8 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	@Override
 	public void inserirCombinacao(Combinacao combinacao) {
 
-		String sql = "INSERT INTO combinacao(nome, descricao, id_marketplace, id_vendedor) values (:nome, :descricao, :idMarketplace, :idVendedor)";
-	    
+		String sql = "INSERT INTO combinacao (nome, descricao, id_marketplace, id_vendedor) values (:nome, :descricao, :idMarketplace, :idVendedor)";
+		
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("nome", combinacao.getNome())
 				.addValue("descricao", combinacao.getDescricao())
@@ -40,12 +41,12 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 		sql.append("								 id_categoria_pai_marketplace, ");
 		sql.append("								 id_categoria_pai_vendedor) ");
 		sql.append("VALUES");
-		sql.append("(:id_combinacao, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor, null, null), ");
-		sql.append("(:id_combinacao, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor), ");
-		sql.append("(:id_combinacao, :idCategoriaGrupoMarketplace, :idCategoriaGrupoVendedor, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor) ");
+		sql.append("(:idCombinacao, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor, null, null), ");
+		sql.append("(:idCombinacao, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor), ");
+		sql.append("(:idCombinacao, :idCategoriaGrupoMarketplace, :idCategoriaGrupoVendedor, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor) ");
 		
 		SqlParameterSource param = new MapSqlParameterSource()
-				.addValue("id_combinacao", combinacao.getId())
+				.addValue("idCombinacao", combinacao.getId())
 				.addValue("idCategoriaLinhaMarketplace", combinacao.getIdLinhaMarketplace())
 				.addValue("idCategoriaLinhaVendedor", combinacao.getIdLinhaVendedor())
 				.addValue("idCategoriaFamiliaMarketplace", combinacao.getIdFamiliaMarketplace())
@@ -67,6 +68,23 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 
 	    List<Long> id = template.queryForList(sql.toString(), param, Long.class);
 	    return id.get(0);
+	}
+
+	@Override
+	public void inserirCombinacaoAtributos(Long idCombinacaoCategoria, CombinacaoAtributo combinacaoAtributo) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("INSERT INTO combinacao_atributo (id_combinacao_categoria,  ");
+		sql.append("								 id_atributo_marketplace, ");
+		sql.append("								 id_atributo_vendedor) ");
+		sql.append("VALUES");
+		sql.append("(:idCombinacaoCategoria, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor) ");
+	
+		SqlParameterSource param = new MapSqlParameterSource()
+				.addValue("idCombinacaoCategoria", idCombinacaoCategoria)
+				.addValue("idAtributoMarketplace", combinacaoAtributo.getIdAtributoMarketplace())
+				.addValue("idAtributoVendedor", combinacaoAtributo.getIdAtributoVendedor());
+		
+	    template.update(sql.toString(),param);		
 	}
 
 }

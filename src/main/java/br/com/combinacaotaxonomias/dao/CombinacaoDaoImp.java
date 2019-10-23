@@ -13,7 +13,11 @@ import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
 @Repository("combinacaoDao")
 public class CombinacaoDaoImp implements CombinacaoDao{
 
-	private NamedParameterJdbcTemplate template;
+	private NamedParameterJdbcTemplate template; 
+	
+	public CombinacaoDaoImp(NamedParameterJdbcTemplate template) {  
+        this.template = template;  
+	}
 	
 	@Override
 	public void inserirCombinacao(Combinacao combinacao) {
@@ -41,8 +45,8 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 		sql.append("								 id_categoria_pai_marketplace, ");
 		sql.append("								 id_categoria_pai_vendedor) ");
 		sql.append("VALUES");
-		sql.append("(:idCombinacao, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor, null, null), ");
-		sql.append("(:idCombinacao, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor), ");
+		sql.append("(:idCombinacao, :idCategoriaLinhaMarketplace, :idCategoriaLinhaVendedor, null, null), ");
+		sql.append("(:idCombinacao, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor, :idCategoriaLinhaMarketplace, :idCategoriaLinhaVendedor), ");
 		sql.append("(:idCombinacao, :idCategoriaGrupoMarketplace, :idCategoriaGrupoVendedor, :idCategoriaFamiliaMarketplace, :idCategoriaFamiliaVendedor) ");
 		
 		SqlParameterSource param = new MapSqlParameterSource()
@@ -77,7 +81,7 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 		sql.append("								 id_atributo_marketplace, ");
 		sql.append("								 id_atributo_vendedor) ");
 		sql.append("VALUES");
-		sql.append("(:idCombinacaoCategoria, :idCategoriaLinhaMarketplacem, :idCategoriaLinhaVendedor) ");
+		sql.append("(:idCombinacaoCategoria, :idCategoriaLinhaMarketplace, :idCategoriaLinhaVendedor) ");
 	
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("idCombinacaoCategoria", idCombinacaoCategoria)

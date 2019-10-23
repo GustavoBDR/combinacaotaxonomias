@@ -19,7 +19,7 @@ import br.com.combinacaotaxonomias.model.CategoriaResponse;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 
 @Service("vendedorService")
 public class VendedorServiceImp implements VendedorService{
@@ -112,7 +112,7 @@ public class VendedorServiceImp implements VendedorService{
 	}
 	
 	public void inserirCategorias(List<Categoria> categorias, Long idVendedor) {
-		Map<Integer, CategoriaTO> CategoriaMap = new HashMap<Integer,CategoriaTO>();
+		Map<Integer, CategoriaCombinacaoTO> CategoriaMap = new HashMap<Integer,CategoriaCombinacaoTO>();
 		
 		
 		for (Categoria categoria : categorias) {
@@ -162,12 +162,12 @@ public class VendedorServiceImp implements VendedorService{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasPorVendedor(Long idVendedor) {
 		return vendedorDao.buscaCategoriasPorVendedor(idVendedor);
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai) {
 		return vendedorDao.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
 	}
 	

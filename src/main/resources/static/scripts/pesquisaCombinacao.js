@@ -22,7 +22,7 @@ function populaLinhaMarketplace(marketplace) {
         if (data) {
         	$("#linhaMarketplaceSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
-            	$("#linhaMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            	$("#linhaMarketplaceSelect").append("<option value=" + obj.idCategoriaPlataforma + ">" + obj.nome + "</option>");
             });
 
         	$('#linhaMarketplaceSelect').selectpicker('refresh'); 
@@ -55,7 +55,7 @@ function populaFamiliaMarketplace(idLinhaMarketplace) {
         if (data) {
         	$("#familiaMarketplaceSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
-            	$("#familiaMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            	$("#familiaMarketplaceSelect").append("<option value=" + obj.idCategoriaPlataforma + ">" + obj.nome + "</option>");
             });
 
         	$('#familiaMarketplaceSelect').selectpicker('refresh'); 
@@ -88,7 +88,7 @@ function populaGrupoMarketplace(idFamiliaMarketplace) {
         if (data) {
         	$("#grupoMarketplaceSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
-            	$("#grupoMarketplaceSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            	$("#grupoMarketplaceSelect").append("<option value=" + obj.idCategoriaPlataforma + ">" + obj.nome + "</option>");
             });
 
         	$('#grupoMarketplaceSelect').selectpicker('refresh'); 
@@ -121,7 +121,7 @@ function populaLinhaVendedor(vendedor) {
         if (data) {
         	$("#linhaVendedorSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
-            	$("#linhaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            	$("#linhaVendedorSelect").append("<option value=" + obj.idCategoriaPlataforma + ">" + obj.nome + "</option>");
             });
 
         	$('#linhaVendedorSelect').selectpicker('refresh'); 
@@ -155,7 +155,7 @@ function populaFamiliaVendedor(idLinhaVendedor) {
         if (data) {
         	$("#familiaVendedorSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
-            	$("#familiaVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            	$("#familiaVendedorSelect").append("<option value=" + obj.idCategoriaPlataforma + ">" + obj.nome + "</option>");
             });
 
         	$('#familiaVendedorSelect').selectpicker('refresh'); 
@@ -188,7 +188,7 @@ function populaGrupoVendedor(idFamiliaVendedor) {
         if (data) {
         	$("#grupoVendedorSelect").append("<option value=0>Selecione uma opção</option>");
             data.forEach(function (obj) {
-            	$("#grupoVendedorSelect").append("<option value=" + obj.idCategoria + ">" + obj.nome + "</option>");
+            	$("#grupoVendedorSelect").append("<option value=" + obj.idCategoriaPlataforma + ">" + obj.nome + "</option>");
             });
 
         	$('#grupoVendedorSelect').selectpicker('refresh'); 

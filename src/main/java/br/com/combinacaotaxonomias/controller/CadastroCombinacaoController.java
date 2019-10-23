@@ -23,7 +23,7 @@ import br.com.combinacaotaxonomias.model.CombinacaoAtributoWrapper;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.to.PlataformaTO;
@@ -126,28 +126,28 @@ public class CadastroCombinacaoController {
 	
     @ResponseBody
     @RequestMapping(value = "/marketplacelinha", method = RequestMethod.GET)
-    public List<CategoriaTO> getMarketplaceLinha(@RequestParam(required = true, name = "idMarketplace") Long idMarketplace) {
-    	List<CategoriaTO> tt = marketplaceService.buscaCategoriasPorMarketplace(idMarketplace);
+    public List<CategoriaCombinacaoTO> getMarketplaceLinha(@RequestParam(required = true, name = "idMarketplace") Long idMarketplace) {
+    	List<CategoriaCombinacaoTO> tt = marketplaceService.buscaCategoriasPorMarketplace(idMarketplace);
         return tt;
     }
     
     @ResponseBody
     @RequestMapping(value = "/vendedorlinha", method = RequestMethod.GET)
-    public List<CategoriaTO> getVendedorLinha(@RequestParam(required = true, name = "idVendedor") Long idVendedor) {
-    	List<CategoriaTO> tt = vendedorService.buscaCategoriasPorVendedor(idVendedor);
+    public List<CategoriaCombinacaoTO> getVendedorLinha(@RequestParam(required = true, name = "idVendedor") Long idVendedor) {
+    	List<CategoriaCombinacaoTO> tt = vendedorService.buscaCategoriasPorVendedor(idVendedor);
         return tt;
     }
 
     @ResponseBody
     @RequestMapping(value = "/marketplaceCategoriaFilha", method = RequestMethod.GET)
-    public List<CategoriaTO> getMarketplaceCategoriaFilha(@RequestParam(required = true, name = "idMarketplace") Long idMarketplace, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
-    	List<CategoriaTO> tt = marketplaceService.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
+    public List<CategoriaCombinacaoTO> getMarketplaceCategoriaFilha(@RequestParam(required = true, name = "idMarketplace") Long idMarketplace, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
+    	List<CategoriaCombinacaoTO> tt = marketplaceService.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
         return tt;
     }
     
     @ResponseBody
     @RequestMapping(value = "/vendedorCategoriaFilha", method = RequestMethod.GET)
-    public List<CategoriaTO> getVendedorCategoriaFilha(@RequestParam(required = true, name = "idVendedor") Long idVendedor, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
+    public List<CategoriaCombinacaoTO> getVendedorCategoriaFilha(@RequestParam(required = true, name = "idVendedor") Long idVendedor, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
     	return vendedorService.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
     }
     

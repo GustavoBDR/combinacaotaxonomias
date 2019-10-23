@@ -14,7 +14,7 @@ import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 
 @Repository("vendedorDao")
 public class VendedorDaoImp implements VendedorDao{
@@ -172,10 +172,11 @@ public class VendedorDaoImp implements VendedorDao{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasPorVendedor(Long idVendedor) {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append("SELECT id_categoria_vendedor as idCategoria");
+		sql.append(",      codigo_categoria as idCategoriaPlataforma ");
 		sql.append(",	   nome as nome ");
 		sql.append(",	   id_vendedor as idPlataforma ");
 		sql.append(",	   id_categoria_pai as idPai ");	
@@ -188,14 +189,15 @@ public class VendedorDaoImp implements VendedorDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("id", idVendedor);
 	    
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaCombinacaoTO.class));
 	}
 	
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai) {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append("SELECT id_categoria_vendedor as idCategoria ");
+		sql.append(",	   codigo_categoria as idCategoriaPlataforma ");
 		sql.append(",	   nome as nome ");
 		sql.append(",	   id_vendedor as idPlataforma ");
 		sql.append(",	   id_categoria_pai as idPai ");	
@@ -210,7 +212,7 @@ public class VendedorDaoImp implements VendedorDao{
 	    		.addValue("idCategoriaPai", idCategoriaPai);
 	    
 	    
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaCombinacaoTO.class));
 	}
 	
 	@Override

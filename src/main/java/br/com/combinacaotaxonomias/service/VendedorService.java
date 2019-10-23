@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 
 public interface VendedorService {
 	public void inserirVendedor(Plataforma vendedor);
@@ -14,7 +14,7 @@ public interface VendedorService {
 	public Plataforma buscaVendedorPorId(Long id);
 	public boolean isVendedor(Plataforma vendedor);
 	public void alterarVendedor(Plataforma vendedor);
-	public List<CategoriaTO> buscaCategoriasPorVendedor(Long idVendedor);
-	public List<CategoriaTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai);
+	public List<CategoriaCombinacaoTO> buscaCategoriasPorVendedor(Long idVendedor);
+	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai);
 	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor);
 }

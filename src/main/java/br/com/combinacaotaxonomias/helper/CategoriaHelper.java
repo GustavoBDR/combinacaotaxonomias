@@ -2,17 +2,17 @@ package br.com.combinacaotaxonomias.helper;
 
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.Taxonomia;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 
 public class CategoriaHelper {
 	
-	public  static Categoria toCategoria(CategoriaTO categoriaTO) {	
-		Categoria categoria = new Categoria(Integer.valueOf(categoriaTO.getIdCategoria()), categoriaTO.getNome());
+	public  static Categoria toCategoria(CategoriaCombinacaoTO categoriaTO) {	
+		Categoria categoria = new Categoria(Integer.valueOf(categoriaTO.getIdCategoriaPlataforma()), categoriaTO.getNome());
 		
 		return categoria;
 	}
 	
-	public  static CategoriaTO toCategoriaTO(Taxonomia categoria, Integer idPai, Long idPlataforma) {
+	public  static CategoriaCombinacaoTO toCategoriaTO(Taxonomia categoria, Integer idPai, Long idPlataforma) {
 		String idCategoria = null;
 		if (categoria.getId() != null) {
 			idCategoria = categoria.getId().toString();
@@ -26,7 +26,7 @@ public class CategoriaHelper {
 			idPlataforma2 = idPlataforma.toString();
 		}
 		
-		CategoriaTO categoriaTO = new CategoriaTO(idCategoria, categoria.getNome(), idCategoriaPai, idPlataforma2);
+		CategoriaCombinacaoTO categoriaTO = new CategoriaCombinacaoTO(null, idCategoria, categoria.getNome(), idCategoriaPai, idPlataforma2);
 		
 		return categoriaTO;
 	}

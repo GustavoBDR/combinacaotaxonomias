@@ -7,7 +7,7 @@ import br.com.combinacaotaxonomias.model.AtributoResponse;
 import br.com.combinacaotaxonomias.model.Categoria;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 
 public interface MarketplaceService {
 	public void inserirMarketplace(Plataforma marketplace);
@@ -17,7 +17,7 @@ public interface MarketplaceService {
 	public boolean isMarketplace(Plataforma marketplace);
 	public void alterarMarketplace(Plataforma marketplace);
 	public List<Atributo> extrairAtributos(List<AtributoResponse> atributosResponse, Integer idCategoria);
-	public List<CategoriaTO> buscaCategoriasPorMarketplace(Long idMarketplace);
-	public List<CategoriaTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai);
+	public List<CategoriaCombinacaoTO> buscaCategoriasPorMarketplace(Long idMarketplace);
+	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai);
 	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idMarketplace);
 }

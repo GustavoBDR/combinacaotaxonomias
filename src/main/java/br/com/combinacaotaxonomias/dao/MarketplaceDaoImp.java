@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 import br.com.combinacaotaxonomias.common.TipoAtributo;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.Categoria;
@@ -172,11 +172,11 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public void inserirCategoriaTO(CategoriaTO categoria) {
+	public void inserirCategoriaTO(CategoriaCombinacaoTO categoria) {
 		String sql = "INSERT INTO categoria_marketplace(codigo_categoria, nome, id_marketplace, id_categoria_pai) values (:idCategoria, :nomeCategoria, :idMarketplace, :idCategoriaPai)";
 		 
 	    SqlParameterSource param = new MapSqlParameterSource()
-	    									.addValue("idCategoria", categoria.getIdCategoria())
+	    									.addValue("idCategoria", categoria.getIdCategoriaPlataforma())
 	    									.addValue("nomeCategoria", categoria.getNome())
 	    									.addValue("idMarketplace", categoria.getIdPlataforma())
 	    									.addValue("idCategoriaPai", categoria.getIdPai());
@@ -185,10 +185,11 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorMarketplace(Long idMarketplace) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasPorMarketplace(Long idMarketplace) {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append("SELECT id_categoria_marketplace as idCategoria");
+		sql.append(",      codigo_categoria as idCategoriaPlataforma ");
 		sql.append(",	   nome as nome ");
 		sql.append(",	   id_marketplace as idPlataforma ");
 		sql.append(",	   id_categoria_pai as idPai ");	
@@ -201,14 +202,15 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("id", idMarketplace);
 	    
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaCombinacaoTO.class));
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai) {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT codigo_categoria as idCategoria ");
+		sql.append("SELECT id_categoria_marketplace as idCategoria ");
+		sql.append(",	   codigo_categoria as idCategoriaPlataforma ");
 		sql.append(",	   nome as nome ");
 		sql.append(",	   id_marketplace as idPlataforma ");
 		sql.append(",	   id_categoria_pai as idPai ");	
@@ -222,7 +224,7 @@ public class MarketplaceDaoImp implements MarketplaceDao{
 	    		.addValue("idMarketplace", idMarketplace)
 	    		.addValue("idCategoriaPai", idCategoriaPai);
 	    
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaCombinacaoTO.class));
 	}
 
 	@Override

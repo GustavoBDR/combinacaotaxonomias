@@ -14,7 +14,7 @@ import br.com.combinacaotaxonomias.dao.MarketplaceDao;
 import br.com.combinacaotaxonomias.helper.CategoriaHelper;
 import br.com.combinacaotaxonomias.model.Taxonomia;
 import br.com.combinacaotaxonomias.model.to.AtributoTO;
-import br.com.combinacaotaxonomias.model.to.CategoriaTO;
+import br.com.combinacaotaxonomias.model.to.CategoriaCombinacaoTO;
 import br.com.combinacaotaxonomias.model.Atributo;
 import br.com.combinacaotaxonomias.model.AtributoResponse;
 import br.com.combinacaotaxonomias.model.Categoria;
@@ -83,7 +83,7 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	
 	
 	public void inserirCategorias(List<Categoria> categorias, Long idMarketplace) {
-		Map<Integer, CategoriaTO> CategoriaMap = new HashMap<Integer,CategoriaTO>();
+		Map<Integer, CategoriaCombinacaoTO> CategoriaMap = new HashMap<Integer,CategoriaCombinacaoTO>();
 		
 		
 		for (Categoria categoria : categorias) {
@@ -162,12 +162,12 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasPorMarketplace(Long idMarketplace) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasPorMarketplace(Long idMarketplace) {
 		return marketplaceDao.buscaCategoriasPorMarketplace(idMarketplace);
 	}
 
 	@Override
-	public List<CategoriaTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai) {
+	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai) {
 		return marketplaceDao.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
 	}
 

@@ -175,5 +175,10 @@ public class MarketplaceServiceImp implements MarketplaceService{
 	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idMarketplace) {
 		return marketplaceDao.buscaAtributosPorCategoria(idCategoria, idMarketplace);
 	}
+
+	@Override
+	public CategoriaCombinacaoTO buscaCategoriaCombinacaoPorId(Integer idCategoria) {
+		return marketplaceDao.buscaCategoriaCombinacaoPorId(idCategoria);
+	}
 	
 }

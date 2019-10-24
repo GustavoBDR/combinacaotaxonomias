@@ -219,19 +219,42 @@ public class VendedorDaoImp implements VendedorDao{
 	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor) {
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("SELECT codigo_atributo as id ");
-		sql.append(",	   nome as nome ");
-		sql.append(",	   id_categoria_vendedor as categoriaId ");	
-		sql.append(",	   tipo as tipoAtributo ");
-		sql.append(" FROM atributo_vendedor ");
-		sql.append(" WHERE 1=1 ");
-		sql.append(" and id_categoria_vendedor = :idCategoria ");
-     	sql.append(" and id_vendedor = :idVendedor ");
+		sql.append(" SELECT am.id_atributo_vendedor as idAtributo ");
+		sql.append(" ,     am.codigo_atributo as idPlataforma");
+		sql.append(" ,	   am.nome as nome ");		
+		sql.append(" ,	   am.id_categoria_vendedor as categoriaId  ");
+		sql.append(" ,	   am.tipo as tipoAtributo ");
+		sql.append("  FROM atributo_vendedor am ");
+		sql.append("  inner join categoria_vendedor cm on (cm.codigo_categoria = am.id_categoria_vendedor) and (cm.id_vendedor = am.id_vendedor) ");
+		sql.append("  WHERE 1=1 ");
+		sql.append("  and cm.id_categoria_vendedor = :idCategoria ");
+		sql.append("  and am.id_vendedor = :idVendedor ");
 
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("idVendedor", idVendedor)
 	    		.addValue("idCategoria", idCategoria);
 	    
 	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(AtributoTO.class));
-	}		
+	}
+	
+	@Override
+	public CategoriaCombinacaoTO buscaCategoriaCombinacaoPorId(Integer idCategoria) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT id_categoria_vendedor as idCategoria ");
+		sql.append(",	   codigo_categoria as idCategoriaPlataforma ");
+		sql.append(",	   nome as nome ");
+		sql.append(",	   id_vendedor as idPlataforma ");
+		sql.append(",	   id_categoria_pai as idPai ");	
+		sql.append(" FROM categoria_vendedor ");
+		sql.append(" WHERE 1=1 ");
+		sql.append(" and id_categoria_vendedor = :idCategoria ");
+		
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idCategoria", idCategoria);
+	    
+	    List<CategoriaCombinacaoTO> categoriaCombinacaoTO = template.query(sql.toString(), param, new BeanPropertyRowMapper(CategoriaCombinacaoTO.class));
+	    return categoriaCombinacaoTO.isEmpty() ? null : categoriaCombinacaoTO.get(0);
+	}	
 }

@@ -12,7 +12,7 @@ public class AtributoHelper {
 		
 		tipoAtributo .setTipo(atributoTO.getTipoAtributo());
 		
-		Atributo atributo = new Atributo(Integer.valueOf(atributoTO.getId()), atributoTO.getNome(), Integer.valueOf(atributoTO.getCategoriaId()), tipoAtributo );
+		Atributo atributo = new Atributo(Integer.valueOf(atributoTO.getIdPlataforma()), atributoTO.getNome(), Integer.valueOf(atributoTO.getCategoriaId()), tipoAtributo );
 		
 		return atributo;
 	}
@@ -21,7 +21,7 @@ public class AtributoHelper {
 		
 		AtributoTO atributoTO = new AtributoTO();
 		
-		atributoTO.setId(atributo.getId().toString());
+		atributoTO.setIdPlataforma(atributo.getId().toString());
 		atributoTO.setNome(atributo.getNome());
 		atributoTO.setCategoriaId(atributo.getCategoriaId().toString());
 		atributoTO.setTipoAtributo(atributo.getTipoAtributo().getTipo());

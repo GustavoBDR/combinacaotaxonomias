@@ -40,4 +40,10 @@ public class CombinacaoServiceImp implements CombinacaoService{
 		}
 	}
 
+	@Override
+	public Long buscaUltimaCombinacaoCategoriaCadastrada() {
+		return combinacaoDao.buscaUltimaCombinacaoCategoriaCadastrada();
+	}
+
+	
 }

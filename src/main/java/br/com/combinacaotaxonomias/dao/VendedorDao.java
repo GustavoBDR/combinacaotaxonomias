@@ -20,4 +20,5 @@ public interface VendedorDao {
 	public List<CategoriaCombinacaoTO> buscaCategoriasPorVendedor(Long idVendedor);
 	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idVendedor, Integer idCategoriaPai);
 	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idVendedor);
+	public CategoriaCombinacaoTO buscaCategoriaCombinacaoPorId(Integer idCategoria);
 }

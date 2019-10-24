@@ -80,15 +80,29 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 		sql.append("INSERT INTO combinacao_atributo (id_combinacao_categoria,  ");
 		sql.append("								 id_atributo_marketplace, ");
 		sql.append("								 id_atributo_vendedor) ");
-		sql.append("VALUES");
-		sql.append("(:idCombinacaoCategoria, :idCategoriaLinhaMarketplace, :idCategoriaLinhaVendedor) ");
+		sql.append(" VALUES ");
+		sql.append("(:idCombinacaoCategoria, :idAtributoMarketplace, :idAtributoVendedor) ");
 	
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("idCombinacaoCategoria", idCombinacaoCategoria)
 				.addValue("idAtributoMarketplace", combinacaoAtributo.getIdAtributoMarketplace())
 				.addValue("idAtributoVendedor", combinacaoAtributo.getIdAtributoVendedor());
 		
-	    template.update(sql.toString(),param);		
+	    template.update(sql.toString(),param);
 	}
 
+	@Override
+	public Long buscaUltimaCombinacaoCategoriaCadastrada() {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT max(id_combinacao_categoria) as id");
+		sql.append(" FROM combinacao_categoria");
+	
+	    SqlParameterSource param = new MapSqlParameterSource();	
+
+	    List<Long> id = template.queryForList(sql.toString(), param, Long.class);
+	    return id.get(0);
+	}
+
+	
 }

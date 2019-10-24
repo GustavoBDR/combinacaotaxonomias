@@ -11,5 +11,6 @@ public interface CombinacaoService {
 	public void inserirCombinacaoCategoria(Combinacao combinacao);
 	public Long buscaUltimaCombinacaoCadastrada();
 	public void inserirCombinacaoAtibutos(Long idCombinacaoCategoria, List<CombinacaoAtributo> listCombinacao);
+	public Long buscaUltimaCombinacaoCategoriaCadastrada();
 
 }

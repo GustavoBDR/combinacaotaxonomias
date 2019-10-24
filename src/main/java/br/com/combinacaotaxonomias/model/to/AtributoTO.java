@@ -3,7 +3,8 @@ package br.com.combinacaotaxonomias.model.to;
 import br.com.combinacaotaxonomias.common.TipoAtributo;
 
 public class AtributoTO {
-	private String id;
+	private String idAtributo;
+	private String idPlataforma;
 	private String nome;
 	private String categoriaId;
 	private String tipoAtributo;
@@ -12,12 +13,20 @@ public class AtributoTO {
 		
 	}
 
-	public String getId() {
-		return id;
+	public String getIdAtributo() {
+		return idAtributo;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIdAtributo(String idAtributo) {
+		this.idAtributo = idAtributo;
+	}
+
+	public String getIdPlataforma() {
+		return idPlataforma;
+	}
+
+	public void setIdPlataforma(String idPlataforma) {
+		this.idPlataforma = idPlataforma;
 	}
 
 	public String getNome() {
@@ -43,5 +52,5 @@ public class AtributoTO {
 	public void setTipoAtributo(String tipoAtributo) {
 		this.tipoAtributo = tipoAtributo;
 	}
-	
+
 }

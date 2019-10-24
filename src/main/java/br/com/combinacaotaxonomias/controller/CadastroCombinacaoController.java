@@ -104,7 +104,7 @@ public class CadastroCombinacaoController {
 		
 		combinacaoService.inserirCombinacao(combinacao);
 		
-		Long idCombinacao = combinacaoService.buscaUltimaCombinacaoCadastrada();
+		Long idCombinacao = combinacaoService.buscaUltimaCombinacaoCategoriaCadastrada();
 		
 		List<CombinacaoAtributoTO> combinacaoAtributosTO = new ArrayList<CombinacaoAtributoTO>();
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributosTO);
@@ -140,15 +140,20 @@ public class CadastroCombinacaoController {
 
     @ResponseBody
     @RequestMapping(value = "/marketplaceCategoriaFilha", method = RequestMethod.GET)
-    public List<CategoriaCombinacaoTO> getMarketplaceCategoriaFilha(@RequestParam(required = true, name = "idMarketplace") Long idMarketplace, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
-    	List<CategoriaCombinacaoTO> tt = marketplaceService.buscaCategoriasFilhas(idMarketplace, idCategoriaPai);
+    public List<CategoriaCombinacaoTO> getMarketplaceCategoriaFilha(@RequestParam(required = true, name = "idMarketplace") Long idMarketplace, @RequestParam(required = true, name = "idCategoria") Integer idCategoria) {
+    	CategoriaCombinacaoTO categoriaCombinacaoPai = marketplaceService.buscaCategoriaCombinacaoPorId(idCategoria);
+    	
+    	List<CategoriaCombinacaoTO> tt = marketplaceService.buscaCategoriasFilhas(idMarketplace, Integer.valueOf(categoriaCombinacaoPai.getIdCategoriaPlataforma()));
         return tt;
     }
     
     @ResponseBody
     @RequestMapping(value = "/vendedorCategoriaFilha", method = RequestMethod.GET)
-    public List<CategoriaCombinacaoTO> getVendedorCategoriaFilha(@RequestParam(required = true, name = "idVendedor") Long idVendedor, @RequestParam(required = true, name = "idCategoriaPai") Integer idCategoriaPai) {
-    	return vendedorService.buscaCategoriasFilhas(idVendedor, idCategoriaPai);
+    public List<CategoriaCombinacaoTO> getVendedorCategoriaFilha(@RequestParam(required = true, name = "idVendedor") Long idVendedor, @RequestParam(required = true, name = "idCategoria") Integer idCategoria) {
+    	CategoriaCombinacaoTO categoriaCombinacaoPai = vendedorService.buscaCategoriaCombinacaoPorId(idCategoria);
+    	
+    	List<CategoriaCombinacaoTO> tt = vendedorService.buscaCategoriasFilhas(idVendedor, Integer.valueOf(categoriaCombinacaoPai.getIdCategoriaPlataforma()));
+        return tt;
     }
     
     

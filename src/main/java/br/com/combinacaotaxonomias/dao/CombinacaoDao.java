@@ -8,4 +8,5 @@ public interface CombinacaoDao {
 	public void inserirCombinacaoCategoria(Combinacao combinacao);
 	public Long buscaUltimaCombinacaoCadastrada();
 	public void inserirCombinacaoAtributos(Long idCombinacaoCategoria, CombinacaoAtributo combinacaoAtributo);
+	public Long buscaUltimaCombinacaoCategoriaCadastrada();
 }

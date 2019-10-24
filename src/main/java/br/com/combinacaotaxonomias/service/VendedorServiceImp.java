@@ -176,4 +176,8 @@ public class VendedorServiceImp implements VendedorService{
 		return vendedorDao.buscaAtributosPorCategoria(idCategoria, idVendedor);
 	}
 
+	@Override
+	public CategoriaCombinacaoTO buscaCategoriaCombinacaoPorId(Integer idCategoria) {
+		return vendedorDao.buscaCategoriaCombinacaoPorId(idCategoria);
+	}
 }

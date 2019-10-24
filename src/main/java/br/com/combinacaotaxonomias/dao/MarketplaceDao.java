@@ -21,4 +21,5 @@ public interface MarketplaceDao {
 	public List<CategoriaCombinacaoTO> buscaCategoriasPorMarketplace(Long idMarketplace);
 	public List<CategoriaCombinacaoTO> buscaCategoriasFilhas(Long idMarketplace, Integer idCategoriaPai);
 	public List<AtributoTO> buscaAtributosPorCategoria(Integer idCategoria, Long idMarketplace);
+	public CategoriaCombinacaoTO buscaCategoriaCombinacaoPorId(Integer idCategoriaPlataforma);
 }

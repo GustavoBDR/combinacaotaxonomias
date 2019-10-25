@@ -8,5 +8,8 @@ $(document).ready(function () {
     $("#btnCombinacao").click(function(){
         location.href="/cadastrocombinacaocategoria";
     });     
+    $("#btnPesquisaCombinacao").click(function(){
+        location.href="/buscaCombinacao";
+    });    
 });
 

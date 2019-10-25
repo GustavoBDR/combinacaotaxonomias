@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,19 +50,48 @@ public class CadastroCombinacaoController {
     
     private CombinacaoAtributoHelper combinacaoAtributoHelper;
 	
+    
+    @RequestMapping(value = "/buscaCombinacao", method = RequestMethod.GET)
+    public String getPesquisaCombinacao(Model model, CombinacaoTO combinacaoTO){
+    	model.addAttribute("combinacaoTO", combinacaoTO);
+    	
+    	if (combinacaoTO.getNome() == null||combinacaoTO.getDescricao() == null) {
+			List<CombinacaoTO> resultadoBuscaCombinacao = combinacaoService.buscaCombinacao(combinacaoTO);
+			model.addAttribute("resultadoBuscaCombinacao", resultadoBuscaCombinacao);
+		}
+    	
+    	return "buscaCombinacao";
+    }
+    
+	@RequestMapping(value = "/editarCombinacao/{id}", method = RequestMethod.GET)
+	public String getEditarMarketplace(@PathVariable Long id, Model model) {
+		
+		CombinacaoTO combinacaoTO = combinacaoService.buscaCombinacaoPorId(id);
+		model.addAttribute("combinacaoTO", combinacaoTO);
+		
+		return "cadastroCombinacaoCategoria";
+	}	
+	    
+    
 	@RequestMapping(value = "/cadastrocombinacaocategoria", method = RequestMethod.GET)
 	public String getCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
-		List<Plataforma> marketplaces = marketplaceService.buscaTodosMarketplaces();
-		List<Plataforma> vendedores = vendedorService.buscaTodosVendedores();
 		
-		List<PlataformaTO> marketplacesTO = plataformaHelper.toListTO(marketplaces);
-		List<PlataformaTO> vendedoresTO = plataformaHelper.toListTO(vendedores);
-		
-		model.addAttribute("vendedores", vendedoresTO);
-		model.addAttribute("marketplaces", marketplacesTO);
+		if (novaCombinacao.getIdCombinacao() == null) {
+			List<Plataforma> marketplaces = marketplaceService.buscaTodosMarketplaces();
+			List<Plataforma> vendedores = vendedorService.buscaTodosVendedores();
+			
+			List<PlataformaTO> marketplacesTO = plataformaHelper.toListTO(marketplaces);
+			List<PlataformaTO> vendedoresTO = plataformaHelper.toListTO(vendedores);
+			
+			model.addAttribute("vendedores", vendedoresTO);
+			model.addAttribute("marketplaces", marketplacesTO);
 
-		novaCombinacao = new CombinacaoTO();
-		model.addAttribute("novaCombinacao", novaCombinacao);
+			novaCombinacao = new CombinacaoTO();
+			model.addAttribute("novaCombinacao", novaCombinacao);			
+		}else {
+			
+		}
+
 
 		return "cadastroCombinacaoCategoria";
 	}

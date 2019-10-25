@@ -2,6 +2,7 @@ package br.com.combinacaotaxonomias.dao;
 
 import java.util.List;
 
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
+import br.com.combinacaotaxonomias.model.Plataforma;
+import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 
 @Repository("combinacaoDao")
 public class CombinacaoDaoImp implements CombinacaoDao{
@@ -104,5 +107,49 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    return id.get(0);
 	}
 
-	
+	@Override
+	public List<CombinacaoTO> buscaCombinacao(CombinacaoTO combinacaoTO) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT id_combinacao as idCombinacao");
+		sql.append(",	   nome as nome");		
+		sql.append(",	   descricao as descricao");
+		sql.append(" FROM combinacao");
+		sql.append(" WHERE 1=1");
+
+		if (combinacaoTO.getNome() != null) {
+			sql.append(" and nome LIKE :nome ");
+		}
+		if (combinacaoTO.getDescricao() != null) {
+			sql.append(" and descricao LIKE :descricao ");
+		}
+
+		sql.append(" order  by 1");
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("nome", "%" + combinacaoTO.getNome() + "%")
+	    		.addValue("descricao", "%" + combinacaoTO.getDescricao() + "%");	
+
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTO.class));
+	}
+
+	@Override
+	public CombinacaoTO buscaCombinacaoPorId(Long id) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append("SELECT id_combinacao as idCombinacao ");
+		sql.append(",	   nome as nome ");
+		sql.append(",	   descricao as descricao ");
+		sql.append(",	   id_marketplace as idMarketplace ");
+		sql.append(",	   id_vendedor as idVendedor ");	
+		sql.append(" FROM combinacao");
+		sql.append(" WHERE 1=1");
+		sql.append(" and id_combinacao LIKE :id ");
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("id", id);
+
+	    List<CombinacaoTO> combinacaoTO = template.queryForList(sql.toString(), param, CombinacaoTO.class);
+	    return combinacaoTO.get(0);
+	}
 }

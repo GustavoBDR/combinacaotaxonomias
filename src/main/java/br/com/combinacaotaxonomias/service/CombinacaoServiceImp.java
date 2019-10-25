@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.combinacaotaxonomias.dao.CombinacaoDao;
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
+import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 
 @Service("combinacaoService")
 public class CombinacaoServiceImp implements CombinacaoService{
@@ -45,5 +46,14 @@ public class CombinacaoServiceImp implements CombinacaoService{
 		return combinacaoDao.buscaUltimaCombinacaoCategoriaCadastrada();
 	}
 
+	@Override
+	public List<CombinacaoTO> buscaCombinacao(CombinacaoTO combinacaoTO) {
+		return combinacaoDao.buscaCombinacao(combinacaoTO);
+	}
+
+	@Override
+	public CombinacaoTO buscaCombinacaoPorId(Long id) {
+		return combinacaoDao.buscaCombinacaoPorId(id);
+	}
 	
 }

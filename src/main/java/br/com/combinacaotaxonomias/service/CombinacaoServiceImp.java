@@ -20,7 +20,7 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	@Override
 	public void inserirCombinacao(Combinacao combinacao) {
 		combinacaoDao.inserirCombinacao(combinacao);
-		combinacao.setId(buscaUltimaCombinacaoCadastrada());
+		combinacao.setIdCombinacao(buscaUltimaCombinacaoCadastrada());
 		inserirCombinacaoCategoria(combinacao);
 	}
 
@@ -55,5 +55,14 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	public CombinacaoTO buscaCombinacaoPorId(Long id) {
 		return combinacaoDao.buscaCombinacaoPorId(id);
 	}
-	
+
+	@Override
+	public Combinacao buscaCombinacaoCategoriaPorCombinacaoId(Long id) {
+		return combinacaoDao.buscaCombinacaoCategoriaPorCombinacaoId(id);
+	}
+
+	@Override
+	public Combinacao buscaCombinacaoCategoriaPorCombinacaoIdCompleto(Long id) {
+		return combinacaoDao.buscaCombinacaoCategoriaPorCombinacaoIdCompleto(id);
+	}
 }

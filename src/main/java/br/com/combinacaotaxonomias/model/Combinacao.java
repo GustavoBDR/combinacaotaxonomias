@@ -1,7 +1,8 @@
 package br.com.combinacaotaxonomias.model;
 
 public class Combinacao {
-	private Long id;
+	private Long idCombinacao;
+	private Long idCombinacaoCategoria;
 	private String nome;
 	private String descricao;
 	private Long idMarketplace;
@@ -12,14 +13,18 @@ public class Combinacao {
 	private Integer idLinhaVendedor;
 	private Integer idFamiliaVendedor;
 	private Integer idGrupoVendedor;
-	
-	public Long getId() {
-		return id;
+	public Long getIdCombinacao() {
+		return idCombinacao;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}	
-	
+	public void setIdCombinacao(Long idCombinacao) {
+		this.idCombinacao = idCombinacao;
+	}
+	public Long getIdCombinacaoCategoria() {
+		return idCombinacaoCategoria;
+	}
+	public void setIdCombinacaoCategoria(Long idCombinacaoCategoria) {
+		this.idCombinacaoCategoria = idCombinacaoCategoria;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -80,5 +85,6 @@ public class Combinacao {
 	public void setIdGrupoVendedor(Integer idGrupoVendedor) {
 		this.idGrupoVendedor = idGrupoVendedor;
 	}
+	
 
 }

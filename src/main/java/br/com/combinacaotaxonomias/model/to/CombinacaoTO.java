@@ -2,6 +2,7 @@ package br.com.combinacaotaxonomias.model.to;
 
 public class CombinacaoTO {
 	private String idCombinacao;
+	private String idCombinacaoCategoria;
 	private String nome;
 	private String descricao;
 	private String idMarketplace;
@@ -18,6 +19,12 @@ public class CombinacaoTO {
 	}
 	public void setIdCombinacao(String idCombinacao) {
 		this.idCombinacao = idCombinacao;
+	}
+	public String getIdCombinacaoCategoria() {
+		return idCombinacaoCategoria;
+	}
+	public void setIdCombinacaoCategoria(String idCombinacaoCategoria) {
+		this.idCombinacaoCategoria = idCombinacaoCategoria;
 	}
 	public String getNome() {
 		return nome;

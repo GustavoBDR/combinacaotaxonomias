@@ -2,6 +2,56 @@ $(document).ready(function () {
     $("#bntCancelaCadastro").click(function(){
         location.href="/";
     });
+    
+    if ($('#idCombinacaoCategoria').val() > 0) {
+
+    	var linhaMarketplace = ($("#idLinhaMarketplaceSelecionada").val());
+    	var familiaMarketplace = ($("#idFamiliaMarketplaceSelecionada").val());
+    	var grupoMarketplace = ($("#idGrupoMarketplaceSelecionada").val());
+    	
+    	var linhaVendedor = ($("#idLinhaVendedorSelecionado").val());
+    	var familiaVendedor = ($("#idFamiliaVendedorSelecionado").val());
+    	var grupoVendedor = ($("#idGrupoVendedorSelecionado").val());
+    	
+    	populaLinhaMarketplace($("#idMarketplaceSelect"));
+    	setTimeout( function(){ 
+          	$('#linhaMarketplaceSelect').val(linhaMarketplace);
+          	$('#linhaMarketplaceSelect').selectpicker('refresh');
+      	}  , 1000 );
+
+    	populaFamiliaMarketplace(linhaMarketplace);
+    	setTimeout( function(){ 
+          	$('#familiaMarketplaceSelect').val(familiaMarketplace);
+          	$('#familiaMarketplaceSelect').selectpicker('refresh');
+      	}  , 1050 );
+    	
+    	populaGrupoMarketplace(familiaMarketplace);
+    	setTimeout( function(){ 
+          	$('#grupoMarketplaceSelect').val(grupoMarketplace);
+          	$('#grupoMarketplaceSelect').selectpicker('refresh');
+      	}  , 1100 );
+    	
+    	
+    	populaLinhaVendedor($("#idVendedorSelect"));
+    	setTimeout( function(){ 
+          	$('#linhaVendedorSelect').val(linhaVendedor);
+          	$('#linhaVendedorSelect').selectpicker('refresh');
+      	}  , 1000 );
+    	
+    	populaFamiliaVendedor(linhaVendedor);
+    	setTimeout( function(){ 
+          	$('#familiaVendedorSelect').val(familiaVendedor);
+          	$('#familiaVendedorSelect').selectpicker('refresh');
+      	}  , 1050 );
+    	
+    	populaGrupoVendedor(familiaVendedor);  	
+    	setTimeout( function(){ 
+          	$('#grupoVendedorSelect').val(grupoVendedor);
+          	$('#grupoVendedorSelect').selectpicker('refresh');
+      	}  , 1100 );
+      	
+
+    }
 });
 
 function populaLinhaMarketplace(marketplace) {
@@ -38,10 +88,15 @@ function populaLinhaMarketplace(marketplace) {
 }
 
 function populaFamiliaMarketplace(idLinhaMarketplace) {
-	
+	var id;
+	if ($('#idCombinacaoCategoria').val() > 0) {
+		id = idLinhaMarketplace;
+	}else{
+		id = $(idLinhaMarketplace).val();
+	}
     $.ajax({
         url: "/marketplaceCategoriaFilha",
-        data: {idMarketplace: $('#idMarketplaceSelect').val(), idCategoria: $(idLinhaMarketplace).val()},
+        data: {idMarketplace: $('#idMarketplaceSelect').val(), idCategoria: id},
         dataType: 'JSON',
         beforeSend: function () {
 
@@ -71,10 +126,16 @@ function populaFamiliaMarketplace(idLinhaMarketplace) {
 }
 
 function populaGrupoMarketplace(idFamiliaMarketplace) {
-	
+	var id;
+	if ($('#idCombinacaoCategoria').val() > 0) {
+		id = idFamiliaMarketplace;
+	}else{
+		id = $(idFamiliaMarketplace).val();
+	}
+
     $.ajax({
         url: "/marketplaceCategoriaFilha",
-        data: {idMarketplace: $('#idMarketplaceSelect').val(), idCategoria: $(idFamiliaMarketplace).val()},
+        data: {idMarketplace: $('#idMarketplaceSelect').val(), idCategoria: id},
         dataType: 'JSON',
         beforeSend: function () {
 
@@ -138,10 +199,16 @@ function populaLinhaVendedor(vendedor) {
 }
 
 function populaFamiliaVendedor(idLinhaVendedor) {
-	
+	var id;
+	if ($('#idCombinacaoCategoria').val() > 0) {
+		id = idLinhaVendedor;
+	}else{
+		id = $(idLinhaVendedor).val();
+	}	
+
     $.ajax({
         url: "/vendedorCategoriaFilha",
-        data: {idVendedor: $('#idVendedorSelect').val(), idCategoria: $(idLinhaVendedor).val()},
+        data: {idVendedor: $('#idVendedorSelect').val(), idCategoria: id},
         dataType: 'JSON',
         beforeSend: function () {
 
@@ -172,9 +239,16 @@ function populaFamiliaVendedor(idLinhaVendedor) {
 
 function populaGrupoVendedor(idFamiliaVendedor) {
 	
+	var id;
+	if ($('#idCombinacaoCategoria').val() > 0) {
+		id = idFamiliaVendedor;
+	}else{
+		id = $(idFamiliaVendedor).val();
+	}
+	
     $.ajax({
         url: "/vendedorCategoriaFilha",
-        data: {idVendedor: $('#idVendedorSelect').val(), idCategoria: $(idFamiliaVendedor).val()},
+        data: {idVendedor: $('#idVendedorSelect').val(), idCategoria: id},
         dataType: 'JSON',
         beforeSend: function () {
 

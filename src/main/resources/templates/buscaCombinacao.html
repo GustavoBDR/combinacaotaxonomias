@@ -40,60 +40,55 @@
                 <input type="text" class="order-form-input" th:field="*{descricao}" maxlength="150" placeholder="Informe a descrição da combinação."/>
               </div>
             </div>
-            <div class="row mt-3 mx-4 float-right">
-              <div class="col-12" th:if="${resultadoBuscaCombinacao == null}">
-                <button type="submit" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Pesquisar</button>
-              </div>  
+            <div class="row">
+              <div class="col-12 " th:if="${resultadoBuscaCombinacao != null}">
+                <table class="table">
+                  <div class="row mt-3 mx-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">NOME</th>
+                        <th scope="col">DESCRIÇÃO</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                  </div>
+                  <div class="row mt-3 mx-4">
+                    <tbody>
+                      <th:block th:each="combinacao : ${resultadoBuscaCombinacao}">
+                        <tr>
+                          <td th:text="${combinacao.nome}"></td>
+                          <td th:text="${combinacao.descricao}"></td>
+                          <td></td> 
+                          <td>
+                            <a th:href="@{'/editarCombinacao/' + ${combinacao.idCombinacao}}">Editar</a>
+                          </td>                                 
+                        </tr>                
+                      </th:block>
+                    </tbody>
+                  </div>
+                </table>
+              </div>
+              <div class="col-12 " th:if="${erroBusca != null}">
+                <div class="alert alert-warning" role="alert">
+                <span th:text="${erroBusca}"></span>
+            </div>
+              </div>
+              <div class="col-12">
+                <div div class="row mt-3 float-right">
+                  <div div class="col-5">
+                      <button type="button" id="bntCancelarBusca" class="btn btn-dark d-block mx-auto btn-submit">Cancelar</button>
+                  </div>
+                  <div div class="col-5">
+                    <button type="submit" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Pesquisar</button>
+                  </div>
+                  <div div class="col-2">
+                  </div>            
+                </div>          
+              </div>        
             </div>
           </form>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 " th:if="${resultadoBuscaCombinacao != null}">
-          <table class="table">
-            <div class="row mt-3 mx-4">
-              <thead>
-                <tr>
-                  <th scope="col">NOME</th>
-                  <th scope="col">DESCRIÇÃO</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-            </div>
-            <div class="row mt-3 mx-4">
-              <tbody>
-              	<th:block th:each="combinacao : ${resultadoBuscaCombinacao}">
-                  <tr>
-                    <td th:text="${combinacao.nome}"></td>
-                    <td th:text="${combinacao.descricao}"></td>
-                    <td></td> 
-                    <td>
-                    	<a th:href="@{'/editarCombinacao/' + ${combinacao.idCombinacao}}">Editar</a>
-                    </td>                                 
-                  </tr>                
-                </th:block>
-              </tbody>
-            </div>
-          </table>
-        </div>
-        <div class="col-12 " th:if="${erroBusca != null}">
-	        <div class="alert alert-warning" role="alert">
-			  	<span th:text="${erroBusca}"></span>
-			</div>
-        </div>
-        <div class="col-12">
-          <div div class="row mt-3 float-right">
-            <div div class="col-5">
-              	<button type="button" id="bntCancelarBusca" class="btn btn-dark d-block mx-auto btn-submit">Cancelar</button>
-            </div>
-            <div div class="col-5">
-            	<button type="submit" id="btnSubmit" class="btn btn-primary d-block mx-auto btn-submit">Pesquisar</button>
-            </div>
-            <div div class="col-2">
-            </div>            
-          </div>          
-        </div>        
       </div>
     </div>
   </section>
@@ -108,6 +103,6 @@
     src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-  <script type="text/javascript" th:src="@{/scripts/pesquisaCombinacao.js}" ></script> 
+  <script type="text/javascript" th:src="@{/scripts/pesquisaCombinacao2.js}" ></script> 
 </body>
 </html>

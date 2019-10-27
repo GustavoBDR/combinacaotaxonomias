@@ -14,4 +14,6 @@ public interface CombinacaoDao {
 	public Long buscaUltimaCombinacaoCategoriaCadastrada();
 	public List<CombinacaoTO> buscaCombinacao(CombinacaoTO combinacaoTO);
 	public CombinacaoTO buscaCombinacaoPorId(Long id);
+	public Combinacao buscaCombinacaoCategoriaPorCombinacaoId(Long id);
+	public Combinacao buscaCombinacaoCategoriaPorCombinacaoIdCompleto(Long id);
 }

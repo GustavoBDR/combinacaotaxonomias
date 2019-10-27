@@ -54,9 +54,10 @@ public class CadastroCombinacaoController {
     @RequestMapping(value = "/buscaCombinacao", method = RequestMethod.GET)
     public String getPesquisaCombinacao(Model model, CombinacaoTO combinacaoTO){
     	model.addAttribute("combinacaoTO", combinacaoTO);
+    	List<CombinacaoTO> resultadoBuscaCombinacao;
     	
-    	if (combinacaoTO.getNome() == null||combinacaoTO.getDescricao() == null) {
-			List<CombinacaoTO> resultadoBuscaCombinacao = combinacaoService.buscaCombinacao(combinacaoTO);
+    	if (combinacaoTO.getNome() != null||combinacaoTO.getDescricao() != null) {
+			resultadoBuscaCombinacao = combinacaoService.buscaCombinacao(combinacaoTO);
 			model.addAttribute("resultadoBuscaCombinacao", resultadoBuscaCombinacao);
 		}
     	
@@ -66,32 +67,43 @@ public class CadastroCombinacaoController {
 	@RequestMapping(value = "/editarCombinacao/{id}", method = RequestMethod.GET)
 	public String getEditarMarketplace(@PathVariable Long id, Model model) {
 		
-		CombinacaoTO combinacaoTO = combinacaoService.buscaCombinacaoPorId(id);
-		model.addAttribute("combinacaoTO", combinacaoTO);
+		Combinacao combinacao = combinacaoService.buscaCombinacaoCategoriaPorCombinacaoIdCompleto(id);
+		CombinacaoTO combinacaoTO = combinacaoHelper.toCombinacaoTO(combinacao);
+		model.addAttribute("novaCombinacao", combinacaoTO);
 		
-		return "cadastroCombinacaoCategoria";
+		List<PlataformaTO> marketplacesTO = new ArrayList<PlataformaTO>();
+		List<PlataformaTO> vendedoresTO = new ArrayList<PlataformaTO>();
+		
+		Plataforma marketplace = marketplaceService.buscaMarketplacePorId(Long.valueOf(combinacaoTO.getIdMarketplace()));
+		marketplacesTO.add(plataformaHelper.toPlataformaTO(marketplace));
+		
+		Plataforma vendedor = vendedorService.buscaVendedorPorId(Long.valueOf(combinacaoTO.getIdVendedor()));
+		vendedoresTO.add(plataformaHelper.toPlataformaTO(vendedor));
+		
+		model.addAttribute("marketplaces", marketplacesTO);		
+		model.addAttribute("vendedores", vendedoresTO);
+
+		
+		
+		
+		return "cadastrocombinacaocategoria";
 	}	
 	    
     
 	@RequestMapping(value = "/cadastrocombinacaocategoria", method = RequestMethod.GET)
 	public String getCadastroCombinacao(Model model, CombinacaoTO novaCombinacao){
 		
-		if (novaCombinacao.getIdCombinacao() == null) {
-			List<Plataforma> marketplaces = marketplaceService.buscaTodosMarketplaces();
-			List<Plataforma> vendedores = vendedorService.buscaTodosVendedores();
-			
-			List<PlataformaTO> marketplacesTO = plataformaHelper.toListTO(marketplaces);
-			List<PlataformaTO> vendedoresTO = plataformaHelper.toListTO(vendedores);
-			
-			model.addAttribute("vendedores", vendedoresTO);
-			model.addAttribute("marketplaces", marketplacesTO);
+		List<Plataforma> marketplaces = marketplaceService.buscaTodosMarketplaces();
+		List<Plataforma> vendedores = vendedorService.buscaTodosVendedores();
+		
+		List<PlataformaTO> marketplacesTO = plataformaHelper.toListTO(marketplaces);
+		List<PlataformaTO> vendedoresTO = plataformaHelper.toListTO(vendedores);
+		
+		model.addAttribute("vendedores", vendedoresTO);
+		model.addAttribute("marketplaces", marketplacesTO);
 
-			novaCombinacao = new CombinacaoTO();
-			model.addAttribute("novaCombinacao", novaCombinacao);			
-		}else {
-			
-		}
-
+		novaCombinacao = new CombinacaoTO();
+		model.addAttribute("novaCombinacao", novaCombinacao);			
 
 		return "cadastroCombinacaoCategoria";
 	}
@@ -130,9 +142,7 @@ public class CadastroCombinacaoController {
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
 		
-		Combinacao combinacao = combinacaoHelper.toCombinacao(novaCombinacaoTO);
-		
-		combinacaoService.inserirCombinacao(combinacao);
+		combinacaoService.inserirCombinacao(novaCombinacao);
 		
 		Long idCombinacao = combinacaoService.buscaUltimaCombinacaoCategoriaCadastrada();
 		

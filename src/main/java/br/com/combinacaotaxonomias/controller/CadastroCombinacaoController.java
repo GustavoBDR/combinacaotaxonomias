@@ -133,9 +133,9 @@ public class CadastroCombinacaoController {
 		}else {
 			if (combinacaoService.isNovaCombinaca(novaCombinacao)) {
 				combinacaoService.updateCombinacao(novaCombinacao);
-				combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
+				//combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
 			}
-			
+			combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
 			idCombinacao = novaCombinacao.getIdCombinacao();
 		}
 		

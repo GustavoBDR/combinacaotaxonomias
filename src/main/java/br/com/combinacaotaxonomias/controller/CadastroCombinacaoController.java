@@ -111,19 +111,19 @@ public class CadastroCombinacaoController {
 	@RequestMapping(value = "/salvacadastrocombinacao", method = RequestMethod.POST)
 	public String salvaCadastroCombinacao(Model model, CombinacaoTO novaCombinacaoTO){
 		model.addAttribute("novaCombinacao", novaCombinacaoTO);
-		
+
 		Combinacao novaCombinacao = combinacaoHelper.toCombinacao(novaCombinacaoTO);
-				
+		
 		Plataforma marketplace = marketplaceService.buscaMarketplacePorId(novaCombinacao.getIdMarketplace());
 		Plataforma vendedor = vendedorService.buscaVendedorPorId(novaCombinacao.getIdVendedor());
-		
 		model.addAttribute("marketplace", plataformaHelper.toPlataformaTO(marketplace));
 		model.addAttribute("vendedor", plataformaHelper.toPlataformaTO(vendedor));
 		
 		List<AtributoTO> atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaMarketplace(), novaCombinacao.getIdMarketplace());
 		List<AtributoTO> atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());				
 		List<AtributoTO> atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoMarketplace(), novaCombinacao.getIdMarketplace());
-		
+
+
 		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
 		atributosMarketplace.addAll(atributosLinhaMarketplace);
 		atributosMarketplace.addAll(atributosFamiliaMarketplace);
@@ -141,10 +141,15 @@ public class CadastroCombinacaoController {
 		atributosVendedor.addAll(atributosGrupoVendedor);	
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
-		
-		combinacaoService.inserirCombinacao(novaCombinacao);
-		
-		Long idCombinacao = combinacaoService.buscaUltimaCombinacaoCategoriaCadastrada();
+		Long idCombinacao;
+		if (novaCombinacaoTO.getIdCombinacaoCategoria() != null) {
+			combinacaoService.inserirCombinacao(novaCombinacao);
+			idCombinacao = combinacaoService.buscaUltimaCombinacaoCategoriaCadastrada();
+		}else {
+			combinacaoService.updateCombinacao(novaCombinacao);
+			combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
+			idCombinacao = novaCombinacao.getIdCombinacao();
+		}
 		
 		List<CombinacaoAtributoTO> combinacaoAtributosTO = new ArrayList<CombinacaoAtributoTO>();
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributosTO);

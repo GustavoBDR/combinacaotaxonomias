@@ -119,35 +119,23 @@ public class CadastroCombinacaoController {
 		model.addAttribute("marketplace", plataformaHelper.toPlataformaTO(marketplace));
 		model.addAttribute("vendedor", plataformaHelper.toPlataformaTO(vendedor));
 		
-		List<AtributoTO> atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaMarketplace(), novaCombinacao.getIdMarketplace());
-		List<AtributoTO> atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());				
-		List<AtributoTO> atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoMarketplace(), novaCombinacao.getIdMarketplace());
-
-
-		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
-		atributosMarketplace.addAll(atributosLinhaMarketplace);
-		atributosMarketplace.addAll(atributosFamiliaMarketplace);
-		atributosMarketplace.addAll(atributosGrupoMarketplace);
-		model.addAttribute("atributosMarketplace", atributosMarketplace);
+		List<AtributoTO> atributosMarketpalce = getAtributosMarketplace(novaCombinacao);
+		model.addAttribute("atributosMarketplace", atributosMarketpalce);
 		
-		
-		List<AtributoTO> atributosLinhaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaVendedor(), novaCombinacao.getIdVendedor());
-		List<AtributoTO> atributosFamiliaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaVendedor(), novaCombinacao.getIdVendedor());
-		List<AtributoTO> atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoVendedor(), novaCombinacao.getIdVendedor());
-		
-		List<AtributoTO> atributosVendedor = new ArrayList<AtributoTO>();
-		atributosVendedor.addAll(atributosLinhaVendedor);
-		atributosVendedor.addAll(atributosFamiliaVendedor);
-		atributosVendedor.addAll(atributosGrupoVendedor);	
+		List<AtributoTO> atributosVendedor = getAtributosVendedor(novaCombinacao);
 		model.addAttribute("atributosVendedor", atributosVendedor);
 		
 		Long idCombinacao;
-		if (novaCombinacaoTO.getIdCombinacaoCategoria() != null) {
+		
+		if (novaCombinacaoTO.getIdCombinacaoCategoria() == null) {
 			combinacaoService.inserirCombinacao(novaCombinacao);
 			idCombinacao = combinacaoService.buscaUltimaCombinacaoCategoriaCadastrada();
 		}else {
-			combinacaoService.updateCombinacao(novaCombinacao);
-			combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
+			if (combinacaoService.isNovaCombinaca(novaCombinacao)) {
+				combinacaoService.updateCombinacao(novaCombinacao);
+				combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
+			}
+			
 			idCombinacao = novaCombinacao.getIdCombinacao();
 		}
 		
@@ -160,7 +148,7 @@ public class CadastroCombinacaoController {
 		
 		return "cadastroCombinacaoAtributos";
 	}
-	
+
 	@RequestMapping(value = "/salvacadastrocombinacaoatributos", method = RequestMethod.POST)
 	public String salvaCadastroCombinacaoAtributos(@ModelAttribute CombinacaoAtributoWrapper combinacaoWrapper){
 
@@ -201,5 +189,29 @@ public class CadastroCombinacaoController {
         return tt;
     }
     
-    
+	private List<AtributoTO> getAtributosMarketplace(Combinacao novaCombinacao) {
+		List<AtributoTO> atributosLinhaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaMarketplace(), novaCombinacao.getIdMarketplace());
+		List<AtributoTO> atributosFamiliaMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaMarketplace(), novaCombinacao.getIdMarketplace());				
+		List<AtributoTO> atributosGrupoMarketplace = marketplaceService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoMarketplace(), novaCombinacao.getIdMarketplace());
+
+		List<AtributoTO> atributosMarketplace = new ArrayList<AtributoTO>();
+		atributosMarketplace.addAll(atributosLinhaMarketplace);
+		atributosMarketplace.addAll(atributosFamiliaMarketplace);
+		atributosMarketplace.addAll(atributosGrupoMarketplace);
+
+		return atributosMarketplace;
+	}
+
+	private List<AtributoTO> getAtributosVendedor(Combinacao novaCombinacao) {
+		List<AtributoTO> atributosLinhaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdLinhaVendedor(), novaCombinacao.getIdVendedor());
+		List<AtributoTO> atributosFamiliaVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdFamiliaVendedor(), novaCombinacao.getIdVendedor());
+		List<AtributoTO> atributosGrupoVendedor = vendedorService.buscaAtributosPorCategoria(novaCombinacao.getIdGrupoVendedor(), novaCombinacao.getIdVendedor());
+		
+		List<AtributoTO> atributosVendedor = new ArrayList<AtributoTO>();
+		atributosVendedor.addAll(atributosLinhaVendedor);
+		atributosVendedor.addAll(atributosFamiliaVendedor);
+		atributosVendedor.addAll(atributosGrupoVendedor);	
+		
+		return atributosVendedor;
+	}	
 }

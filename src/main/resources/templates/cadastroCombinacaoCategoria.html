@@ -26,15 +26,21 @@
         </div>
         <div class="col-12">
           <form action="#" th:action="@{/salvacadastrocombinacao}" th:object="${novaCombinacao}" method="post" id="formPesquisa">
-            <input type="hidden" id="idCombinacaoCategoria" name="idCombinacaoCategoria" th:value="${novaCombinacao.idCombinacaoCategoria}">
-            
-            <input type="hidden" id="idLinhaMarketplaceSelecionada" th:value="${novaCombinacao.idLinhaMarketplace}">
-            <input type="hidden" id="idFamiliaMarketplaceSelecionada" th:value="${novaCombinacao.idFamiliaMarketplace}">
-            <input type="hidden" id="idGrupoMarketplaceSelecionada" th:value="${novaCombinacao.idGrupoMarketplace}">
-            
-            <input type="hidden" id="idLinhaVendedorSelecionado" th:value="${novaCombinacao.idLinhaVendedor}">
-            <input type="hidden" id="idFamiliaVendedorSelecionado" th:value="${novaCombinacao.idFamiliaVendedor}">
-            <input type="hidden" id="idGrupoVendedorSelecionado" th:value="${novaCombinacao.idGrupoVendedor}">        
+            <div th:if="${novaCombinacao.idVendedor != null}">
+	            <input type="hidden" id="idCombinacaoCategoria" name="idCombinacaoCategoria" th:value="${novaCombinacao.idCombinacaoCategoria}" th:if="${novaCombinacao.idVendedor != null}">
+	            
+	            <input type="hidden" id="idLinhaMarketplaceSelecionada" th:value="${novaCombinacao.idLinhaMarketplace}">
+	            <input type="hidden" id="idFamiliaMarketplaceSelecionada" th:value="${novaCombinacao.idFamiliaMarketplace}">
+	            <input type="hidden" id="idGrupoMarketplaceSelecionada" th:value="${novaCombinacao.idGrupoMarketplace}">
+	            
+	            <input type="hidden" id="idLinhaVendedorSelecionado" th:value="${novaCombinacao.idLinhaVendedor}">
+	            <input type="hidden" id="idFamiliaVendedorSelecionado" th:value="${novaCombinacao.idFamiliaVendedor}">
+	            <input type="hidden" id="idGrupoVendedorSelecionado" th:value="${novaCombinacao.idGrupoVendedor}">        
+	            
+	            <input type="hidden" name="idMarketplace" th:value="${novaCombinacao.idMarketplace}">
+	            <input type="hidden" name="idVendedor" th:value="${novaCombinacao.idVendedor}">
+	            <input type="hidden" name="idCombinacao" th:value="${novaCombinacao.idCombinacao}">            
+            </div>
             
             <div class="row mt-3 mx-4">
               <div class="col-12">
@@ -67,7 +73,7 @@
 	              </div>
               </div>
               <div class="col-12" th:if="${novaCombinacao.idMarketplace != null}">
-		  	      <select class="selectpicker col-8" data-live-search="true" id="idMarketplaceSelect" th:field="*{idMarketplace}" disabled>
+		  	      <select class="selectpicker col-8" data-live-search="true" id="idMarketplaceSelect" disabled>
 	                  <option th:each="marketplace : ${marketplaces}" th:value="${marketplace.id}" th:text="${marketplace.nome}"></option>
 	              </select>				  
 	              <div class="col-4">
@@ -87,7 +93,7 @@
 	              </div>                  
               </div>
               <div class="col-12" th:if="${novaCombinacao.idVendedor != null}">
-		  	      <select class="selectpicker col-8" data-live-search="true" id="idVendedorSelect" th:field="*{idVendedor}" disabled>
+		  	      <select class="selectpicker col-8" data-live-search="true" id="idVendedorSelect" disabled>
 	                  <option th:each="vendedor : ${vendedores}" th:value="${vendedor.id}" th:text="${vendedor.nome}"></option>
 	              </select>				  
 	              <div class="col-4">

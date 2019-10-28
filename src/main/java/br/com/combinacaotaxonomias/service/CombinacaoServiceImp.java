@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 
 import br.com.combinacaotaxonomias.dao.CombinacaoDao;
@@ -52,7 +54,7 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	}
 
 	@Override
-	public CombinacaoTO buscaCombinacaoPorId(Long id) {
+	public Combinacao buscaCombinacaoPorId(Long id) {
 		return combinacaoDao.buscaCombinacaoPorId(id);
 	}
 
@@ -65,4 +67,41 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	public Combinacao buscaCombinacaoCategoriaPorCombinacaoIdCompleto(Long id) {
 		return combinacaoDao.buscaCombinacaoCategoriaPorCombinacaoIdCompleto(id);
 	}
+
+	@Override
+	public boolean isNovaCombinaca(Combinacao novaCombinacao) {
+		Combinacao  combinacaoAntiga = combinacaoDao.buscaCombinacaoCategoriaPorCombinacaoIdCompleto(novaCombinacao.getIdCombinacao());
+		
+		Integer x = combinacaoAntiga.getIdLinhaMarketplace();
+		Integer y = novaCombinacao.getIdLinhaMarketplace();
+		
+		if (combinacaoAntiga.getNome().equals(combinacaoAntiga.getNome()) || !combinacaoAntiga.getDescricao().equals(novaCombinacao.getDescricao())) {
+			if (combinacaoAntiga.getIdLinhaMarketplace().equals(novaCombinacao.getIdLinhaMarketplace())) {
+				if (combinacaoAntiga.getIdFamiliaMarketplace().equals(novaCombinacao.getIdFamiliaMarketplace())) {
+					if (combinacaoAntiga.getIdGrupoMarketplace().equals(novaCombinacao.getIdGrupoMarketplace())) {
+						if (combinacaoAntiga.getIdLinhaVendedor().equals(novaCombinacao.getIdLinhaVendedor())) {
+							if (combinacaoAntiga.getIdFamiliaVendedor().equals(novaCombinacao.getIdFamiliaVendedor())) {
+								if (combinacaoAntiga.getIdGrupoVendedor().equals(novaCombinacao.getIdGrupoVendedor())) {
+									return false;
+								}
+							}
+						}
+					}
+				}
+			}
+		} 
+		return true;
+		
+	}
+
+	@Override
+	public void updateCombinacao(Combinacao novaCombinacao) {
+		combinacaoDao.updateCombinacao(novaCombinacao);
+	}
+
+	@Override
+	public void deleteCombinacaoAtributos(Combinacao novaCombinacao) {
+		combinacaoDao.deleteCombinacaoAtributos(novaCombinacao);	
+	}
+	
 }

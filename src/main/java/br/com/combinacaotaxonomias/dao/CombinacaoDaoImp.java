@@ -132,7 +132,7 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	}
 
 	@Override
-	public CombinacaoTO buscaCombinacaoPorId(Long id) {
+	public Combinacao buscaCombinacaoPorId(Long id) {
 		StringBuilder sql = new StringBuilder();
 
 		sql.append("SELECT id_combinacao as idCombinacao ");
@@ -147,8 +147,8 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("id", id);
 
-	    List<CombinacaoTO> combinacaoTO = template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTO.class));
-        return combinacaoTO.isEmpty() ? null : combinacaoTO.get(0);
+	    List<Combinacao> combinacao = template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
+        return combinacao.isEmpty() ? null : combinacao.get(0);
 	}
 	
 	@Override
@@ -213,6 +213,33 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    List<Combinacao> combinacao = template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
         return combinacao.isEmpty() ? null : combinacao.get(0);
 	}
-	
+
+	@Override
+	public void updateCombinacao(Combinacao novaCombinacao) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE combinacao ");
+		sql.append("   SET nome= :nome ");
+		sql.append(", 	   descricao= :descricao ");
+		sql.append("WHERE id_combinacao = :idCombinacao ");		
+		
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("nome", novaCombinacao.getNome())
+	    									.addValue("descricao", novaCombinacao.getDescricao())
+	    									.addValue("idCombinacao", novaCombinacao.getIdCombinacao());   								
+
+	    template.update(sql.toString(),param);
+	}
+
+	@Override
+	public void deleteCombinacaoAtributos(Combinacao novaCombinacao) {
+		StringBuilder sql = new StringBuilder();
+		sql.append(" DELETE FROM combinacao_atributo ");
+		sql.append("  WHERE id_combinacao_categoria = :idCombinacaoCategoria ");;		
+		
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    									.addValue("idCombinacaoCategoria", novaCombinacao.getIdCombinacaoCategoria());   								
+
+	    template.update(sql.toString(),param);
+	}	
 	
 }

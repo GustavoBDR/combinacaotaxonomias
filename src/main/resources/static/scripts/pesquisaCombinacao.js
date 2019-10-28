@@ -12,45 +12,44 @@ $(document).ready(function () {
     	var linhaVendedor = ($("#idLinhaVendedorSelecionado").val());
     	var familiaVendedor = ($("#idFamiliaVendedorSelecionado").val());
     	var grupoVendedor = ($("#idGrupoVendedorSelecionado").val());
-    	
+    	    	
     	populaLinhaMarketplace($("#idMarketplaceSelect"));
     	setTimeout( function(){ 
           	$('#linhaMarketplaceSelect').val(linhaMarketplace);
           	$('#linhaMarketplaceSelect').selectpicker('refresh');
-      	}  , 1000 );
+      	}  , 2000 );
 
     	populaFamiliaMarketplace(linhaMarketplace);
     	setTimeout( function(){ 
           	$('#familiaMarketplaceSelect').val(familiaMarketplace);
           	$('#familiaMarketplaceSelect').selectpicker('refresh');
-      	}  , 1050 );
+      	}  , 2050 );
     	
     	populaGrupoMarketplace(familiaMarketplace);
     	setTimeout( function(){ 
           	$('#grupoMarketplaceSelect').val(grupoMarketplace);
           	$('#grupoMarketplaceSelect').selectpicker('refresh');
-      	}  , 1100 );
+      	}  , 2100 );
     	
     	
     	populaLinhaVendedor($("#idVendedorSelect"));
     	setTimeout( function(){ 
           	$('#linhaVendedorSelect').val(linhaVendedor);
           	$('#linhaVendedorSelect').selectpicker('refresh');
-      	}  , 1000 );
+      	}  , 2000 );
     	
     	populaFamiliaVendedor(linhaVendedor);
     	setTimeout( function(){ 
           	$('#familiaVendedorSelect').val(familiaVendedor);
           	$('#familiaVendedorSelect').selectpicker('refresh');
-      	}  , 1050 );
+      	}  , 2050 );
     	
     	populaGrupoVendedor(familiaVendedor);  	
     	setTimeout( function(){ 
           	$('#grupoVendedorSelect').val(grupoVendedor);
           	$('#grupoVendedorSelect').selectpicker('refresh');
-      	}  , 1100 );
-      	
-
+      	}  , 2100 );     	
+	
     }
 });
 

@@ -7,7 +7,7 @@ import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 
 public class CombinacaoAtributoWrapper {
 	
-	private String idCombinacaoCategoria;
+	private String idCombinacao;
 	private List<CombinacaoAtributoTO>  combinacaoAtributos;
 
 	public List<CombinacaoAtributoTO> getCombinacaoAtributos() {
@@ -26,11 +26,11 @@ public class CombinacaoAtributoWrapper {
 		this.combinacaoAtributos = combinacaoAtributos;
 	}
 
-	public String getIdCombinacaoCategoria() {
-		return idCombinacaoCategoria;
+	public String getIdCombinacao() {
+		return idCombinacao;
 	}
 
-	public void setIdCombinacaoCategoria(String idCombinacaoCategoria) {
-		this.idCombinacaoCategoria = idCombinacaoCategoria;
+	public void setIdCombinacao(String idCombinacao) {
+		this.idCombinacao = idCombinacao;
 	}	
 }

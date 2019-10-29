@@ -127,14 +127,15 @@ public class CadastroCombinacaoController {
 		
 		Long idCombinacao;
 		
-		if (novaCombinacaoTO.getIdCombinacaoCategoria() == null) {
+		if (novaCombinacaoTO.getIdCombinacao() == null) {
 			combinacaoService.inserirCombinacao(novaCombinacao);
-			idCombinacao = combinacaoService.buscaUltimaCombinacaoCategoriaCadastrada();
+			idCombinacao = combinacaoService.buscaUltimaCombinacaoCadastrada();
 		}else {
-			if (combinacaoService.isNovaCombinaca(novaCombinacao)) {
+			/*if (combinacaoService.isNovaCombinaca(novaCombinacao)) {
 				combinacaoService.updateCombinacao(novaCombinacao);
-				//combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
-			}
+				combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
+			}*/
+			combinacaoService.updateCombinacao(novaCombinacao);
 			combinacaoService.deleteCombinacaoAtributos(novaCombinacao);
 			idCombinacao = novaCombinacao.getIdCombinacao();
 		}
@@ -143,7 +144,7 @@ public class CadastroCombinacaoController {
 		CombinacaoAtributoWrapper combinacaoWrapper = new CombinacaoAtributoWrapper(combinacaoAtributosTO);
 		
 		//Após inserir no banco, adicionar o id
-		combinacaoWrapper.setIdCombinacaoCategoria(idCombinacao.toString());
+		combinacaoWrapper.setIdCombinacao(idCombinacao.toString());
 		model.addAttribute("combinacaoWrapper", combinacaoWrapper);
 		
 		return "cadastroCombinacaoAtributos";
@@ -152,7 +153,7 @@ public class CadastroCombinacaoController {
 	@RequestMapping(value = "/salvacadastrocombinacaoatributos", method = RequestMethod.POST)
 	public String salvaCadastroCombinacaoAtributos(@ModelAttribute CombinacaoAtributoWrapper combinacaoWrapper){
 
-		combinacaoService.inserirCombinacaoAtibutos(Long.valueOf(combinacaoWrapper.getIdCombinacaoCategoria()), combinacaoAtributoHelper.toListCombinacao(combinacaoWrapper.getCombinacaoAtributos()));
+		combinacaoService.inserirCombinacaoAtibutos(Long.valueOf(combinacaoWrapper.getIdCombinacao()), combinacaoAtributoHelper.toListCombinacao(combinacaoWrapper.getCombinacaoAtributos()));
 		
 		return "index";
 	}

@@ -10,7 +10,7 @@ public interface CombinacaoDao {
 	public void inserirCombinacao(Combinacao combinacao);
 	public void inserirCombinacaoCategoria(Combinacao combinacao);
 	public Long buscaUltimaCombinacaoCadastrada();
-	public void inserirCombinacaoAtributos(Long idCombinacaoCategoria, CombinacaoAtributo combinacaoAtributo);
+	public void inserirCombinacaoAtributos(Long idCombinacao, CombinacaoAtributo combinacaoAtributo);
 	public Long buscaUltimaCombinacaoCategoriaCadastrada();
 	public List<CombinacaoTO> buscaCombinacao(CombinacaoTO combinacaoTO);
 	public Combinacao buscaCombinacaoPorId(Long id);
@@ -18,4 +18,6 @@ public interface CombinacaoDao {
 	public Combinacao buscaCombinacaoCategoriaPorCombinacaoIdCompleto(Long id);
 	public void updateCombinacao(Combinacao novaCombinacao);
 	public void deleteCombinacaoAtributos(Combinacao novaCombinacao);
+	public List<Combinacao> buscaCombinacaoPorIdMarketplace(Long idMarketplace);
+	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor);
 }

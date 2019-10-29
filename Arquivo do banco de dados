@@ -111,7 +111,7 @@ CREATE SEQUENCE combinacao_atributo_id_seq
 
 CREATE TABLE combinacao_atributo (
 	id_combinacao_atributo   	INTEGER DEFAULT NEXTVAL('combinacao_atributo_id_seq'),
-	id_combinacao_categoria		INTEGER REFERENCES combinacao_categoria (id_combinacao_categoria),
+	id_combinacao		        INTEGER REFERENCES combinacao (id_combinacao),
 	id_atributo_marketplace 	INTEGER REFERENCES atributo_marketplace (id_atributo_marketplace), 
 	id_atributo_vendedor 		INTEGER REFERENCES atributo_vendedor (id_atributo_vendedor),
 	CONSTRAINT id_combinacao_atributo PRIMARY KEY(id_combinacao_atributo)

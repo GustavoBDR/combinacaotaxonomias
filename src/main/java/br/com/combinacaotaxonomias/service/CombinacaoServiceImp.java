@@ -37,9 +37,9 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	}
 
 	@Override
-	public void inserirCombinacaoAtibutos(Long idCombinacaoCategoria, List<CombinacaoAtributo> listCombinacao) {
+	public void inserirCombinacaoAtibutos(Long idCombinacao, List<CombinacaoAtributo> listCombinacao) {
 		for (CombinacaoAtributo combinacaoAtributo : listCombinacao) {
-			combinacaoDao.inserirCombinacaoAtributos(idCombinacaoCategoria, combinacaoAtributo);	
+			combinacaoDao.inserirCombinacaoAtributos(idCombinacao, combinacaoAtributo);	
 		}
 	}
 
@@ -103,5 +103,14 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	public void deleteCombinacaoAtributos(Combinacao novaCombinacao) {
 		combinacaoDao.deleteCombinacaoAtributos(novaCombinacao);	
 	}
+
+	@Override
+	public List<Combinacao> buscaCombinacaoPorIdMarketplace(Long idMarketplace) {
+		return combinacaoDao.buscaCombinacaoPorIdMarketplace(idMarketplace);
+	}
 	
+	@Override	
+	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor){
+		return combinacaoDao.buscaCombinacaoPorIdVendedor(idVendedor);
+	}
 }

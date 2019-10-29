@@ -76,16 +76,16 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	}
 
 	@Override
-	public void inserirCombinacaoAtributos(Long idCombinacaoCategoria, CombinacaoAtributo combinacaoAtributo) {
+	public void inserirCombinacaoAtributos(Long idCombinacao, CombinacaoAtributo combinacaoAtributo) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO combinacao_atributo (id_combinacao_categoria,  ");
+		sql.append("INSERT INTO combinacao_atributo (id_combinacao,  ");
 		sql.append("								 id_atributo_marketplace, ");
 		sql.append("								 id_atributo_vendedor) ");
 		sql.append(" VALUES ");
-		sql.append("(:idCombinacaoCategoria, :idAtributoMarketplace, :idAtributoVendedor) ");
+		sql.append("(:idCombinacao, :idAtributoMarketplace, :idAtributoVendedor) ");
 	
 		SqlParameterSource param = new MapSqlParameterSource()
-				.addValue("idCombinacaoCategoria", idCombinacaoCategoria)
+				.addValue("idCombinacao", idCombinacao)
 				.addValue("idAtributoMarketplace", combinacaoAtributo.getIdAtributoMarketplace())
 				.addValue("idAtributoVendedor", combinacaoAtributo.getIdAtributoVendedor());
 		
@@ -234,12 +234,48 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	public void deleteCombinacaoAtributos(Combinacao novaCombinacao) {
 		StringBuilder sql = new StringBuilder();
 		sql.append(" DELETE FROM combinacao_atributo ");
-		sql.append("  WHERE id_combinacao_categoria = :idCombinacaoCategoria ");;		
+		sql.append("  WHERE id_combinacao = :idCombinacao ");;		
 		
 	    SqlParameterSource param = new MapSqlParameterSource()
-	    									.addValue("idCombinacaoCategoria", novaCombinacao.getIdCombinacaoCategoria());   								
+	    									.addValue("idCombinacao", novaCombinacao.getIdCombinacaoCategoria());   								
 
 	    template.update(sql.toString(),param);
+	}
+
+	@Override
+	public List<Combinacao> buscaCombinacaoPorIdMarketplace(Long idMarketplace) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" SELECT id_combinacao as idCombinacao ");
+		sql.append(" , 		nome as nome ");
+		sql.append(" ,		descricao as descricao ");
+		sql.append(" ,	 	id_marketplace as idMarketplace ");
+		sql.append(" , 		id_vendedor as idVendedor ");
+		sql.append(" FROM combinacao ");
+		sql.append(" WHERE id_marketplace = :idMarketplace ");
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idMarketplace", idMarketplace);
+
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTO.class));
+	}	
+	
+	@Override
+	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" SELECT id_combinacao as idCombinacao ");
+		sql.append(" , 		nome as nome ");
+		sql.append(" ,		descricao as descricao ");
+		sql.append(" ,	 	id_marketplace as idMarketplace ");
+		sql.append(" , 		id_vendedor as idVendedor ");
+		sql.append(" FROM combinacao ");
+		sql.append(" WHERE id_marketplace = :idVendedor ");
+		
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idVendedor", idVendedor);
+
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTO.class));
 	}	
 	
 }

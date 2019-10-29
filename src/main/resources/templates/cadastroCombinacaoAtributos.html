@@ -27,7 +27,7 @@
       </div>
       <form action="#" th:action="@{/salvacadastrocombinacaoatributos}" th:object="${combinacaoWrapper}" method="post" id="formPesquisa"> 
         
-        <input th:field="*{idCombinacaoCategoria}" th:value="${idCombinacaoCategoria}" hidden/>
+        <input th:field="*{idCombinacao}" th:value="${idCombinacao}" hidden/>
         
         <div class="col-12">
           <div class="row mt-3 mx-4">
@@ -35,13 +35,13 @@
                 <label class="order-form-label">Marketplace</label>
             </div>
 		  	<div class="col-4">
-		    	<input type="text" class="order-form-input" maxlength="150" th:value="${vendedor.nome}" disabled/>
+		    	<input type="text" class="order-form-input" maxlength="150" th:value="${marketplace.nome}" disabled/>
 		  	</div>				  
             <div class="col-1">
             	<label class="order-form-label">Vendedor</label>
             </div>
 		  	<div class="col-4">
-		    	<input type="text" class="order-form-input" maxlength="150" th:value="${marketplace.nome}" disabled/>
+		    	<input type="text" class="order-form-input" maxlength="150" th:value="${vendedor.nome}" disabled/>
 		  	</div>			  	  
           </div>
         </div>

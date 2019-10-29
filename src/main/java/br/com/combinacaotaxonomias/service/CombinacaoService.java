@@ -11,7 +11,7 @@ public interface CombinacaoService {
 	public void inserirCombinacao(Combinacao combinacao);
 	public void inserirCombinacaoCategoria(Combinacao combinacao);
 	public Long buscaUltimaCombinacaoCadastrada();
-	public void inserirCombinacaoAtibutos(Long idCombinacaoCategoria, List<CombinacaoAtributo> listCombinacao);
+	public void inserirCombinacaoAtibutos(Long idCombinacao, List<CombinacaoAtributo> listCombinacao);
 	public Long buscaUltimaCombinacaoCategoriaCadastrada();
 	public List<CombinacaoTO> buscaCombinacao(CombinacaoTO combinacaoTO);
 	public Combinacao buscaCombinacaoPorId(Long id);
@@ -20,4 +20,6 @@ public interface CombinacaoService {
 	public boolean isNovaCombinaca(Combinacao novaCombinacao);
 	public void updateCombinacao(Combinacao novaCombinacao);
 	public void deleteCombinacaoAtributos(Combinacao novaCombinacao);
+	public List<Combinacao> buscaCombinacaoPorIdMarketplace(Long idMarketplace);
+	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor);
 }

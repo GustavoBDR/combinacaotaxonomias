@@ -6,6 +6,8 @@ import java.util.List;
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 
+
+
 public class CombinacaoHelper {
 	public static Combinacao toCombinacao(CombinacaoTO combinacaoTO) {
 		Combinacao combinacao = new Combinacao();
@@ -33,31 +35,56 @@ public class CombinacaoHelper {
 	public static CombinacaoTO toCombinacaoTO(Combinacao combinacao) {
 		CombinacaoTO combinacaoTO = new CombinacaoTO();
 		
-		combinacaoTO.setIdCombinacao(combinacao.getIdCombinacao().toString());
-		combinacaoTO.setIdCombinacaoCategoria(combinacao.getIdCombinacaoCategoria().toString());
-		combinacaoTO.setNome(combinacao.getNome());
-		combinacaoTO.setDescricao(combinacao.getDescricao());
-		combinacaoTO.setIdMarketplace(combinacao.getIdMarketplace().toString());
-		combinacaoTO.setIdVendedor(combinacao.getIdVendedor().toString());
-		combinacaoTO.setIdLinhaMarketplace(combinacao.getIdLinhaMarketplace().toString());
-		combinacaoTO.setIdFamiliaMarketplace(combinacao.getIdFamiliaMarketplace().toString());
-		combinacaoTO.setIdGrupoMarketplace(combinacao.getIdGrupoMarketplace().toString());
-		combinacaoTO.setIdLinhaVendedor(combinacao.getIdLinhaVendedor().toString());
-		combinacaoTO.setIdFamiliaVendedor(combinacao.getIdFamiliaVendedor().toString());
-		combinacaoTO.setIdGrupoVendedor(combinacao.getIdGrupoVendedor().toString());
-		
+		if (combinacao.getIdCombinacao() != null) {
+			combinacaoTO.setIdCombinacao(combinacao.getIdCombinacao().toString());
+		}
+		if (combinacao.getIdCombinacaoCategoria() != null) {
+			combinacaoTO.setIdCombinacaoCategoria(combinacao.getIdCombinacaoCategoria().toString());			
+		}		
+		if (combinacao.getNome() != null) {
+			combinacaoTO.setNome(combinacao.getNome());			
+		}
+		if (combinacao.getDescricao() != null) {
+			combinacaoTO.setDescricao(combinacao.getDescricao());			
+		}
+		if (combinacao.getIdMarketplace() != null) {
+			combinacaoTO.setIdMarketplace(combinacao.getIdMarketplace().toString());			
+		}
+		if (combinacao.getIdVendedor() != null) {
+			combinacaoTO.setIdVendedor(combinacao.getIdVendedor().toString());			
+		}
+		if (combinacao.getIdLinhaMarketplace() != null) {
+			combinacaoTO.setIdLinhaMarketplace(combinacao.getIdLinhaMarketplace().toString());			
+		}
+		if (combinacao.getIdFamiliaMarketplace() != null) {
+			combinacaoTO.setIdFamiliaMarketplace(combinacao.getIdFamiliaMarketplace().toString());			
+		}
+		if (combinacao.getIdGrupoMarketplace() != null) {
+			combinacaoTO.setIdGrupoMarketplace(combinacao.getIdGrupoMarketplace().toString());			
+		}
+		if (combinacao.getIdLinhaVendedor() != null) {
+			combinacaoTO.setIdLinhaVendedor(combinacao.getIdLinhaVendedor().toString());			
+		}
+		if (combinacao.getIdFamiliaVendedor() != null) {
+			combinacaoTO.setIdFamiliaVendedor(combinacao.getIdFamiliaVendedor().toString());			
+		}
+		if (combinacao.getIdGrupoVendedor() != null ) {
+			combinacaoTO.setIdGrupoVendedor(combinacao.getIdGrupoVendedor().toString());			
+		}
+
 		return combinacaoTO;
 	}
-	
-	public static List<CombinacaoTO> toListCombinacaoTO(List<Combinacao> listCombinacao) {
+ 
+	public static List<CombinacaoTO> toListCombinacaoTO(List<Combinacao> listaCombinacoes) {
 		List<CombinacaoTO> listCombinacaoTO = new ArrayList<CombinacaoTO>();
-		
-		for (Combinacao combinacao : listCombinacao) {
+		 
+		for (Combinacao combinacao : listaCombinacoes) {
+			
 			CombinacaoTO combinacaoTO = new CombinacaoTO();
 			
 			combinacaoTO = toCombinacaoTO(combinacao);
 			
-			listCombinacaoTO.add(combinacaoTO);
+			listCombinacaoTO.add(combinacaoTO);			
 		}
 
 		return listCombinacaoTO;

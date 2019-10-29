@@ -257,7 +257,7 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("idMarketplace", idMarketplace);
 
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
 	}	
 	
 	@Override
@@ -275,7 +275,7 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("idVendedor", idVendedor);
 
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
 	}	
 	
 }

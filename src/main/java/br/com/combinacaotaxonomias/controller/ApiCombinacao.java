@@ -20,11 +20,11 @@ public class ApiCombinacao {
     private CombinacaoHelper combinacaoHelper;
     
 	@RequestMapping("/getCombinacoes")
-	public List<List<CombinacaoTO>> getCombinacoes(Long idMarketplace){
+	public List<CombinacaoTO> getCombinacoes(Long idMarketplace){
 	
 		List<Combinacao> combinacoes= combinacaoService.buscaCombinacaoPorIdMarketplace(idMarketplace);
 		List<CombinacaoTO> combinacoesTO = combinacaoHelper.toListCombinacaoTO(combinacoes);
 	    
-		return Arrays.asList(combinacoesTO);
+		return combinacoesTO;
 	}
 }

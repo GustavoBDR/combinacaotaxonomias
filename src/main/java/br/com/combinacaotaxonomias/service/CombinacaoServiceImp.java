@@ -113,4 +113,9 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor){
 		return combinacaoDao.buscaCombinacaoPorIdVendedor(idVendedor);
 	}
+
+	@Override
+	public List<Combinacao> buscaCombinacaoPorIdMarketplaceCompleto(Long idMarketplace) {
+		return combinacaoDao.buscaCombinacaoPorIdMarketplaceCompleto(idMarketplace);
+	}
 }

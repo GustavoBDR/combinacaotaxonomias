@@ -276,6 +276,40 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    		.addValue("idVendedor", idVendedor);
 
 	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
+	}
+	
+	@Override
+	public List<Combinacao> buscaCombinacaoPorIdMarketplaceCompleto(Long idMarketplace) {
+		StringBuilder sql = new StringBuilder();
+
+		sql.append(" SELECT linha.id_combinacao as idCombinacao ");
+		sql.append(" ,      c.nome as nome ");
+		sql.append(" ,      c.descricao as descricao ");
+		sql.append(" ,      c.id_marketplace as idMarketplace ");
+		sql.append(" ,      c.id_vendedor as idVendedor ");
+		sql.append(" ,      linha.id_combinacao_categoria as idCombinacaoCategoria ");
+		sql.append(" , 	    linha.id_categoria_marketplace as idLinhaMarketplace ");
+		sql.append(" ,      linha.id_categoria_vendedor as idLinhaVendedor ");
+		sql.append(" , 	    familia.id_categoria_marketplace as idFamiliaMarketplace ");
+		sql.append(" ,      familia.id_categoria_vendedor as idFamiliaVendedor ");
+		sql.append(" , 	    grupo.id_categoria_marketplace as idGrupoMarketplace ");
+		sql.append(" ,      grupo.id_categoria_vendedor as idGrupoVendedor ");
+		sql.append(" FROM combinacao_categoria linha ");
+		sql.append(" inner join combinacao_categoria familia on (familia.id_categoria_pai_marketplace = linha.id_categoria_marketplace  and ");
+		sql.append(" 										     familia.id_categoria_pai_vendedor    = linha.id_categoria_vendedor and ");
+		sql.append(" 										     familia.id_combinacao 				  = linha.id_combinacao) ");
+		sql.append(" inner join combinacao_categoria grupo on (grupo.id_categoria_pai_marketplace = familia.id_categoria_marketplace  and ");
+		sql.append(" 										   grupo.id_categoria_pai_vendedor    = familia.id_categoria_vendedor and ");
+		sql.append(" 										   grupo.id_combinacao                = familia.id_combinacao) ");
+		sql.append(" inner join combinacao c on (c.id_combinacao = linha.id_combinacao)  ");
+		sql.append(" inner join marketplace m on (m.id_marketplace = c.id_marketplace) ");
+		sql.append(" inner join vendedor v on (v.id_vendedor = c.id_vendedor) ");
+		sql.append(" WHERE c.id_marketplace = :idMarketplace ");
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idMarketplace", idMarketplace);
+
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
 	}	
 	
 }

@@ -22,4 +22,5 @@ public interface CombinacaoService {
 	public void deleteCombinacaoAtributos(Combinacao novaCombinacao);
 	public List<Combinacao> buscaCombinacaoPorIdMarketplace(Long idMarketplace);
 	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor);
+	public List<Combinacao> buscaCombinacaoPorIdMarketplaceCompleto(Long idMarketplace);
 }

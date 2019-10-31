@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
 import br.com.combinacaotaxonomias.model.Plataforma;
+import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
+import br.com.combinacaotaxonomias.model.to.CombinacaoTaxonomiaTO;
 
 @Repository("combinacaoDao")
 public class CombinacaoDaoImp implements CombinacaoDao{
@@ -310,6 +312,70 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    		.addValue("idMarketplace", idMarketplace);
 
 	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(Combinacao.class));
+	}
+
+	@Override
+	public List<CombinacaoTaxonomiaTO> buscaCombinacaoTaxonomiaPorIdMarketplace(Long idMarketplace) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" SELECT linha.id_combinacao as idCombinacao, ");
+	    sql.append("        c.nome as nome, ");
+	    sql.append("        c.descricao as descricao, ");
+	    sql.append("        c.id_marketplace as idMarketplace, ");
+	    sql.append("        c.id_vendedor as idVendedor, ");
+	    sql.append("        linha.id_categoria_marketplace as idLinhaMarketplace, ");
+	    sql.append("        linhacm.nome as nomeLinhaMarketplace,    ");
+	    sql.append("        familia.id_categoria_marketplace as idFamiliaMarketplace, ");
+	    sql.append("        familiacm.nome as nomeFamiliaMarketplace,          ");
+	    sql.append("        grupo.id_categoria_marketplace as idGrupoMarketplace, ");
+	    sql.append("        grupocm.nome as nomeGrupoMarktetplace,       ");
+	    sql.append("        linha.id_categoria_vendedor as idLinhaVendedor, ");
+	    sql.append("        linhacv.nome as nomeLinhaVendedor,         ");
+	    sql.append("        familia.id_categoria_vendedor as idFamiliaVendedor, ");
+	    sql.append("        familiacv.nome as nomeFamiliaVendedor,     ");
+	    sql.append("        grupo.id_categoria_vendedor as idGrupoVendedor, ");
+	    sql.append("        grupocv.nome as nomeGrupoVendedor ");
+	    sql.append("   FROM combinacao c ");
+	    sql.append("   INNER JOIN combinacao_categoria linha on (linha.id_combinacao = c.id_combinacao) ");
+	    sql.append("   INNER JOIN combinacao_categoria familia on (familia.id_categoria_pai_marketplace = linha.id_categoria_marketplace and ");
+	    sql.append("                         familia.id_categoria_pai_vendedor = linha.id_categoria_vendedor and  ");
+	    sql.append("                           familia.id_combinacao = linha.id_combinacao) ");
+	    sql.append("   INNER JOIN combinacao_categoria grupo on (grupo.id_categoria_pai_marketplace = familia.id_categoria_marketplace and ");
+	    sql.append("                       grupo.id_categoria_pai_vendedor = familia.id_categoria_vendedor and  ");
+	    sql.append("                         grupo.id_combinacao = familia.id_combinacao) ");
+	    sql.append("   INNER JOIN categoria_marketplace linhacm on (linhacm.id_categoria_marketplace = linha.id_categoria_marketplace) ");
+	    sql.append("   INNER JOIN categoria_marketplace familiacm on (familiacm.id_categoria_marketplace = familia.id_categoria_marketplace) ");
+	    sql.append("   INNER JOIN categoria_marketplace grupocm on (grupocm.id_categoria_marketplace = grupo.id_categoria_marketplace) ");
+	    sql.append("   INNER JOIN categoria_vendedor linhacv on (linhacv.id_categoria_vendedor = linha.id_categoria_vendedor) ");
+	    sql.append("   INNER JOIN categoria_vendedor familiacv on (familiacv.id_categoria_vendedor = familia.id_categoria_vendedor) ");
+	    sql.append("   INNER JOIN categoria_vendedor grupocv on (grupocv.id_categoria_vendedor = grupo.id_categoria_vendedor) ");
+	    sql.append("   where c.id_marketplace = :idMarketplace ");
+
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idMarketplace", idMarketplace);
+	    
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTaxonomiaTO.class));
+	}
+
+	@Override
+	public List<CombinacaoAtributoTO> buscaCombinacaoTaxonomiaAtributos(String idCombinacao) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append(" select  ca.id_combinacao as idCombinacao ");
+	    sql.append(" ,       am.codigo_atributo as idAtributoMarketplace ");
+	    sql.append(" ,       am.nome as nomeAtributoMarketplace ");
+	    sql.append(" ,       am.tipo as tipoAtributoMarketplace ");
+	    sql.append(" ,       av.codigo_atributo as idAtributoVendedor ");
+	    sql.append(" ,       av.nome as nomeAtributoVendedor ");
+	    sql.append(" ,       av.tipo as tipoAtributoVendedor ");
+	    sql.append("   from combinacao_atributo ca ");
+	    sql.append("   inner join atributo_marketplace am on (am.id_atributo_marketplace = ca.id_atributo_marketplace) ");
+	    sql.append("   inner join atributo_vendedor av on (av.id_atributo_vendedor = ca.id_atributo_vendedor) ");
+	    sql.append("  where ca.id_combinacao = :idCombinacao ");
+	    
+	    SqlParameterSource param = new MapSqlParameterSource()
+	    		.addValue("idCombinacao", Long.valueOf(idCombinacao));
+	    
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoAtributoTO.class));
 	}	
-	
 }

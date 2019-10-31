@@ -1,8 +1,9 @@
 package br.com.combinacaotaxonomias.model.to;
 
+import java.util.List;
+
 public class CombinacaoTaxonomiaTO {
 	private String idCombinacao;
-	private String idCombinacaoCategoria;
 	private String nome;
 	private String descricao;
 	private String idMarketplace;
@@ -19,18 +20,13 @@ public class CombinacaoTaxonomiaTO {
 	private String nomeFamiliaVendedor;
 	private String idGrupoVendedor;
 	private String nomeGrupoVendedor;
+	private List<CombinacaoAtributoTO> atributos;
 	
 	public String getIdCombinacao() {
 		return idCombinacao;
 	}
 	public void setIdCombinacao(String idCombinacao) {
 		this.idCombinacao = idCombinacao;
-	}
-	public String getIdCombinacaoCategoria() {
-		return idCombinacaoCategoria;
-	}
-	public void setIdCombinacaoCategoria(String idCombinacaoCategoria) {
-		this.idCombinacaoCategoria = idCombinacaoCategoria;
 	}
 	public String getNome() {
 		return nome;
@@ -128,6 +124,11 @@ public class CombinacaoTaxonomiaTO {
 	public void setNomeGrupoVendedor(String nomeGrupoVendedor) {
 		this.nomeGrupoVendedor = nomeGrupoVendedor;
 	}
-	
-	
+	public List<CombinacaoAtributoTO> getAtributos() {
+		return atributos;
+	}
+	public void setAtributos(List<CombinacaoAtributoTO> atributos) {
+		this.atributos = atributos;
+	}
+		
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.combinacaotaxonomias.helper.CombinacaoHelper;
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
+import br.com.combinacaotaxonomias.model.to.CombinacaoTaxonomiaTO;
 import br.com.combinacaotaxonomias.service.CombinacaoService;
 
 @RestController
@@ -30,11 +31,12 @@ public class ApiCombinacao {
 	}*/
     
     @RequestMapping("/getCombinacoesPorMarketplace")
-	public List<CombinacaoTO> getCombinacoes(Long idMarketplace){
+	public List<CombinacaoTaxonomiaTO> getCombinacoesTaxonomiaPorMarketplace(Long idMarketplace){
 	
-		List<Combinacao> combinacoes= combinacaoService.buscaCombinacaoPorIdMarketplaceCompleto(idMarketplace);
-		List<CombinacaoTO> combinacoesTO = combinacaoHelper.toListCombinacaoTO(combinacoes);
+		//List<Combinacao> combinacoes= combinacaoService.buscaCombinacaoPorIdMarketplaceCompleto(idMarketplace);
+    	List<CombinacaoTaxonomiaTO> combinacaoTaxonomiaTO = combinacaoService.BuscaCombinacoesTaxonomiaPorMarketplace(idMarketplace);
+    	
 	    
-		return combinacoesTO;
+		return combinacaoTaxonomiaTO;
 	}
 }

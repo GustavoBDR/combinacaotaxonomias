@@ -1,13 +1,13 @@
 package br.com.combinacaotaxonomias.model.to;
 
 public class CombinacaoAtributoTO {
-	private String idCombinacao;
-	private String idAtributoMarketplace;
-	private String nomeAtributoMarketplace;
-	private String tipoAtributoMarketplace;
-	private String idAtributoVendedor;	
-	private String nomeAtributoVendedor;
-	private String tipoAtributoVendedor;	
+	  private String idCombinacao;
+	  private String idAtributoMarketplace;
+	  private String nomeAtributoMarketplace;
+	  private String tipoAtributoMarketplace;
+	  private String idAtributoVendedor;  
+	  private String nomeAtributoVendedor;
+	  private String tipoAtributoVendedor;	
 	
 	public CombinacaoAtributoTO(String idAtributoMarketplace, String idAtributoVendedor) {
 		this.idAtributoMarketplace = idAtributoMarketplace;

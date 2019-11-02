@@ -14,7 +14,7 @@ import br.com.combinacaotaxonomias.model.to.CombinacaoTaxonomiaTO;
 import br.com.combinacaotaxonomias.service.CombinacaoService;
 
 @RestController
-public class ApiCombinacao {
+public class ApiCombinacaoController {
     @Autowired
     private CombinacaoService combinacaoService;
     
@@ -32,8 +32,7 @@ public class ApiCombinacao {
     
     @RequestMapping("/getCombinacoesPorMarketplace")
 	public List<CombinacaoTaxonomiaTO> getCombinacoesTaxonomiaPorMarketplace(Long idMarketplace){
-	
-		//List<Combinacao> combinacoes= combinacaoService.buscaCombinacaoPorIdMarketplaceCompleto(idMarketplace);
+
     	List<CombinacaoTaxonomiaTO> combinacaoTaxonomiaTO = combinacaoService.BuscaCombinacoesTaxonomiaPorMarketplace(idMarketplace);
     	
 	    

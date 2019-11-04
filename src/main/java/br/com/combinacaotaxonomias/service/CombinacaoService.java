@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
+import br.com.combinacaotaxonomias.model.CombinacaoTaxonomia;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTaxonomiaTO;
 
@@ -24,5 +25,5 @@ public interface CombinacaoService {
 	public List<Combinacao> buscaCombinacaoPorIdMarketplace(Long idMarketplace);
 	public List<Combinacao> buscaCombinacaoPorIdVendedor(Long idVendedor);
 	public List<Combinacao> buscaCombinacaoPorIdMarketplaceCompleto(Long idMarketplace);
-	public List<CombinacaoTaxonomiaTO> BuscaCombinacoesTaxonomiaPorMarketplace(Long idMarketplace);
+	public List<CombinacaoTaxonomia> BuscaCombinacoesTaxonomiaPorMarketplace(Long idMarketplace);
 }

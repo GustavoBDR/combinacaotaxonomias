@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.combinacaotaxonomias.dao.CombinacaoDao;
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
+import br.com.combinacaotaxonomias.model.CombinacaoTaxonomia;
 import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTaxonomiaTO;
@@ -122,10 +123,10 @@ public class CombinacaoServiceImp implements CombinacaoService{
 	}
 
 	@Override
-	public List<CombinacaoTaxonomiaTO> BuscaCombinacoesTaxonomiaPorMarketplace(Long idMarketplace) {
-		List<CombinacaoTaxonomiaTO> combinacoes = combinacaoDao.buscaCombinacaoTaxonomiaPorIdMarketplace(idMarketplace);
-		for (CombinacaoTaxonomiaTO combinacao : combinacoes) {
-			List<CombinacaoAtributoTO> atributos = combinacaoDao.buscaCombinacaoTaxonomiaAtributos(combinacao.getIdCombinacao());
+	public List<CombinacaoTaxonomia> BuscaCombinacoesTaxonomiaPorMarketplace(Long idMarketplace) {
+		List<CombinacaoTaxonomia> combinacoes = combinacaoDao.buscaCombinacaoTaxonomiaPorIdMarketplace(idMarketplace);
+		for (CombinacaoTaxonomia combinacao : combinacoes) {
+			List<CombinacaoAtributo> atributos = combinacaoDao.buscaCombinacaoTaxonomiaAtributos(combinacao.getIdCombinacao());
 			combinacao.setAtributos(atributos);
 		}
 		

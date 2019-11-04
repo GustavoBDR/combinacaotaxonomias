@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import br.com.combinacaotaxonomias.model.Combinacao;
 import br.com.combinacaotaxonomias.model.CombinacaoAtributo;
+import br.com.combinacaotaxonomias.model.CombinacaoTaxonomia;
 import br.com.combinacaotaxonomias.model.Plataforma;
 import br.com.combinacaotaxonomias.model.to.CombinacaoAtributoTO;
 import br.com.combinacaotaxonomias.model.to.CombinacaoTO;
@@ -315,7 +316,7 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	}
 
 	@Override
-	public List<CombinacaoTaxonomiaTO> buscaCombinacaoTaxonomiaPorIdMarketplace(Long idMarketplace) {
+	public List<CombinacaoTaxonomia> buscaCombinacaoTaxonomiaPorIdMarketplace(Long idMarketplace) {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append(" SELECT linha.id_combinacao as idCombinacao, ");
@@ -354,14 +355,16 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("idMarketplace", idMarketplace);
 	    
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTaxonomiaTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoTaxonomia.class));
 	}
 
 	@Override
-	public List<CombinacaoAtributoTO> buscaCombinacaoTaxonomiaAtributos(String idCombinacao) {
+	public List<CombinacaoAtributo> buscaCombinacaoTaxonomiaAtributos(Long idCombinacao) {
 		StringBuilder sql = new StringBuilder();
 		
 		sql.append(" select  ca.id_combinacao as idCombinacao ");
+	    sql.append(" ,       am.id_marketplace as idMarketplace ");
+	    sql.append(" ,       av.id_vendedor as idVendedor ");
 	    sql.append(" ,       am.codigo_atributo as idAtributoMarketplace ");
 	    sql.append(" ,       am.nome as nomeAtributoMarketplace ");
 	    sql.append(" ,       am.tipo as tipoAtributoMarketplace ");
@@ -376,6 +379,6 @@ public class CombinacaoDaoImp implements CombinacaoDao{
 	    SqlParameterSource param = new MapSqlParameterSource()
 	    		.addValue("idCombinacao", Long.valueOf(idCombinacao));
 	    
-	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoAtributoTO.class));
+	    return template.query(sql.toString(), param, new BeanPropertyRowMapper(CombinacaoAtributo.class));
 	}	
 }
